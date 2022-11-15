@@ -30,8 +30,6 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d){
     return idx + WIDTH - 1;
   case -1:
     return idx - 1 ;
-  case 0:
-    return UINT_MAX;
   case 1:
     return idx + 1;
   case 2:
@@ -40,6 +38,8 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d){
     return idx - WIDTH;
   case 4:
     return idx - WIDTH - 1;
+  default:
+    return UINT_MAX;
   }
 }
 
@@ -77,6 +77,7 @@ struct neighbors_t get_neighbors(unsigned int idx)
 	  result.n[s].d = 0;
 	}
     }
+  return result;
 }
 
 int main(int argc, char* argv[]){
