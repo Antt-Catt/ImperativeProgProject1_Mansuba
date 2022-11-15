@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "neighbors.h"
 
 void init_neighbors(unsigned int seed){
@@ -20,7 +21,7 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d){
   if (j == (WIDTH - 1) && (d == 1 || d == 2 || d == -4)){
     return UINT_MAX;
   }
-  switch{
+  switch(d){
   case -4:
     return idx + WIDTH + 1;
   case -3:
@@ -42,6 +43,43 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d){
   }
 }
 
+struct neighbors_t get_neighbors(unsigned int idx)
+{
+  struct neighbors_t result;
+  int s = 0;
+  int k = -4;
+  while(k < 5)
+    {  
+      unsigned int n_idx = get_neighbor(idx, k);
+      if (n_idx != UINT_MAX)
+	{
+	  result.n[s].i = n_idx;
+	  result.n[s].d = k;
+	  s++;
+	}
+      
+      k++;
+      if ( k == 0)
+	{
+	  k++;
+	}
+    }
+  for(k = s; k < MAX_NEIGHBORS; k++)
+    {
+      if (k == s)
+	{
+	  result.n[s].i = UINT_MAX;
+	  result.n[s].d = 0;
+	}
+      else
+	{
+	  result.n[s].i = 0;
+	  result.n[s].d = 0;
+	}
+    }
+}
+
 int main(int argc, char* argv[]){
   return 0;
 }
+  
