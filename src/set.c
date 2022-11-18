@@ -1,4 +1,6 @@
 #include "set.h"
+#include <limits.h>
+
 
 set_t init_set(int size){
   set_t set;
@@ -7,23 +9,56 @@ set_t init_set(int size){
   return set;
 };
 
-set_t resize_set(set_t set, int new_size){
-  set.ptr = realloc(set.ptr, new_size * sizeof(unsigned int));
-  set.size = new_size;
-  return set;
+unsigned int * get_set(set_t * set, unsigned int i){
+  return (*set).ptr + i;
+}
+
+void resize_set(set_t * set, int new_size){
+  (*set).ptr = realloc((*set).ptr, new_size * sizeof(unsigned int));
+  (*set).size = new_size;
 };
 
-set_t append(set_t set, unsigned int x){
-  set = resize_set(set, (set.size + 1));
-  *(set.ptr + set.size) = x;
+void append_set(set_t * set, unsigned int x){
+  resize_set(set, ((*set).size + 1));
+  *get_set(set,(*set).size -1)= x;
 };
+
+unsigned int pop_set(set_t * set){
+  int x = *get_set(set,(*set).size -1);
+  resize_set(set, ((*set).size - 1));
+  return x;
+};
+
+unsigned int exist_set(set_t * set, unsigned int x){
+  for (int i = 0; i < (*set).size; i++)
+    {
+      if( *get_set(set,i) == x)
+	{
+	  return i;
+	}
+    }
+  return UINT_MAX;
+};
+
+void modif_set(set_t * set, unsigned int x, unsigned int y){
+  unsigned int i = exist_set(set, x);
+  if (i != UINT_MAX)
+    {
+      *get_set(set,i) = y;
+    }
+}
+
 
 int main(){
+
   set_t ens = init_set(5);
-  if ( ens.ptr != NULL) {
-    *ens.ptr = 12;
-    *(ens.ptr +50) = 17;
-  }
+  append_set(&ens, 17);
+  int w = ens.size;
+  modif_set(&ens, 17,19);
+  int y = pop_set(&ens);
+  int z = ens.size;
+  printf("%d, %d, %d\n", w, y, z);
+
 
   return 0;
 }
