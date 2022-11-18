@@ -28,12 +28,10 @@ int main(int argc, char* argv[])
   printf("neighbors %d\n", get_neighbor(10,-3));
   printf("neighbors %d\n", get_neighbor(14,1));
 
-  printf("C'est un test");
-
-  /*struct neighbors_t result = get_neighbors(7);
-  for(int p = 0; p < MAX_NEIGHBORS; p++){
+  struct neighbors_t result = get_neighbors(9);
+  for(int p = 0; p < MAX_NEIGHBORS + 1; p++){
     printf("%d %d\n", result.n[p].i, result.n[p].d); 
   }
-  printf("\n");*/
+  printf("\n");
   return 0;
 }

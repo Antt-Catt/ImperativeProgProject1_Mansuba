@@ -58,24 +58,24 @@ struct neighbors_t get_neighbors(unsigned int idx)
   while(k < 5)
     {  
       unsigned int n_idx = get_neighbor(idx, k);
-      if (n_idx != UINT_MAX)
+      if (n_idx != -1)
 	{
 	  result.n[s].i = n_idx;
 	  result.n[s].d = k;
 	  s++;
 	}
       k++;
-      if ( k == 0)
+      if (k == 0)
 	{
 	  k++;
 	}
     }
   result.n[s].i = UINT_MAX;
   result.n[s].d = 0;
-  for(k=(s+1); k < MAX_NEIGHBORS+1; k++)
+  for(k=(s + 1); k < MAX_NEIGHBORS + 1; k++)
     {
-      result.n[s].i = 0;
-      result.n[s].d = 0;
+      result.n[k].i = 0;
+      result.n[k].d = 0;
     }
   return result;
 }
