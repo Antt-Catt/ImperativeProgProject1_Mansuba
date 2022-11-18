@@ -22,8 +22,20 @@ int main(int argc, char* argv[])
   printf("Un pion blanc sur cette place : %s\n", place_to_string(c,s));
 
   printf("\n");
+
   //tests world
-  printf("%d\n", world_get(world_init(),2));
+  printf("Tests de world.c :\n");
+  extern struct world_t w;
+  world_init();
+  for (int i = 0; i < WORLD_SIZE; i++){
+    printf("place %d, color %d, sort %d\n", i, world_get(&w,i), world_get_sort(&w,i));
+  }
+
+  world_set(&w, 5, 1); 
+  world_set_sort(&w, 16, 1);
+  world_set(&w, 16, 2); 
+  printf("place 5, color %d, sort %d\n", world_get(&w, 5), world_get_sort(&w, 5));
+  printf("place 16, color %d, sort %d\n", world_get(&w, 16), world_get_sort(&w, 16));
 
   //tests neighbors
   printf("neighbors %d\n", get_neighbor(0,2));
