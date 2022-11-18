@@ -70,18 +70,12 @@ struct neighbors_t get_neighbors(unsigned int idx)
 	  k++;
 	}
     }
-  for(k = s; k < MAX_NEIGHBORS+1; k++)
+  result.n[s].i = UINT_MAX;
+  result.n[s].d = 0;
+  for(k=(s+1); k < MAX_NEIGHBORS+1; k++)
     {
-      if (k == s)
-	{
-	  result.n[s].i = UINT_MAX;
-	  result.n[s].d = 0;
-	}
-      else
-	{
-	  result.n[s].i = 0;
-	  result.n[s].d = 0;
-	}
+      result.n[s].i = 0;
+      result.n[s].d = 0;
     }
   return result;
 }
