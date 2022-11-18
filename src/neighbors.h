@@ -15,13 +15,14 @@ struct vector_t {
   enum dir_t d;   // the direction towards this place
 };
 
-/** A list of neighbors, terminated by UINT_MAX
 
-    For example, the list of neighbors { 2, 3 } can be written as
-    { .n = { 2, 3, UINT_MAX, 0, 0, 0, 0, 0 } }
+/** A list of neighbors, terminated by {UINT_MAX, NO_DIR}
+
+     For example, the list of neighbors { 2↑, 3↓ } can be written as
+     { .n = { {2, NORTH}, {3, SOUTH}, {UINT_MAX, NO_DIR} } }
 */
 struct neighbors_t {
-  struct vector_t n[MAX_NEIGHBORS];
+  struct vector_t n[MAX_NEIGHBORS+1];
 };
 
 /** Initializes the relation between the neighbors, based on an

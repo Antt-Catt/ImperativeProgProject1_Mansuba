@@ -57,14 +57,13 @@ struct neighbors_t get_neighbors(unsigned int idx)
 	  result.n[s].d = k;
 	  s++;
 	}
-      
       k++;
       if ( k == 0)
 	{
 	  k++;
 	}
     }
-  for(k = s; k < MAX_NEIGHBORS; k++)
+  for(k = s; k < MAX_NEIGHBORS+1; k++)
     {
       if (k == s)
 	{
