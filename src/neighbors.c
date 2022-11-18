@@ -7,6 +7,7 @@
     integer `seed`. `seed` must be less than MAX_RELATIONS.
     Can be called multiple times. */
 void init_neighbors(unsigned int seed){
+  seed = seed;
 }
 
 /** Returns the neighbor of the place `idx`, in direction `d`, and
@@ -58,7 +59,7 @@ struct neighbors_t get_neighbors(unsigned int idx)
   while(k < 5)
     {  
       unsigned int n_idx = get_neighbor(idx, k);
-      if (n_idx != -1)
+      if (n_idx != UINT_MAX)
 	{
 	  result.n[s].i = n_idx;
 	  result.n[s].d = k;

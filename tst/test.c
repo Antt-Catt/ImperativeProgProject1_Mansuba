@@ -9,6 +9,9 @@ struct world_t * world_init();
 
 int main(int argc, char* argv[])
 {
+  argc = argc;
+  argv[0] = argv[0];
+  
   printf("\n");
   //tests geometry
   int d = 4;
