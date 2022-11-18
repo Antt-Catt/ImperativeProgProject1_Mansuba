@@ -19,7 +19,7 @@ struct world_t * world_init()
     {
       w.c[i] = 0;
       w.s[i] = 0;
-    }
+      }
   return &w;
 }
 
