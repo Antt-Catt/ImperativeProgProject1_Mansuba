@@ -11,12 +11,12 @@ all: project
 project: # (Add your dependency here, e.g "project.o")
 	# (Add your compile command here, e.g "gcc $(CFLAGS) project.o -o project")
 
-test_project: # (Add your dependency here, e.g "test.o")
-	gcc -c $(CFLAGS) tst/test.c
+test: # (Add your dependency here, e.g "test.o")
 	gcc -c $(CFLAGS) src/geometry.c
 	gcc -c $(CFLAGS) src/world.c
 	gcc -c $(CFLAGS) src/neighbors.c
-	gcc $(CFLAGS) geometry.o world.o test.o -o test.project
+	gcc -c $(CFLAGS) tst/test.c
+	gcc $(CFLAGS) geometry.o world.o test.o -o test
 	# (Add your compile command here, e.g "gcc $(CFLAGS) test.o -o test_project")
 
 clean:
