@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
   printf("%d\n", world_get(world_init(),2));
 
   //tests neighbors
-  printf("neighbors %d\n", get_neighbor(0,2));
+  /*printf("neighbors %d\n", get_neighbor(0,2));
   printf("neighbors %d\n", get_neighbor(0,-3));
   printf("neighbors %d\n", get_neighbor(10,-3));
   printf("neighbors %d\n", get_neighbor(14,1));
@@ -32,6 +32,6 @@ int main(int argc, char* argv[])
   for(int p = 0; p < MAX_NEIGHBORS; p++){
     printf("%d %d\n", result.n[p].i, result.n[p].d); 
   }
-  printf("\n");
+  printf("\n");*/
   return 0;
 }
