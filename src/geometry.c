@@ -10,10 +10,13 @@ const char* names_sort[] = {
   "NO_SORT","PAWN"
 };
 
-char result[32];
+//char result[32];
+
+static const char* place_strings[MAX_SORT][MAX_COLOR];
 
 const char* place_to_string(enum color_t c, enum sort_t s){
-  sprintf(result,"%s %s", names_color[c], names_sort[s]);
+  // sprintf(result,"%s %s", names_color[c], names_sort[s]);
+  static const char* result[MAX_SORT][MAX_COLOR] = {names_sort[c], names_color[s]} ;
   return result;
 }
 
