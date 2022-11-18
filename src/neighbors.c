@@ -78,8 +78,3 @@ struct neighbors_t get_neighbors(unsigned int idx)
     }
   return result;
 }
-
-int main(int argc, char* argv[]){
-  return 0;
-}
-  
