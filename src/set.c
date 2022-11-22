@@ -42,7 +42,7 @@ unsigned int exist_in_set(set_t *set, unsigned int x)
 
 void modif_set(set_t *set, unsigned int x, unsigned int y)
 {
-  unsigned int i = exist_set(set, x);
+  unsigned int i = exist_in_set(set, x);
   if (i != UINT_MAX)
   {
     (*set).ptr[i] = y;
