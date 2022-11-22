@@ -56,22 +56,8 @@ void print_set(set_t *set)
     printf("%d", (*set).ptr[i]);
     if (i % WIDTH == 0)
     {
-      printf("\n")
+      printf("\n");
     }
   }
-  printf("\n")
-}
-
-int main()
-{
-
-  set_t ens = init_set(5);
-  append_set(&ens, 17);
-  int w = ens.size;
-  modif_set(&ens, 17, 19);
-  int y = pop_set(&ens);
-  int z = ens.size;
-  printf("%d, %d, %d\n", w, y, z);
-
-  return 0;
+  printf("\n");
 }
