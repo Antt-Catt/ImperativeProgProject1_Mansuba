@@ -66,6 +66,30 @@ void init_player_set(int p)
     {
       append_set(&black_init_set, WIDTH * i);
     }
-    append_set(&white_init_set, WIDTH * i);
+    else
+    {
+      append_set(&white_init_set, WIDTH * i);
+    }
+  }
+}
+
+void check_simple_victory(int idx, int p)
+{
+  for (int i = 0; i < HEIGHT; i++)
+  {
+    if (p == 1)
+    {
+      if (idx == black_init_set.ptr[i])
+      {
+        printf("Victoire simple pour WHITE");
+      }
+    }
+    else
+    {
+      if (idx == white_init_set.ptr[i])
+      {
+        printf("Victoire simple pour BLACK");
+      }
+    }
   }
 }
