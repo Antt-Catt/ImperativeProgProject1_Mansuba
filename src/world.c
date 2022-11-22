@@ -16,7 +16,7 @@ struct world_t w;
 
 /** Initializes a world (NO_COLOR, NO_SORT everywhere)
     Always returns the same pointer */
-struct world_t *world_init()
+struct world_t * world_init()
 {
   for (int i = 0; i < WORLD_SIZE; i++)
   {
@@ -48,48 +48,4 @@ enum sort_t world_get_sort(const struct world_t *b, unsigned int idx)
 void world_set_sort(struct world_t *b, unsigned int idx, enum sort_t c)
 {
   (*b).s[idx] = c;
-}
-
-set_t black_init_set;
-set_t black_current_set;
-
-set_t white_init_set;
-set_t white_current_set;
-
-void init_player_set(unsigned int p)
-{
-  for (int i = 0; i < HEIGHT; i++)
-  {
-    w.c[WIDTH * i] = p;
-    w.c[WIDTH * i] = PAWN;
-    if (p == BLACK)
-    {
-      append_set(&black_init_set, WIDTH * i);
-    }
-    else
-    {
-      append_set(&white_init_set, WIDTH * i);
-    }
-  }
-}
-
-void check_simple_victory(unsigned int idx, unsigned int p)
-{
-  for (int i = 0; i < HEIGHT; i++)
-  {
-    if (p == 1)
-    {
-      if (idx == black_init_set.ptr[i])
-      {
-        printf("Victoire simple pour WHITE");
-      }
-    }
-    else
-    {
-      if (idx == white_init_set.ptr[i])
-      {
-        printf("Victoire simple pour BLACK");
-      }
-    }
-  }
 }
