@@ -10,7 +10,7 @@ void mvt_possibles_aux(set_t *set, unsigned int idx)
 {
     struct neighbors_t neigh_idx = get_neighbors(idx);
     unsigned int idx_n;
-    for (int j = 0; j < MAX_NEIGHBORS + 1; j++)
+    for (int j = 0; j < MAX_NEIGHBORS; j++)
     {
         idx_n = neigh_idx.n[j].i;
         if (world_get_sort(&w, idx_n) != 0)
