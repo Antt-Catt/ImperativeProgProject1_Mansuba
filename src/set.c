@@ -15,7 +15,7 @@ void resize_set(set_t *set, int new_size)
   (*set).size = new_size;
 };
 
-void append_set(set_t *set, unsigned int x)
+void push_set(set_t *set, unsigned int x)
 {
   resize_set(set, ((*set).size + 1));
   (*set).ptr[(*set).size - 1] = x;
@@ -28,7 +28,7 @@ unsigned int pop_set(set_t *set)
   return x;
 };
 
-unsigned int exist_set(set_t *set, unsigned int x)
+unsigned int exist_in_set(set_t *set, unsigned int x)
 {
   for (int i = 0; i < (*set).size; i++)
   {
@@ -51,17 +51,19 @@ void modif_set(set_t *set, unsigned int x, unsigned int y)
 
 void print_set(set_t *set)
 {
+  printf("{ ");
   for (int i = 0; i < (*set).size; i++)
   {
-    printf("%d", (*set).ptr[i]);
-    if (i % WIDTH == 0)
+    printf("%d ", (*set).ptr[i]);
+    if (i % WIDTH == (WIDTH - 1))
     {
-      printf("\n")
+      printf("\n");
     }
   }
-  printf("\n")
+  printf("}\n");
 }
 
+/*
 int main()
 {
 
@@ -75,3 +77,4 @@ int main()
 
   return 0;
 }
+*/

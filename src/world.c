@@ -64,11 +64,11 @@ void init_player_set(unsigned int p)
     w.c[WIDTH * i] = PAWN;
     if (p == BLACK)
     {
-      append_set(&black_init_set, WIDTH * i);
+      push_set(&black_init_set, WIDTH * i);
     }
     else
     {
-      append_set(&white_init_set, WIDTH * i);
+      push_set(&white_init_set, WIDTH * i);
     }
   }
 }

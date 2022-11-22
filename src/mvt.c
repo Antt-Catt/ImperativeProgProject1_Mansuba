@@ -4,8 +4,7 @@
 #include "world.h"
 #include "set.h"
 
-
-struct world_t w;
+extern struct world_t w;
 
 void mvt_possibles_aux(set_t *set, unsigned int idx)
 {
@@ -14,12 +13,12 @@ void mvt_possibles_aux(set_t *set, unsigned int idx)
     for (int j = 0; j < MAX_NEIGHBORS + 1; j++)
     {
         idx_n = neigh_idx.n[j].i;
-        if (w.s[idx_n] != 0)
+        if (world_get_sort(&w, idx_n) != 0)
         {
             idx_n = get_neighbor(idx_n, neigh_idx.n[j].d);
-            if (w.s[idx_n] == 0)
+            if (world_get_sort(&w, idx_n) == 0)
             {
-                append_set(set, idx_n);
+                push_set(set, idx_n);
                 mvt_possibles_aux(set, idx_n);
             }
         }
@@ -33,16 +32,16 @@ set_t mvt_possibles(unsigned int idx)
     for (int j = 0; j < MAX_NEIGHBORS; j++)
     {
         unsigned int idx_n = neigh_idx.n[j].i;
-        if (w.s[idx_n] == 0)
+        if (world_get_sort(&w, idx_n) == 0)
         {
-            append_set(&set, idx_n);
+            push_set(&set, idx_n);
         }
         else
         {
             idx_n = get_neighbor(idx_n, neigh_idx.n[j].d);
-            if (w.s[idx_n] == 0)
+            if (world_get_sort(&w, idx_n) == 0)
             {
-                append_set(&set, idx_n);
+                push_set(&set, idx_n);
                 mvt_possibles_aux(&set, idx_n);
             }
         }
