@@ -11,7 +11,7 @@ typedef struct
     int size;
 } set_t;
 
-set_t init_set(int size);
+set_t init_set(unsigned int size);
 
 unsigned int *get_set(set_t *set, unsigned int i);
 

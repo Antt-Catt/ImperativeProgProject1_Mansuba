@@ -9,11 +9,6 @@ set_t init_set(unsigned int size)
   return set;
 };
 
-unsigned int *get_set(set_t *set, unsigned int i)
-{
-  return (*set).ptr + i;
-}
-
 void resize_set(set_t *set, int new_size)
 {
   (*set).ptr = realloc((*set).ptr, new_size * sizeof(unsigned int));
@@ -23,12 +18,12 @@ void resize_set(set_t *set, int new_size)
 void append_set(set_t *set, unsigned int x)
 {
   resize_set(set, ((*set).size + 1));
-  *get_set(set, (*set).size - 1) = x;
+  (*set).ptr[(*set).size-1]= x;
 };
 
 unsigned int pop_set(set_t *set)
 {
-  int x = *get_set(set, (*set).size - 1);
+  int x = (*set).ptr[(*set).size - 1];
   resize_set(set, ((*set).size - 1));
   return x;
 };
@@ -37,7 +32,7 @@ unsigned int exist_set(set_t *set, unsigned int x)
 {
   for (int i = 0; i < (*set).size; i++)
   {
-    if (*get_set(set, i) == x)
+    if ((*set).ptr[i] == x)
     {
       return i;
     }
@@ -50,7 +45,7 @@ void modif_set(set_t *set, unsigned int x, unsigned int y)
   unsigned int i = exist_set(set, x);
   if (i != UINT_MAX)
   {
-    *get_set(set, i) = y;
+    (*set).ptr[i] = y;
   }
 }
 
