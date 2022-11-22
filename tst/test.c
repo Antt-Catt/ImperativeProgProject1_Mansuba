@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
  
 
   set_t ens = init_set(5);
-  append_set(&ens, 17);
+  push_set(&ens, 17);
   int x = ens.size;
   modif_set(&ens, 17, 19);
   int y = pop_set(&ens);
