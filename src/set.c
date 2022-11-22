@@ -18,7 +18,7 @@ void resize_set(set_t *set, int new_size)
 void append_set(set_t *set, unsigned int x)
 {
   resize_set(set, ((*set).size + 1));
-  (*set).ptr[(*set).size-1]= x;
+  (*set).ptr[(*set).size - 1] = x;
 };
 
 unsigned int pop_set(set_t *set)
@@ -47,6 +47,19 @@ void modif_set(set_t *set, unsigned int x, unsigned int y)
   {
     (*set).ptr[i] = y;
   }
+}
+
+void print_set(set_t *set)
+{
+  for (int i = 0; i < (*set).size; i++)
+  {
+    printf("%d", (*set).ptr[i]);
+    if (i % WIDTH == 0)
+    {
+      printf("\n")
+    }
+  }
+  printf("\n")
 }
 
 int main()

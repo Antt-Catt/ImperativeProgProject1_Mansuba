@@ -1,5 +1,5 @@
-#ifndef __ENSEMBLE_H__
-#define __ENSEMBLE_H__
+#ifndef __SET_H__
+#define __SET_H__
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,4 +25,6 @@ unsigned int exist_set(set_t *set, unsigned int x);
 
 void modif_set(set_t *set, unsigned int x, unsigned int y);
 
-#endif // __ENSEMBLE_H__
+void print_set(set_t *set);
+
+#endif // __SET_H__
