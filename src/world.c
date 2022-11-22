@@ -56,7 +56,7 @@ set_t black_current_set;
 set_t white_init_set;
 set_t white_current_set;
 
-void init_player_set(int p)
+void init_player_set(unsigned int p)
 {
   for (int i = 0; i < HEIGHT; i++)
   {
@@ -73,7 +73,7 @@ void init_player_set(int p)
   }
 }
 
-void check_simple_victory(int idx, int p)
+void check_simple_victory(unsigned int idx, unsigned int p)
 {
   for (int i = 0; i < HEIGHT; i++)
   {
