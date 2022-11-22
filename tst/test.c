@@ -30,12 +30,13 @@ int main(int argc, char* argv[])
   for (int i = 0; i < WORLD_SIZE; i++){
     printf("place %d, color %d, sort %d\n", i, world_get(&w,i), world_get_sort(&w,i));
   }
-
+  
   world_set(&w, 5, 1); 
   world_set_sort(&w, 16, 1);
   world_set(&w, 16, 2); 
   printf("place 5, color %d, sort %d\n", world_get(&w, 5), world_get_sort(&w, 5));
   printf("place 16, color %d, sort %d\n", world_get(&w, 16), world_get_sort(&w, 16));
+
 
   //tests neighbors
   printf("neighbors %d\n", get_neighbor(0,2));
