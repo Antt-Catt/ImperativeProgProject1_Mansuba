@@ -16,7 +16,7 @@ struct world_t w;
 
 /** Initializes a world (NO_COLOR, NO_SORT everywhere)
     Always returns the same pointer */
-struct world_t *world_init()
+struct world_t * world_init()
 {
   for (int i = 0; i < WORLD_SIZE; i++)
   {
@@ -48,6 +48,7 @@ enum sort_t world_get_sort(const struct world_t *b, unsigned int idx)
 void world_set_sort(struct world_t *b, unsigned int idx, enum sort_t c)
 {
   (*b).s[idx] = c;
+<<<<<<< HEAD
 }
 
 set_t black_init_set;
@@ -92,4 +93,6 @@ void check_simple_victory(unsigned int idx, unsigned int p)
       }
     }
   }
+=======
+>>>>>>> a1a1c1523d7a983e509580aa48fca62a71365e24
 }
