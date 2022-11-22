@@ -4,6 +4,7 @@
 #include "../src/neighbors.h"
 #include "../src/geometry.h"
 #include "../src/world.h"
+#include "../src/set.h"
 
 struct world_t * world_init();
 
@@ -49,5 +50,16 @@ int main(int argc, char* argv[])
     printf("%d %d\n", result.n[p].i, result.n[p].d); 
   }
   printf("\n");
+ 
+
+  set_t ens = init_set(5);
+  append_set(&ens, 17);
+  int x = ens.size;
+  modif_set(&ens, 17, 19);
+  int y = pop_set(&ens);
+  int z = ens.size;
+  printf("%d, %d, %d\n", x, y, z);
+
   return 0;
+
 }
