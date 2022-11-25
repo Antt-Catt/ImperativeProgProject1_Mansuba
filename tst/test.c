@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <limits.h>
-#include "../src/neighbors.h"
-#include "../src/geometry.h"
-#include "../src/world.h"
-#include "../src/set.h"
+#include "neighbors.h"
+#include "geometry.h"
+#include "world.h"
+#include "set.h"
 
 struct world_t * world_init();
 
