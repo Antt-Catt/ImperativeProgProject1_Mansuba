@@ -84,22 +84,44 @@ void init_player_set(unsigned int p, struct world_t * w)
   }
 }
 
-void check_simple_victory(unsigned int idx, unsigned int p)
+int check_simple_victory(unsigned int idx, unsigned int p)
 {
-  if (p == 2)
-    {
-      if (exist_in_set(&black_init_set,idx) != UINT_MAX)
-	{
-	  printf("Victoire simple pour WHITE\n");
-	}
-    }
-  else
+  if (p == 1)
     {
       if (exist_in_set(&white_init_set,idx) != UINT_MAX)
 	{
 	  printf("Victoire simple pour BLACK\n");
+	  return 1;
 	}
     }
+  else
+    {
+      if (exist_in_set(&black_init_set,idx) != UINT_MAX)
+	{
+	  printf("Victoire simple pour WHITE\n");
+	  return 1;
+	}
+    }
+  return 0;
+}
+
+int check_complex_victory(unsigned int p)
+{
+  if (p == 1){
+    for(int i = 0; i < HEIGHT; i++){
+      if (check_simple_victory(black_current_set.ptr[i], 1) == 0){
+	return 1;
+      }
+    }
+  }
+  else{
+    for(int i = 0; i < HEIGHT; i++){
+      if (check_simple_victory(white_current_set.ptr[i], 2) == 0){
+	return 1;
+      }
+    }
+  }
+  return 0;
 }
 
 int main(int argc, char *argv[])
@@ -114,5 +136,13 @@ int main(int argc, char *argv[])
     printf("%d %d\n", black_init_set.ptr[i], white_init_set.ptr[i]);
   }
   check_simple_victory(15, WHITE);*/
+  
+  push_set(&black_current_set, 14);
+  push_set(&black_current_set, 4);
+  push_set(&black_current_set, 9);
+  push_set(&black_current_set, 19);
+  
+  printf("%d\n", check_complex_victory(BLACK));
+  
   return 0;
 }
