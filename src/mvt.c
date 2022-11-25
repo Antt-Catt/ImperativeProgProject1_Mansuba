@@ -5,11 +5,7 @@
 #include "world.h"
 #include "set.h"
 
-struct world_t
-{
-    int c[WORLD_SIZE];
-    int s[WORLD_SIZE];
-};
+extern struct world_t w;
 
 void mvt_possibles_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned int init)
 {
@@ -65,13 +61,7 @@ set_t mvt_possibles(unsigned int idx, struct world_t *w)
 
 int main()
 {
-
-    struct world_t w;
-    for (int i = 0; i < WORLD_SIZE; i++)
-    {
-        w.c[i] = 0;
-        w.s[i] = 0;
-    }
+    world_init();
     set_t set;
     world_set_sort(&w, 1, 1);
     world_set_sort(&w, 3, 1);
