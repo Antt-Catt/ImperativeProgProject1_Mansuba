@@ -12,6 +12,8 @@ struct world_t
   int s[WORLD_SIZE];
 };
 
+struct world_t w;
+
 /** Initializes a world (NO_COLOR, NO_SORT everywhere)
     Always returns the same pointer */
 struct world_t * world_init()

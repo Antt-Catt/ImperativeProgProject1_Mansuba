@@ -7,8 +7,6 @@
     These places are indexed from 0 to WORLD_SIZE-1 */
 struct world_t;
 
-struct world_t w;
-
 /** Initializes a world (NO_COLOR, NO_SORT everywhere)
     Always returns the same pointer */
 struct world_t *world_init();
