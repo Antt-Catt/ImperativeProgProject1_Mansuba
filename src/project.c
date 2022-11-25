@@ -73,12 +73,12 @@ void init_player_set(unsigned int p, struct world_t * w)
   {
     if (p == BLACK)
     {
-      world_set(&w, WIDTH * i, p);
+      world_set(w, WIDTH * i, p);
       push_set(&black_init_set, WIDTH * i);
     }
     else
     {
-      world_set(&w, WIDTH * i + HEIGHT, p);
+      world_set(w, WIDTH * i + HEIGHT, p);
       push_set(&white_init_set, WIDTH * i + HEIGHT);
     }
   }
@@ -104,9 +104,9 @@ void check_simple_victory(unsigned int idx, unsigned int p)
 
 int main(int argc, char *argv[])
 {
-  /*argc = argc;
+  argc = argc;
   argv[0] = argv[0];
-  world_init();
+  /*world_init();
   init_player_set(BLACK);
   init_player_set(WHITE);
   modif_set(&white_init_set,14,15);
