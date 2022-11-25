@@ -89,14 +89,14 @@ void check_simple_victory(unsigned int idx, unsigned int p)
     {
       if (exist_in_set(&black_init_set,idx) != UINT_MAX)
 	{
-	  printf("Victoire simple pour WHITE");
+	  printf("Victoire simple pour WHITE\n");
 	}
     }
   else
     {
       if (exist_in_set(&white_init_set,idx) != UINT_MAX)
 	{
-	  printf("Victoire simple pour BLACK");
+	  printf("Victoire simple pour BLACK\n");
 	}
     }
 }
@@ -105,13 +105,13 @@ int main(int argc, char *argv[])
 {
   argc = argc;
   argv[0] = argv[0];
-  world_init();
+  /*world_init();
   init_player_set(BLACK);
   init_player_set(WHITE);
   modif_set(&white_init_set,14,15);
   for(int i = 0; i < HEIGHT; i++){
     printf("%d %d\n", black_init_set.ptr[i], white_init_set.ptr[i]);
   }
-  check_simple_victory(15, WHITE); 
+  check_simple_victory(15, WHITE);*/ 
   return 0;
 }
