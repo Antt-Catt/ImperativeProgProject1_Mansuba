@@ -32,6 +32,7 @@ void mvt_possibles_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
             if (world_get_sort(w, idx_n) == 0)
             {
                 if (exist_in_set(set, idx_n) == UINT_MAX && idx_n != init)
+
                 {
                     mvt_possibles_aux(set, idx_n, w, init);
                 }
@@ -66,9 +67,8 @@ set_t mvt_possibles(unsigned int idx, struct world_t *w)
     return set;
 }
 
-void init_player_set(unsigned int p)
+void init_player_set(unsigned int p, struct world_t * w)
 {
-  extern struct world_t w;
   for (int i = 0; i < HEIGHT; i++)
   {
     if (p == BLACK)
@@ -104,15 +104,15 @@ void check_simple_victory(unsigned int idx, unsigned int p)
 
 int main(int argc, char *argv[])
 {
-  argc = argc;
+  /*argc = argc;
   argv[0] = argv[0];
-  /*world_init();
+  world_init();
   init_player_set(BLACK);
   init_player_set(WHITE);
   modif_set(&white_init_set,14,15);
   for(int i = 0; i < HEIGHT; i++){
     printf("%d %d\n", black_init_set.ptr[i], white_init_set.ptr[i]);
   }
-  check_simple_victory(15, WHITE);*/ 
+  check_simple_victory(15, WHITE);*/
   return 0;
 }
