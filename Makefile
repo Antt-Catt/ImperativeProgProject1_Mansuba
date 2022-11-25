@@ -21,7 +21,7 @@ test: # (Add your dependency here, e.g "test.o")
 	gcc -c $(CFLAGS) src/world.c
 	gcc -c $(CFLAGS) src/neighbors.c
 	gcc -c $(CFLAGS) src/set.c
-	gcc -c $(CFLAGS) tst/test.c
+	gcc -c -I src/ $(CFLAGS) tst/test.c
 	gcc $(CFLAGS) geometry.o world.o neighbors.o set.o test.o -o tst/test_project
 	# (Add your compile command here, e.g "gcc $(CFLAGS) test.o -o test_project")
 
