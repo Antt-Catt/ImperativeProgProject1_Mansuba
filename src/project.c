@@ -68,6 +68,7 @@ set_t mvt_possibles(unsigned int idx, struct world_t *w)
 
 void init_player_set(unsigned int p)
 {
+  extern struct world_t w;
   for (int i = 0; i < HEIGHT; i++)
   {
     if (p == BLACK)
