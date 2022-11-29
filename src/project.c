@@ -4,7 +4,7 @@
 #include "world.h"
 #include "neighbors.h"
 #include "set.h"
-
+//comment
 set_t black_init_set;
 set_t black_current_set;
 
