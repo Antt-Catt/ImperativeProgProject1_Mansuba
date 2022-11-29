@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <time.h>
 #include "world.h"
 #include "neighbors.h"
 #include "set.h"
@@ -26,12 +27,15 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
     if (world_get_sort(w, idx_n) != 0)
     {
       idx_n = get_neighbor(idx_n, neigh_idx.n[j].d);
-      if (world_get_sort(w, idx_n) == 0)
+      if (idx_n != UINT_MAX)
       {
-        if (exist_in_set(set, idx_n) == UINT_MAX && idx_n != init)
-
+        if (world_get_sort(w, idx_n) == 0)
         {
-          possible_mvts_aux(set, idx_n, w, init);
+          if (exist_in_set(set, idx_n) == UINT_MAX && idx_n != init)
+
+          {
+            possible_mvts_aux(set, idx_n, w, init);
+          }
         }
       }
     }
@@ -54,9 +58,12 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
     else
     {
       idx_n = get_neighbor(idx_n, neigh_idx.n[j].d);
-      if (world_get_sort(w, idx_n) == 0)
+      if (idx_n != UINT_MAX)
       {
-        possible_mvts_aux(&set, idx_n, w, idx);
+        if (world_get_sort(w, idx_n) == 0)
+        {
+          possible_mvts_aux(&set, idx_n, w, idx);
+        }
       }
     }
     j++;
@@ -145,7 +152,6 @@ unsigned int choose_random_piece_belonging_to(int current_player)
 unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 {
   set_t set = possible_mvts(p, w);
-  print_set(&set);
   unsigned int tmp = set.size - 1;
   int i = (rand() % (tmp - 0 + 1)) + 0;
   return set.ptr[i];
@@ -172,38 +178,34 @@ int main(int argc, char *argv[])
 {
   argc = argc;
   argv[0] = argv[0];
+  srand(time(NULL));
+
+  int s = 0;
+  struct world_t *w = world_init();
+  init_neighbors(0);
 
   black_init_set = init_set(HEIGHT);
   white_init_set = init_set(HEIGHT);
   black_current_set = init_set(HEIGHT);
   white_current_set = init_set(HEIGHT);
-  int s = 0;
-  struct world_t *w = world_init();
-  init_neighbors(0);
+
   init_player_set(1, w);
   init_player_set(2, w);
+
   unsigned int current_player = (rand() % (2 - 1 + 1)) + 1;
-  unsigned int p = choose_random_piece_belonging_to(current_player);
+  unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
   unsigned int m;
-  print_set(&black_init_set);
-  print_set(&white_init_set);
-  print_set(&black_current_set);
-  print_set(&white_current_set);
-  while ((check_simple_victory(p, current_player) == 0) && (s != 10))
+
+  while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (s != 100))
   {
     p = choose_random_piece_belonging_to(current_player);
-    //m = choose_random_move_for_piece(w, p);
-    printf("player %d, piece %d, m %d\n", current_player, p, m);
+    m = choose_random_move_for_piece(w, p);
     move_piece(w, p, m);
     current_player = current_player % 2 + 1;
     s++;
-    print_set(&black_init_set);
-    print_set(&white_init_set);
-    print_set(&black_current_set);
-    print_set(&white_current_set);
-
   }
 
-  printf("QLQ A GAGNEEEEEEE\n");
+  print_set(&black_current_set);
+  print_set(&white_current_set);
   return 0;
 }
