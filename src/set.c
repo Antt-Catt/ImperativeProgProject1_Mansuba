@@ -7,26 +7,26 @@ set_t init_set(unsigned int size)
   set.ptr = malloc(size * sizeof(unsigned int));
   set.size = size;
   return set;
-};
+}
 
 void resize_set(set_t *set, int new_size)
 {
   (*set).ptr = realloc((*set).ptr, new_size * sizeof(unsigned int));
   (*set).size = new_size;
-};
+}
 
 void push_set(set_t *set, unsigned int x)
 {
   resize_set(set, ((*set).size + 1));
   (*set).ptr[(*set).size - 1] = x;
-};
+}
 
 unsigned int pop_set(set_t *set)
 {
   int x = (*set).ptr[(*set).size - 1];
   resize_set(set, ((*set).size - 1));
   return x;
-};
+}
 
 unsigned int exist_in_set(set_t *set, unsigned int x)
 {
@@ -38,7 +38,7 @@ unsigned int exist_in_set(set_t *set, unsigned int x)
     }
   }
   return UINT_MAX;
-};
+}
 
 void modif_set(set_t *set, unsigned int x, unsigned int y)
 {

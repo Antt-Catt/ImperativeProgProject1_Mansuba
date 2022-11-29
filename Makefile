@@ -9,11 +9,12 @@ all: project
 	gcc -c $(CFLAGS) $<
 
 project: # (Add your dependency here, e.g "project.o")
-	gcc -c $(CFLAGS) src/project.c
 	gcc -c $(CFLAGS) src/geometry.c
 	gcc -c $(CFLAGS) src/world.c
 	gcc -c $(CFLAGS) src/neighbors.c
-	gcc $(CFLAGS) geometry.o world.o neighbors.o project.o -o project
+	gcc -c $(CFLAGS) src/set.c
+	gcc -c $(CFLAGS) src/project.c
+	gcc $(CFLAGS) geometry.o world.o neighbors.o set.o project.o -o src/project
 	# (Add your compile command here, e.g "gcc $(CFLAGS) project.o -o project")
 
 test: # (Add your dependency here, e.g "test.o")
@@ -26,4 +27,4 @@ test: # (Add your dependency here, e.g "test.o")
 	# (Add your compile command here, e.g "gcc $(CFLAGS) test.o -o test_project")
 
 clean:
-	rm -f *.o *~ tst/test_project src/*~
+	rm -f *.o *~ tst/test_project tst/*~ src/*~ src/project

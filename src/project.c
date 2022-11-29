@@ -31,6 +31,7 @@ void mvt_possibles_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
             if (world_get_sort(w, idx_n) == 0)
             {
                 if (exist_in_set(set, idx_n) == UINT_MAX && idx_n != init)
+
                 {
                     mvt_possibles_aux(set, idx_n, w, init);
                 }
@@ -65,52 +66,82 @@ set_t mvt_possibles(unsigned int idx, struct world_t *w)
     return set;
 }
 
-void init_player_set(unsigned int p)
+void init_player_set(unsigned int p, struct world_t * w)
 {
   for (int i = 0; i < HEIGHT; i++)
   {
     if (p == BLACK)
     {
-      world_set(&w, WIDTH * i, p);
+      world_set(w, WIDTH * i, p);
       push_set(&black_init_set, WIDTH * i);
     }
     else
     {
-      world_set(&w, WIDTH * i + HEIGHT, p);
+      world_set(w, WIDTH * i + HEIGHT, p);
       push_set(&white_init_set, WIDTH * i + HEIGHT);
     }
   }
 }
 
-void check_simple_victory(unsigned int idx, unsigned int p)
+int check_simple_victory(unsigned int idx, unsigned int p)
 {
-  if (p == 2)
+  if (p == 1)
     {
-      if (exist_in_set(&black_init_set,idx) != UINT_MAX)
+      if (exist_in_set(&white_init_set,idx) != UINT_MAX)
 	{
-	  printf("Victoire simple pour WHITE");
+	  printf("Victoire simple pour BLACK\n");
+	  return 1;
 	}
     }
   else
     {
-      if (exist_in_set(&white_init_set,idx) != UINT_MAX)
+      if (exist_in_set(&black_init_set,idx) != UINT_MAX)
 	{
-	  printf("Victoire simple pour BLACK");
+	  printf("Victoire simple pour WHITE\n");
+	  return 1;
 	}
     }
+  return 0;
+}
+
+int check_complex_victory(unsigned int p)
+{
+  if (p == 1){
+    for(int i = 0; i < HEIGHT; i++){
+      if (check_simple_victory(black_current_set.ptr[i], 1) == 0){
+	return 1;
+      }
+    }
+  }
+  else{
+    for(int i = 0; i < HEIGHT; i++){
+      if (check_simple_victory(white_current_set.ptr[i], 2) == 0){
+	return 1;
+      }
+    }
+  }
+  return 0;
 }
 
 int main(int argc, char *argv[])
 {
   argc = argc;
   argv[0] = argv[0];
-  world_init();
+  /*world_init();
   init_player_set(BLACK);
   init_player_set(WHITE);
   modif_set(&white_init_set,14,15);
   for(int i = 0; i < HEIGHT; i++){
     printf("%d %d\n", black_init_set.ptr[i], white_init_set.ptr[i]);
   }
-  check_simple_victory(15, WHITE); 
+  check_simple_victory(15, WHITE);*/
+  
+  push_set(&black_current_set, 14);
+  push_set(&black_current_set, 4);
+  push_set(&black_current_set, 9);
+  push_set(&black_current_set, 19);
+  
+  printf("%d\n", check_complex_victory(BLACK));
+  
   return 0;
 }
