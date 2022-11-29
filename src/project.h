@@ -1,9 +1,9 @@
 #ifndef __PROJECT_H__
 #define __PROJECT_H__
 
-void mvt_possibles_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned int init);
+void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned int init);
 
-set_t mvt_possibles(unsigned int idx, struct world_t *w);
+set_t possible_mvts(unsigned int idx, struct world_t *w);
 
 void init_player_set(unsigned int p, struct world_t * w);
 
