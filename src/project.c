@@ -115,27 +115,41 @@ int check_simple_victory(unsigned int idx, unsigned int p)
 
 int check_complex_victory(unsigned int p)
 {
-  if (p == 1)
+  if (p == BLACK)
   {
-    for (int i = 0; i < HEIGHT; i++)
+    int i = 0;
+    while (i < black_current_set.size)
     {
-      if (check_simple_victory(black_current_set.ptr[i], 1) == 0)
+      if (check_simple_victory(black_current_set.ptr[i], BLACK) == 0)
       {
-        return 1;
+        return 0;
       }
+      else
+      {
+        delete_from_set(&black_current_set, black_current_set.ptr[i]);
+        i--;
+      }
+      i++;
     }
   }
   else
   {
-    for (int i = 0; i < HEIGHT; i++)
+    int i = 0;
+    while (i < white_current_set.size)
     {
-      if (check_simple_victory(white_current_set.ptr[i], 2) == 0)
+      if (check_simple_victory(white_current_set.ptr[i], WHITE) == 0)
       {
-        return 1;
+        return 0;
       }
+      else
+      {
+        delete_from_set(&white_current_set, white_current_set.ptr[i]);
+        i--;
+      }
+      i++;
     }
   }
-  return 0;
+  return 1;
 }
 
 unsigned int choose_random_piece_belonging_to(int current_player)
@@ -195,8 +209,18 @@ int main(int argc, char *argv[])
   unsigned int current_player = (rand() % (2 - 1 + 1)) + 1;
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
   unsigned int m;
-
+  /*
   while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (s != 100))
+  {
+    p = choose_random_piece_belonging_to(current_player);
+    m = choose_random_move_for_piece(w, p);
+    move_piece(w, p, m);
+    current_player = current_player % 2 + 1;
+    s++;
+  }
+*/
+
+  while ((check_complex_victory(current_player) == 0) && (s != 10000))
   {
     p = choose_random_piece_belonging_to(current_player);
     m = choose_random_move_for_piece(w, p);
