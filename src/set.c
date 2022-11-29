@@ -55,10 +55,6 @@ void print_set(set_t *set)
   for (int i = 0; i < (*set).size; i++)
   {
     printf("%d ", (*set).ptr[i]);
-    if (i % WIDTH == (WIDTH - 1))
-    {
-      printf("\n");
-    }
   }
   printf("}\n");
 }

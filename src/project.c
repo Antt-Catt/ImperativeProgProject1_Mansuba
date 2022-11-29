@@ -4,14 +4,12 @@
 #include "world.h"
 #include "neighbors.h"
 #include "set.h"
-//comment
+
 set_t black_init_set;
 set_t black_current_set;
 
 set_t white_init_set;
 set_t white_current_set;
-
-extern struct world_t w;
 
 void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned int init)
 {
@@ -74,13 +72,15 @@ void init_player_set(unsigned int p, struct world_t *w)
     {
       world_set(w, WIDTH * i, p);
       world_set_sort(w, WIDTH * i, PAWN);
-      push_set(&black_init_set, WIDTH * i);
+      black_init_set.ptr[i] = WIDTH * i;
+      black_current_set.ptr[i] = WIDTH * i;
     }
     else
     {
       world_set(w, WIDTH * i + HEIGHT, p);
-      world_set_sort(w, WIDTH * i, PAWN);
-      push_set(&white_init_set, WIDTH * i + HEIGHT);
+      world_set_sort(w, WIDTH * i + HEIGHT, PAWN);
+      white_init_set.ptr[i] = WIDTH * i + HEIGHT;
+      white_current_set.ptr[i] = WIDTH * i + HEIGHT;
     }
   }
 }
@@ -145,6 +145,7 @@ unsigned int choose_random_piece_belonging_to(int current_player)
 unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 {
   set_t set = possible_mvts(p, w);
+  print_set(&set);
   unsigned int tmp = set.size - 1;
   int i = (rand() % (tmp - 0 + 1)) + 0;
   return set.ptr[i];
@@ -171,39 +172,38 @@ int main(int argc, char *argv[])
 {
   argc = argc;
   argv[0] = argv[0];
-  /*choose_random_piece_belonging_to(w, current_player)
-  world_init();
-  init_player_set(BLACK);
-  init_player_set(WHITE);
-  modif_set(&white_init_set,14,15);
-  for(int i = 0; i < HEIGHT; i++){
-    printf("%d %d\n", black_init_set.ptr[i], white_init_set.ptr[i]);
-  }
-  check_simple_victory(15, WHITE);
-  push_set(&black_current_set, 14);
-  push_set(&black_current_set, 4);
-  push_set(&black_current_set, 9);
-  push_set(&black_current_set, 19);
-  printf("%d\n", check_complex_victory(BLACK));
-  */
+
+  black_init_set = init_set(HEIGHT);
+  white_init_set = init_set(HEIGHT);
+  black_current_set = init_set(HEIGHT);
+  white_current_set = init_set(HEIGHT);
   int s = 0;
-  w = world_init();
+  struct world_t *w = world_init();
   init_neighbors(0);
   init_player_set(1, w);
   init_player_set(2, w);
   unsigned int current_player = (rand() % (2 - 1 + 1)) + 1;
   unsigned int p = choose_random_piece_belonging_to(current_player);
   unsigned int m;
-  /*
-  while ((check_simple_victory(p, current_player)) && (s != 1))
+  print_set(&black_init_set);
+  print_set(&white_init_set);
+  print_set(&black_current_set);
+  print_set(&white_current_set);
+  while ((check_simple_victory(p, current_player) == 0) && (s != 10))
   {
     p = choose_random_piece_belonging_to(current_player);
-    m = choose_random_move_for_piece(w, p);
+    //m = choose_random_move_for_piece(w, p);
+    printf("player %d, piece %d, m %d\n", current_player, p, m);
     move_piece(w, p, m);
     current_player = current_player % 2 + 1;
     s++;
+    print_set(&black_init_set);
+    print_set(&white_init_set);
+    print_set(&black_current_set);
+    print_set(&white_current_set);
+
   }
-  */
+
   printf("QLQ A GAGNEEEEEEE\n");
   return 0;
 }
