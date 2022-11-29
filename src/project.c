@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include "geometry.h"
 #include "world.h"
 #include "neighbors.h"
 #include "set.h"
