@@ -228,7 +228,8 @@ int main(int argc, char *argv[])
 
   if (optc != 3)
     {
-      return 1;
+      printf("Options needed : -s -m -t\n");
+      return 0;
     }
 
   srand(time(NULL));
