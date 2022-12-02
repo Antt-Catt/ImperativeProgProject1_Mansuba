@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <time.h>
+#include <unistd.h>
+#include <getopt.h>
+#include <string.h>
 #include "world.h"
 #include "neighbors.h"
 #include "set.h"
@@ -202,10 +205,36 @@ void move_piece(struct world_t *w, unsigned int p, unsigned int m)
 
 int main(int argc, char *argv[])
 {
-  argc = argc;
-  argv[0] = argv[0];
+  int opt;
+  int optc = 0;
+  int MAX_TURNS;
+  char victory_type[1];
+
+  while ((opt = getopt(argc, argv, "s:m:t:")) != -1) {
+    switch (opt) {
+    case 's':
+      optc++;
+      break;
+    case 'm':
+      MAX_TURNS = atoi(optarg);
+      optc++;
+      break;
+    case 't':
+      strcpy(victory_type, optarg);
+      optc++;
+      break;
+    }
+  }
+
+  if (optc != 3)
+    {
+      printf("Options needed : -s -m -t\n");
+      return 1;
+    }
+
   srand(time(NULL));
-  int s = 0;
+
+  int nb_turns = 0;
   struct world_t *w = world_init();
   init_neighbors(0);
 
@@ -220,17 +249,16 @@ int main(int argc, char *argv[])
   unsigned int current_player = (rand() % (2 - 1 + 1)) + 1;
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
   unsigned int m;
-
-  int t = 0;
-  if (t == 0)
+  
+  if (strcmp(victory_type, "s") == 0)
   {
-    while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (s != 100))
+    while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
       p = choose_random_piece_belonging_to(current_player);
       m = choose_random_move_for_piece(w, p);
       move_piece(w, p, m);
       current_player = current_player % 2 + 1;
-      s++;
+      nb_turns++;
     }
     if (current_player == BLACK)
     {
@@ -241,16 +269,19 @@ int main(int argc, char *argv[])
       printf("Victoire simple pour BLACK\n");
     }
   }
-  else
+  if (strcmp(victory_type, "c") == 0)
   {
 
-    while ((check_complex_victory(current_player) == 0) && (s != 100000000))
+    while ((check_complex_victory(current_player) == 0) && (nb_turns != MAX_TURNS))
     {
       p = choose_random_piece_belonging_to(current_player);
       m = choose_random_move_for_piece(w, p);
       move_piece(w, p, m);
       current_player = current_player % 2 + 1;
-      s++;
+      nb_turns++;
+      print_set(&black_current_set);
+      print_set(&white_current_set);
+      printf("\n");
     }
   }
 
