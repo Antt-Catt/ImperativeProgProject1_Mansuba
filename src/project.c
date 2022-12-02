@@ -98,16 +98,14 @@ int check_simple_victory(unsigned int idx, unsigned int p)
   {
     if (exist_in_set(&white_init_set, idx) != UINT_MAX)
     {
-      printf("Victoire simple pour BLACK\n");
-      return 1;
+      return p;
     }
   }
   else
   {
     if (exist_in_set(&black_init_set, idx) != UINT_MAX)
     {
-      printf("Victoire simple pour WHITE\n");
-      return 1;
+      return p;
     }
   }
   return 0;
@@ -149,6 +147,14 @@ int check_complex_victory(unsigned int p)
       i++;
     }
   }
+  if (p == BLACK)
+  {
+    printf("Victoire complexe pour BLACK\n");
+  }
+  else
+  {
+    printf("Victoire complexe pour WHITE\n");
+  }
   return 1;
 }
 
@@ -166,9 +172,13 @@ unsigned int choose_random_piece_belonging_to(int current_player)
 unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 {
   set_t set = possible_mvts(p, w);
-  unsigned int tmp = set.size - 1;
-  int i = (rand() % (tmp - 0 + 1)) + 0;
-  return set.ptr[i];
+  if (set.size != 0)
+  {
+    unsigned int tmp = set.size - 1;
+    int i = (rand() % (tmp - 0 + 1)) + 0;
+    return set.ptr[i];
+  }
+  return p;
 }
 
 void move_piece(struct world_t *w, unsigned int p, unsigned int m)
@@ -193,7 +203,7 @@ int main(int argc, char *argv[])
   argc = argc;
   argv[0] = argv[0];
   srand(time(NULL));
-
+elonging to current player
   int s = 0;
   struct world_t *w = world_init();
   init_neighbors(0);
@@ -209,24 +219,38 @@ int main(int argc, char *argv[])
   unsigned int current_player = (rand() % (2 - 1 + 1)) + 1;
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
   unsigned int m;
-  /*
-  while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (s != 100))
-  {
-    p = choose_random_piece_belonging_to(current_player);
-    m = choose_random_move_for_piece(w, p);
-    move_piece(w, p, m);
-    current_player = current_player % 2 + 1;
-    s++;
-  }
-*/
 
-  while ((check_complex_victory(current_player) == 0) && (s != 10000))
+  int t = 0;
+  if (t = 0)
   {
-    p = choose_random_piece_belonging_to(current_player);
-    m = choose_random_move_for_piece(w, p);
-    move_piece(w, p, m);
-    current_player = current_player % 2 + 1;
-    s++;
+    while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (s != 100))
+    {
+      p = choose_random_piece_belonging_to(current_player);
+      m = choose_random_move_for_piece(w, p);
+      move_piece(w, p, m);
+      current_player = current_player % 2 + 1;
+      s++;
+    }
+    if (current_player == BLACK)
+    {
+      printf("Victoire simple pour WHITE\n");
+    }
+    else
+    {
+      printf("Victoire simple pour BLACK\n");
+    }
+  }
+  else
+  {
+
+    while ((check_complex_victory(current_player) == 0) && (s != 100000000))
+    {
+      p = choose_random_piece_belonging_to(current_player);
+      m = choose_random_move_for_piece(w, p);
+      move_piece(w, p, m);
+      current_player = current_player % 2 + 1;
+      s++;
+    }
   }
 
   print_set(&black_current_set);

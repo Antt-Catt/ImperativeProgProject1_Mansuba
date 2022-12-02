@@ -11,13 +11,13 @@ struct world_t;
     Always returns the same pointer */
 struct world_t *world_init();
 
-/** Return the color at a place */
+/** Returns the color at a place */
 enum color_t world_get(const struct world_t *b, unsigned int idx);
 
 /** Sets the color at a place */
 void world_set(struct world_t *b, unsigned int idx, enum color_t c);
 
-/** Return the sort at a place */
+/** Returns the sort at a place */
 enum sort_t world_get_sort(const struct world_t *b, unsigned int idx);
 
 /** Sets the sort at a place */

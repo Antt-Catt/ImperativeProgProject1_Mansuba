@@ -47,10 +47,10 @@ enum dir_t {
   MAX_DIR = 9,    // Total number of different directions
 };
 
-/** Return a string describing the color `c` and sort `s` */
+/** Returns a string describing the color `c` and sort `s` */
 const char* place_to_string(enum color_t c, enum sort_t s);
 
-/** Return a string describing the direction `d` */
+/** Returns a string describing the direction `d` */
 const char* dir_to_string(enum dir_t d);
 
 #endif // __GEOMETRY_H__
