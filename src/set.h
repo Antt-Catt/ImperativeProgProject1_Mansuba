@@ -35,4 +35,7 @@ void print_set(set_t *set);
 /** Deletes element x from the set*/
 void delete_from_set(set_t *set, unsigned int x);
 
+/** Frees the space previously occupied by the set */
+void delete_set(set_t *set);
+
 #endif // __SET_H__

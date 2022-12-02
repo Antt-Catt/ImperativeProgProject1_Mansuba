@@ -61,7 +61,13 @@ void print_set(set_t *set)
 
 void delete_from_set(set_t *set, unsigned int x)
 {
-int y = (*set).ptr[(*set).size - 1];
-modif_set(set, x, y);
-pop_set(set);
+  int y = (*set).ptr[(*set).size - 1];
+  modif_set(set, x, y);
+  pop_set(set);
+}
+
+void delete_set(set_t *set)
+{
+  (*set).size = 0;
+  free((*set).ptr);
 }
