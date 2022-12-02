@@ -11,8 +11,7 @@ typedef struct
     int size;
 } set_t;
 
-/** Initializes a set (0 element)
-    Always return the same set*/
+/** Initialize a set with size places */
 set_t init_set(unsigned int size);
 
 /** Resize the set's size with realloc */
@@ -21,16 +20,19 @@ void resize_set(set_t *set, int new_size);
 /** Add an element at the end of the set */
 void push_set(set_t *set, unsigned int x);
 
-/** Remove the last element and return it */
+/** Remove the last element of the set and return it */
 unsigned int pop_set(set_t *set);
 
-/** Check if an element exists in the set and return his index */
+/** Check if x exists in the set and return it's index */
 unsigned int exist_in_set(set_t *set, unsigned int x);
 
-/** Change the value of an element in the set */
+/** Change the value of x in the set by y */
 void modif_set(set_t *set, unsigned int x, unsigned int y);
 
 /** Print the set */
 void print_set(set_t *set);
+
+/** Delete element x from the set*/
+void delete_from_set(set_t *set, unsigned int x);
 
 #endif // __SET_H__
