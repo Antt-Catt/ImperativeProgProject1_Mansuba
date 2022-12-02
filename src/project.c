@@ -228,7 +228,6 @@ int main(int argc, char *argv[])
 
   if (optc != 3)
     {
-      printf("Options needed : -s -m -t\n");
       return 1;
     }
 
