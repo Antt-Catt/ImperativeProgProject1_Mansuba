@@ -58,3 +58,10 @@ void print_set(set_t *set)
   }
   printf("}\n");
 }
+
+void delete_from_set(set_t *set, unsigned int x)
+{
+int y = (*set).ptr[(*set).size - 1];
+modif_set(set, x, y);
+pop_set(set);
+}
