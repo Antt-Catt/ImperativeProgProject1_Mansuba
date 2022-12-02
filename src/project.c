@@ -203,7 +203,6 @@ int main(int argc, char *argv[])
   argc = argc;
   argv[0] = argv[0];
   srand(time(NULL));
-elonging to current player
   int s = 0;
   struct world_t *w = world_init();
   init_neighbors(0);
@@ -221,7 +220,7 @@ elonging to current player
   unsigned int m;
 
   int t = 0;
-  if (t = 0)
+  if (t == 0)
   {
     while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (s != 100))
     {
