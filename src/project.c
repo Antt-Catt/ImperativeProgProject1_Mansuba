@@ -176,7 +176,8 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
   {
     unsigned int tmp = set.size - 1;
     int i = (rand() % (tmp - 0 + 1)) + 0;
-    unsigned int x = set.ptr[i] delete_set(&set);
+    unsigned int x = set.ptr[i];
+    delete_set(&set);
     return x;
   }
   return p;
@@ -255,6 +256,7 @@ int main(int argc, char *argv[])
 
   print_set(&black_current_set);
   print_set(&white_current_set);
+
   delete_set(&black_current_set);
   delete_set(&white_current_set);
   delete_set(&black_init_set);
