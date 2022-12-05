@@ -2,13 +2,18 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <time.h>
+#include <getopt.h>
+#include <unistd.h>
+#include <string.h>
+#include "neighbors.h"
+#include "geometry.h"
 #include "movements.h"
+#include "world.h"
 
 set_t black_init_set;
-set_t black_current_set;
-
+extern set_t black_current_set;
 set_t white_init_set;
-set_t white_current_set;
+extern set_t white_current_set;
 
 void init_player_set(unsigned int p, struct world_t *w)
 {
@@ -133,6 +138,7 @@ int main(int argc, char *argv[])
     switch (opt) {
     case 's':
       optc++;
+      srand(atoi(optarg));
       break;
     case 'm':
       MAX_TURNS = atoi(optarg);

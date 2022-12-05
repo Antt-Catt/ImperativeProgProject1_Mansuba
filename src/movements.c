@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include "geometry.h"
 #include "world.h"
 #include "neighbors.h"
 #include "set.h"
@@ -29,9 +30,9 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
                 {
                     if (exist_in_set(set, idx_n) == UINT_MAX && idx_n != init)
 
-                    {
+		      {
                         possible_mvts_aux(set, idx_n, w, init);
-                    }
+		      }
                 }
             }
         }
@@ -41,45 +42,45 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
 
 set_t possible_mvts(unsigned int idx, struct world_t *w)
 {
-    set_t set = init_set(0);
-    struct neighbors_t neigh_idx = get_neighbors(idx);
-    int j = 0;
-    while (neigh_idx.n[j].i != UINT_MAX)
+  set_t set = init_set(0);
+  struct neighbors_t neigh_idx = get_neighbors(idx);
+  int j = 0;
+  while (neigh_idx.n[j].i != UINT_MAX)
     {
-        unsigned int idx_n = neigh_idx.n[j].i;
-        if (world_get_sort(w, idx_n) == 0)
+      unsigned int idx_n = neigh_idx.n[j].i;
+      if (world_get_sort(w, idx_n) == 0)
         {
-            push_set(&set, idx_n);
+	  push_set(&set, idx_n);
         }
-        else
+      else
         {
-            idx_n = get_neighbor(idx_n, neigh_idx.n[j].d);
-            if (idx_n != UINT_MAX)
+	  idx_n = get_neighbor(idx_n, neigh_idx.n[j].d);
+	  if (idx_n != UINT_MAX)
             {
-                if (world_get_sort(w, idx_n) == 0)
+	      if (world_get_sort(w, idx_n) == 0)
                 {
-                    possible_mvts_aux(&set, idx_n, w, idx);
+		  possible_mvts_aux(&set, idx_n, w, idx);
                 }
             }
         }
-        j++;
+      j++;
     }
-    return set;
+  return set;
 }
 
 void move_piece(struct world_t *w, unsigned int p, unsigned int m)
 {
-    unsigned int current_player = world_get(w, p);
-    world_set(w, m, current_player);
-    world_set_sort(w, m, PAWN);
-    if (current_player == BLACK)
+  unsigned int current_player = world_get(w, p);
+  world_set(w, m, current_player);
+  world_set_sort(w, m, PAWN);
+  if (current_player == BLACK)
     {
-        modif_set(&black_current_set, p, m);
+      modif_set(&black_current_set, p, m);
     }
-    else
+  else
     {
-        modif_set(&white_current_set, p, m);
+      modif_set(&white_current_set, p, m);
     }
-    world_set(w, p, NO_COLOR);
-    world_set_sort(w, p, NO_SORT);
+  world_set(w, p, NO_COLOR);
+  world_set_sort(w, p, NO_SORT);
 }
