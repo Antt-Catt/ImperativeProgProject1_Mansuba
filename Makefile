@@ -2,29 +2,18 @@ WIDTH ?= 5
 HEIGHT ?= 4
 MANSUBA_FLAGS = -DWIDTH=$(WIDTH) -DHEIGHT=$(HEIGHT)
 CFLAGS = -Wall -Wextra -std=c99 -g3 $(MANSUBA_FLAGS)
+OBJS = src/geometry.o src/world.o src/neighbors.o src/set.o src/movements.o
 
-all: project
+all: project test
 
 %.o: %.c
-	gcc -c $(CFLAGS) $<
+	gcc -c -I src/ $(CFLAGS) $< -o $@
 
-project: # (Add your dependency here, e.g "project.o")
-	gcc -c $(CFLAGS) src/geometry.c
-	gcc -c $(CFLAGS) src/world.c
-	gcc -c $(CFLAGS) src/neighbors.c
-	gcc -c $(CFLAGS) src/set.c
-	gcc -c $(CFLAGS) src/project.c
-	gcc $(CFLAGS) geometry.o world.o neighbors.o set.o project.o -o src/project
-	# (Add your compile command here, e.g "gcc $(CFLAGS) project.o -o project")
+project: $(OBJS) src/project.o
+	gcc $(CFLAGS) $(OBJS) src/project.o -o src/project
 
-test: # (Add your dependency here, e.g "test.o")
-	gcc -c $(CFLAGS) src/geometry.c
-	gcc -c $(CFLAGS) src/world.c
-	gcc -c $(CFLAGS) src/neighbors.c
-	gcc -c $(CFLAGS) src/set.c
-	gcc -c -I src/ $(CFLAGS) tst/test.c
-	gcc $(CFLAGS) geometry.o world.o neighbors.o set.o test.o -o tst/test_project
-	# (Add your compile command here, e.g "gcc $(CFLAGS) test.o -o test_project")
+test: $(OBJS) tst/test.o
+	gcc $(CFLAGS) $(OBJS) tst/test.o -o tst/test_project
 
 clean:
-	rm -f *.o *~ tst/test_project tst/*~ src/*~ src/project
+	rm -f tst/test_project src/project */*.o */*~
