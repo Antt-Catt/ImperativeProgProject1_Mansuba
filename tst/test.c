@@ -6,8 +6,6 @@
 #include "world.h"
 #include "set.h"
 
-struct world_t * world_init();
-
 int main(int argc, char* argv[])
 {
   argc = argc;
@@ -26,20 +24,21 @@ int main(int argc, char* argv[])
 
   //tests world
   printf("Tests de world.c :\n");
-  extern struct world_t w;
-  world_init();
+  //extern struct world_t w;
+  struct world_t* w = world_init();
   for (int i = 0; i < WORLD_SIZE; i++){
-    printf("place %d, color %d, sort %d\n", i, world_get(&w,i), world_get_sort(&w,i));
+    printf("place %d, color %d, sort %d\n", i, world_get(w,i), world_get_sort(w,i));
   }
   
-  world_set(&w, 5, 1); 
-  world_set_sort(&w, 16, 1);
-  world_set(&w, 16, 2); 
-  printf("place 5, color %d, sort %d\n", world_get(&w, 5), world_get_sort(&w, 5));
-  printf("place 16, color %d, sort %d\n", world_get(&w, 16), world_get_sort(&w, 16));
+  world_set(w, 5, 1); 
+  world_set_sort(w, 16, 1);
+  world_set(w, 16, 2); 
+  printf("place 5, color %d, sort %d\n", world_get(w, 5), world_get_sort(w, 5));
+  printf("place 16, color %d, sort %d\n", world_get(w, 16), world_get_sort(w, 16));
 
 
   //tests neighbors
+  printf("Tests de neighbors.c :\n");
   printf("neighbors %d\n", get_neighbor(0,2));
   printf("neighbors %d\n", get_neighbor(0,-3));
   printf("neighbors %d\n", get_neighbor(10,-3));
