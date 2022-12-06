@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include "movements.h"
+#include "neighbors.h"
 #include "set.h"
 
 
