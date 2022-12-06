@@ -14,7 +14,7 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
     int j = 0;
     unsigned int idx_n;
     struct neighbors_t neigh_idx = get_neighbors(idx);
-    if (exist_in_set(set, idx) == UINT_MAX && idx != init)
+    if ((exist_in_set(set, idx) == UINT_MAX) && (idx != init))
     {
         push_set(set, idx);
     }
@@ -82,5 +82,5 @@ void move_piece(struct world_t *w, unsigned int p, unsigned int m)
       modif_set(&white_current_set, p, m);
     }
   world_set(w, p, NO_COLOR);
-  world_set_sort(w, p, NO_SORT);
+  world_set_sort( w, p, NO_SORT);
 }
