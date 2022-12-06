@@ -5,7 +5,6 @@
 #include <getopt.h>
 #include <unistd.h>
 #include <string.h>
-#include "project.h"
 #include "movements.h"
 #include "neighbors.h"
 #include "world.h"
