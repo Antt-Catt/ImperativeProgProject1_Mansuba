@@ -38,7 +38,14 @@ void init_player_set(unsigned int p, struct world_t *w)
 
 int check_simple_victory(unsigned int idx, unsigned int p)
 {
-  if (p == 1)
+  /*printf("player = %d, piece = %d\n", p, idx);
+  printf("BLACK ");
+  print_set(&black_current_set);
+  print_set(&black_init_set);
+  printf("WHITE ");
+  print_set(&white_current_set);
+  print_set(&white_init_set);*/
+  if (p == BLACK)
   {
     if (exist_in_set(&white_init_set, idx) != UINT_MAX)
     {
@@ -157,8 +164,6 @@ int main(int argc, char *argv[])
       return 0;
     }
 
-  srand(time(NULL));
-
   int nb_turns = 0;
   struct world_t *w = world_init();
   init_neighbors(0);
@@ -176,23 +181,38 @@ int main(int argc, char *argv[])
   unsigned int m;
   
   if (strcmp(victory_type, "s") == 0)
-  {
-    while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
-      p = choose_random_piece_belonging_to(current_player);
-      m = choose_random_move_for_piece(w, p);
-      move_piece(w, p, m);
-      current_player = current_player % 2 + 1;
-      nb_turns++;
-    }
-    if (current_player == BLACK)
-    {
-      printf("Victoire simple pour WHITE\n");
-    }
-    else
-    {
-      printf("Victoire simple pour BLACK\n");
-    }
+      while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
+	{
+	  p = choose_random_piece_belonging_to(current_player);
+	  m = choose_random_move_for_piece(w, p);
+	  move_piece(w, p, m);
+	  current_player = current_player % 2 + 1;
+	  nb_turns++;
+	  p = m;
+	  /*printf("BLACK ");
+	  print_set(&black_current_set);
+	  print_set(&black_init_set);
+	  printf("WHITE ");
+	  print_set(&white_current_set);
+	  print_set(&white_init_set);
+	  printf("\n");*/
+	}
+      if (current_player == BLACK)
+	{
+	  printf("Victoire simple pour WHITE\n");
+	}
+      else
+	{
+	  printf("Victoire simple pour BLACK\n");
+	}
+      /*printf("%d\n", nb_turns);
+      printf("BLACK ");
+      print_set(&black_current_set);
+      print_set(&black_init_set);
+      printf("WHITE ");
+      print_set(&white_current_set);
+      print_set(&white_init_set);*/
   }
   if (strcmp(victory_type, "c") == 0)
   {
@@ -203,15 +223,20 @@ int main(int argc, char *argv[])
       m = choose_random_move_for_piece(w, p);
       move_piece(w, p, m);
       current_player = current_player % 2 + 1;
+      p = m;
       nb_turns++;
-      print_set(&black_current_set);
+      /*print_set(&black_current_set);
       print_set(&white_current_set);
-      printf("\n");
+      printf("\n");*/
     }
   }
 
+  printf("BLACK ");
   print_set(&black_current_set);
+  print_set(&black_init_set);
+  printf("WHITE ");
   print_set(&white_current_set);
+  print_set(&white_init_set);
 
   delete_set(&black_current_set);
   delete_set(&white_current_set);
