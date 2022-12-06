@@ -1,5 +1,6 @@
-#include "set.h"
 #include <limits.h>
+#include "set.h"
+
 
 set_t init_set(unsigned int size)
 {

@@ -5,10 +5,11 @@
 #include <getopt.h>
 #include <unistd.h>
 #include <string.h>
-#include "neighbors.h"
-#include "geometry.h"
+#include "project.h"
 #include "movements.h"
+#include "neighbors.h"
 #include "world.h"
+#include "set.h"
 
 set_t black_init_set;
 extern set_t black_current_set;
