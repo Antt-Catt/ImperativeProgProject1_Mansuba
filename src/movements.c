@@ -4,6 +4,7 @@
 #include "movements.h"
 #include "set.h"
 
+
 set_t black_current_set;
 set_t white_current_set;
 
@@ -80,5 +81,5 @@ void move_piece(struct world_t *w, unsigned int p, unsigned int m)
     modif_set(&white_current_set, p, m);
   }
   world_set(w, p, NO_COLOR);
-  world_set_sort( w, p, NO_SORT);
+  world_set_sort(w, p, NO_SORT);
 }
