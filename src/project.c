@@ -187,8 +187,8 @@ int main(int argc, char *argv[])
   black_current_set = init_set(HEIGHT);
   white_current_set = init_set(HEIGHT);
 
-  init_player_set(1, w);
-  init_player_set(2, w);
+  init_player_set(BLACK, w);
+  init_player_set(WHITE, w);
 
   unsigned int current_player = (rand() % (2 - 1 + 1)) + 1;
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
@@ -214,9 +214,9 @@ int main(int argc, char *argv[])
       printf("Victoire simple pour BLACK\n");
     }
   }
+  
   if (strcmp(victory_type, "c") == 0)
   {
-
     while ((check_complex_victory(current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
       p = choose_random_piece_belonging_to(current_player);
