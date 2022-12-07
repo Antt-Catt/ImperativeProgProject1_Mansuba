@@ -1,10 +1,7 @@
 #ifndef __PROJECT_H__
 #define __PROJECT_H__
 
-#include "movements.h"
-#include "neighbors.h"
 #include "world.h"
-#include "set.h"
 
 /** Initializes the positions of player p's pieces */
 void init_player_set(unsigned int p, struct world_t * w);

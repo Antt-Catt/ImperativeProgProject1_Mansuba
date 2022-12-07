@@ -8,7 +8,6 @@
 #include "project.h"
 #include "movements.h"
 #include "neighbors.h"
-#include "world.h"
 #include "set.h"
 
 set_t black_init_set;
