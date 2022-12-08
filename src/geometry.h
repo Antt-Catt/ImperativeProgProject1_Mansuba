@@ -28,7 +28,8 @@ enum color_t {
 enum sort_t {
   NO_SORT  = 0,   // Default sort (i.e nothing)
   PAWN     = 1,
-  MAX_SORT = 2,   // Total number of different sorts
+  TOWER = 2
+  MAX_SORT = 3,   // Total number of different sorts
 };
 
 /** Enum defining the possible directions in the world
