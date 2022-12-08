@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include "world.h"
-#include "geometry.h"
-#include "set.h"
 
 /** Abstract struct representing the possible places in the world
     These places are indexed from 0 to WORLD_SIZE-1 */
