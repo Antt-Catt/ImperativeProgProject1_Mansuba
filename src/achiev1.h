@@ -2,6 +2,8 @@
 #define __ACHIEV1_H__
 
 #include "project.h"
+#include "world.h"
+#include "set.h"
 
 /** COMMENT HERE */
 
