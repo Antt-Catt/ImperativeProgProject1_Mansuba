@@ -3,6 +3,7 @@
 #include <limits.h>
 
 #include "movements.h"
+#include "world.h"
 #include "set.h"
 
 set_t black_current_set;
