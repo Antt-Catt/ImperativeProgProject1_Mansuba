@@ -156,7 +156,7 @@ void print_world(struct world_t *w)
     }
     printf("\n");
   }
-  printf("\n");
+  printf("\n====================================\n\n");
 }
 
 int main(int argc, char *argv[])
