@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+
 #include "neighbors.h"
 
 /** Initializes the relation between the neighbors, based on an

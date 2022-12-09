@@ -1,7 +1,9 @@
 #ifndef __PROJECT_H__
 #define __PROJECT_H__
 
+#include "movements.h"
 #include "world.h"
+#include "set.h"
 
 set_t black_init_set;
 extern set_t black_current_set;
