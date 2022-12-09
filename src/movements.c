@@ -46,8 +46,8 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
   if (world_get_sort(w, idx) == ELEPHANT)
   {
     return possible_mvts_elephant(idx, w);
-  set_t set = init_set(0);
   }
+  set_t set = init_set(0);
   int j = -3;
   unsigned int idx_n;
   while (j < 4)
