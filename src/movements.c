@@ -15,20 +15,25 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
   {
     push_set(set, idx);
   }
-  int j = 0;
+  int j;
+  int k = 0;
   unsigned int idx_n;
   struct neighbors_t neigh_idx = get_neighbors(idx);
-  while (neigh_idx.n[j].i != UINT_MAX)
+  while (neigh_idx.n[k].i != UINT_MAX)
   {
-    if (world_get_sort(w, neigh_idx.n[j].i) != 0)
+    j = neigh_idx.n[k].d;
+    if (j == -3 || j == -1 || j == 1 || j == 3)
     {
-      idx_n = get_neighbor(idx, neigh_idx.n[j].d);
-      if (idx_n != UINT_MAX && idx_n != init && world_get_sort(w, idx_n) == NO_SORT && exist_in_set(set, idx_n) == UINT_MAX)
+      if (world_get_sort(w, neigh_idx.n[k].i) != 0)
       {
-        possible_mvts_aux(set, idx_n, w, init);
+        idx_n = get_neighbor(neigh_idx.n[k].i, j);
+        if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0 && exist_in_set(set, idx_n) == UINT_MAX && idx_n != init)
+        {
+          possible_mvts_aux(set, idx_n, w, idx);
+        }
       }
     }
-    j++;
+    k++;
   }
 }
 
@@ -43,25 +48,26 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
     return possible_mvts_elephant(idx, w);
   }
   set_t set = init_set(0);
-  struct neighbors_t neigh_idx = get_neighbors(idx);
-  int j = 0;
-  while (neigh_idx.n[j].i != UINT_MAX)
+  int j = -3;
+  unsigned int idx_n;
+  while (j < 4)
   {
-    unsigned int idx_n = neigh_idx.n[j].i;
+    idx_n = get_neighbor(idx, j);
     if (world_get_sort(w, idx_n) == 0)
     {
       push_set(&set, idx_n);
     }
     else
     {
-      idx_n = get_neighbor(idx_n, neigh_idx.n[j].d);
-      if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0)
+      idx_n = get_neighbor(idx_n, j);
+      if (world_get_sort(w, idx_n) == 0)
       {
         possible_mvts_aux(&set, idx_n, w, idx);
       }
     }
-    j++;
+    j += 2;
   }
+  print_set(&set);
   return set;
 }
 

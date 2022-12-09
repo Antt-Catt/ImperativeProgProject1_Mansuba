@@ -47,7 +47,6 @@ set_t possible_mvts_elephant(unsigned int idx, struct world_t *w)
         }
         j += 2;
     }
-
     j = -4;
     while (j < 5)
     {
@@ -62,6 +61,5 @@ set_t possible_mvts_elephant(unsigned int idx, struct world_t *w)
             j += 2;
         }
     }
-    print_set(&set);
     return set;
 }

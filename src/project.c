@@ -120,7 +120,9 @@ unsigned int choose_random_piece_belonging_to(int current_player)
 unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 {
   set_t set = possible_mvts(p, w);
-  if (set.size > 1)
+  printf("%d  ", p);
+  print_set(&set);
+  if (set.size > 0)
   {
     unsigned int tmp = set.size - 1;
     int i = (rand() % (tmp - 0 + 1)) + 0;
@@ -197,8 +199,6 @@ int main(int argc, char *argv[])
   init_player_set(BLACK, w);
   init_player_set(WHITE, w);
 
-  world_set_sort(w, 10, ELEPHANT);
-
   unsigned int current_player = (rand() % (2 - 1 + 1)) + 1;
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
   unsigned int m;
@@ -216,15 +216,26 @@ int main(int argc, char *argv[])
       nb_turns++;
       p = m;
       print_world(w);
+      /*
+      print_set(&black_init_set);
+      print_set(&black_current_set);
+      print_set(&white_init_set);
+      print_set(&white_current_set);
+      */
     }
-    if (current_player == BLACK)
+    if (current_player == BLACK && nb_turns != MAX_TURNS)
     {
       printf("Victoire simple pour WHITE\n");
     }
-    else
+    else if (current_player == WHITE && nb_turns != MAX_TURNS)
     {
       printf("Victoire simple pour BLACK\n");
     }
+    else
+    {
+      printf("Pas de gagnant\n");
+    }
+    
     print_world(w);
   }
 
@@ -240,11 +251,11 @@ int main(int argc, char *argv[])
       nb_turns++;
     }
   }
-  
+
   delete_set(&black_current_set);
   delete_set(&white_current_set);
   delete_set(&black_init_set);
   delete_set(&white_init_set);
-  
+
   return 0;
 }
