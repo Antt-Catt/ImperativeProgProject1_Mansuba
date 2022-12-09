@@ -156,14 +156,14 @@ void print_world(struct world_t *w)
     }
     printf("\n");
   }
-  printf("\n");
+  printf("\n====================================\n\n");
 }
 
 int main(int argc, char *argv[])
 {
   int opt;
   srand(time(NULL));
-  int MAX_TURNS = WIDTH * HEIGHT;
+  int MAX_TURNS = 2 * WIDTH * HEIGHT;
   int victory_type = 0;
   while ((opt = getopt(argc, argv, "s:m:t:")) != -1)
   {
@@ -240,11 +240,11 @@ int main(int argc, char *argv[])
       nb_turns++;
     }
   }
-
+  
   delete_set(&black_current_set);
   delete_set(&white_current_set);
   delete_set(&black_init_set);
   delete_set(&white_init_set);
-
+  
   return 0;
 }

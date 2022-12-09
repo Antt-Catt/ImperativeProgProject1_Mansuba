@@ -4,6 +4,7 @@
 #include "neighbors.h"
 #include "achiev1.h"
 #include "world.h"
+#include "neighbors.h"
 #include "set.h"
 
 /** Sub function for possible_mvts */ 

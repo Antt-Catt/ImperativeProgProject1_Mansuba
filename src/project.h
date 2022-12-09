@@ -3,12 +3,9 @@
 
 #include "movements.h"
 #include "world.h"
+#include "neighbors.h"
 #include "set.h"
-
-set_t black_init_set;
-extern set_t black_current_set;
-set_t white_init_set;
-extern set_t white_current_set;
+#include "movements.h"
 
 /** Initializes the positions of player p's pieces */
 void init_player_set(unsigned int p, struct world_t * w);
