@@ -3,6 +3,8 @@
 
 #include "neighbors.h"
 #include "achiev1.h"
+#include "world.h"
+#include "set.h"
 
 /** Sub function for possible_mvts */ 
 void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned int init);
