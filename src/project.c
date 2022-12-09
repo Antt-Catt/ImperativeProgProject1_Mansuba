@@ -8,9 +8,9 @@
 
 #include "project.h"
 
-set_t black_init_set;
+extern set_t black_init_set;
 extern set_t black_current_set;
-set_t white_init_set;
+extern set_t white_init_set;
 extern set_t white_current_set;
 
 void init_player_set(unsigned int p, struct world_t *w)
@@ -135,30 +135,24 @@ void print_world(struct world_t *w)
 {
   for (int i = 0; i < HEIGHT; i++)
   {
-    /*if (i % WIDTH == 0 && i != 0)
-    {
-      printf("\n");
-    }
-    printf("i=%d_s=%d_c=%d\t", i, world_get_sort(w, i), world_get(w, i));*/
     for (int j = 0; j < WIDTH; j++)
     {
       if (world_get_sort(w, i * WIDTH + j) == NO_SORT)
       {
-        printf(".");
+        printf(".\t");
       }
       else if (world_get(w, i * WIDTH + j) == BLACK)
       {
-        printf("B");
+        printf("B(%d)\t", world_get_sort(w, i * WIDTH + j));
       }
       else if (world_get(w, i * WIDTH + j) == WHITE)
       {
-        printf("W");
+        printf("W(%d)\t", world_get_sort(w, j + i*WIDTH));
       }
       else
       {
         printf("X");
       }
-      printf(" ");
     }
     printf("\n");
   }
@@ -168,7 +162,6 @@ void print_world(struct world_t *w)
 int main(int argc, char *argv[])
 {
   int opt;
-  //int optc = 0;
   srand(time(NULL));
   int MAX_TURNS = WIDTH * HEIGHT;
   int victory_type = 0;
@@ -208,6 +201,8 @@ int main(int argc, char *argv[])
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
   unsigned int m;
 
+print_world(w);
+
   if (victory_type == 0)
   {
     while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
@@ -227,6 +222,7 @@ int main(int argc, char *argv[])
     {
       printf("Victoire simple pour BLACK\n");
     }
+    print_world(w);
   }
 
   if (victory_type == 1)
