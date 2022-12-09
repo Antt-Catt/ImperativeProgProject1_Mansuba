@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+
 #include "movements.h"
-#include "neighbors.h"
-#include "achiev1.h"
-#include "world.h"
-#include "set.h"
 
 set_t black_current_set;
 set_t white_current_set;
