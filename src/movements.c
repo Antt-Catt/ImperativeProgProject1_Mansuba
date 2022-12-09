@@ -52,8 +52,8 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
   unsigned int idx_n;
   while (j < 4)
   {
-    idx_n = get_neighbor(idx, j);
-    if (world_get_sort(w, idx_n) == 0)
+    //idx_n = get_neighbor(idx, j);
+    if (world_get_sort(w, get_neighbor(idx, j)) == 0)
     {
       push_set(&set, idx_n);
     }
