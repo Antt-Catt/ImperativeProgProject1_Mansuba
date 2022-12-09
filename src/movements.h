@@ -1,7 +1,9 @@
 #ifndef __MOVEMENTS_H__
 #define __MOVEMENTS_H__
 
+#include "geometry.h"
 #include "world.h"
+#include "neighbors.h"
 #include "set.h"
 
 /** Sub function for possible_mvts */ 
