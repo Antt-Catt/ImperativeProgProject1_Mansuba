@@ -2,9 +2,6 @@
 #define __ACHIEV1_H__
 
 #include "project.h"
-#include "movements.h"
-#include "neighbors.h"
-#include "set.h"
 
 /** COMMENT HERE */
 

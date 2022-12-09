@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 #include "world.h"
 
 /** Abstract struct representing the possible places in the world
