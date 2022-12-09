@@ -26,10 +26,10 @@ void init_player_set(unsigned int p, struct world_t *w)
     }
     else
     {
-      world_set(w, WIDTH * i + HEIGHT, p);
-      world_set_sort(w, WIDTH * i + HEIGHT, PAWN);
-      white_init_set.ptr[i] = WIDTH * i + HEIGHT;
-      white_current_set.ptr[i] = WIDTH * i + HEIGHT;
+      world_set(w, WIDTH * i + WIDTH - 1, p);
+      world_set_sort(w, WIDTH * i + WIDTH - 1, PAWN);
+      white_init_set.ptr[i] = WIDTH * i + WIDTH - 1;
+      white_current_set.ptr[i] = WIDTH * i + WIDTH - 1;
     }
   }
 }
@@ -133,13 +133,34 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 
 void print_world(struct world_t *w)
 {
-  for (int i = 0; i < WORLD_SIZE; i++)
+  for (int i = 0; i < HEIGHT; i++)
   {
-    if (i % WIDTH == 0 && i != 0)
+    /*if (i % WIDTH == 0 && i != 0)
     {
       printf("\n");
     }
-    printf("i=%d_s=%d_c=%d\t", i, world_get_sort(w, i), world_get(w, i));
+    printf("i=%d_s=%d_c=%d\t", i, world_get_sort(w, i), world_get(w, i));*/
+    for (int j = 0; j < WIDTH; j++)
+    {
+      if (world_get_sort(w, i*WIDTH + j) == NO_SORT)
+	{
+	  printf(".");
+	}
+      else if (world_get(w, i*WIDTH + j) == BLACK)
+	{
+	  printf("B");
+	}
+      else if (world_get(w, i*WIDTH + j) == WHITE)
+	{
+	  printf("W");
+	}
+      else
+	{
+	  printf("X");
+	}
+      printf(" ");
+    }
+    printf("\n");
   }
   printf("\n");
 }
@@ -147,38 +168,53 @@ void print_world(struct world_t *w)
 int main(int argc, char *argv[])
 {
   int opt;
-  int optc = 0;
+  //int optc = 0;
+  int sflag = 1, mflag = 1, tflag = 1;
   int MAX_TURNS;
-  char victory_type[1];
+  char* victory_type[1];
 
   while ((opt = getopt(argc, argv, "s:m:t:")) != -1)
   {
     switch (opt)
     {
     case 's':
-      optc++;
       srand(atoi(optarg));
+      sflag--;
       break;
     case 'm':
       MAX_TURNS = atoi(optarg);
-      optc++;
+      mflag--;
       break;
     case 't':
-      strcpy(victory_type, optarg);
-      optc++;
+      printf("%s\\n", optarg);
+      victory_type[0] = optarg;
+      tflag--;
       break;
     }
   }
 
-  if (optc != 3)
+  if (sflag){
+    srand(time(NULL));
+  }
+
+  if (mflag){
+    MAX_TURNS = WIDTH*HEIGHT;
+  }
+
+  if (tflag){
+    victory_type[0] = "s";
+    }
+  
+  /*if (optc != 3)
   {
     printf("Options needed : -s -m -t\n");
     return 0;
-  }
+    }*/
 
   int nb_turns = 0;
   struct world_t *w = world_init();
   init_neighbors(0);
+  print_world(w);
 
   black_init_set = init_set(HEIGHT);
   white_init_set = init_set(HEIGHT);
@@ -186,13 +222,16 @@ int main(int argc, char *argv[])
   white_current_set = init_set(HEIGHT);
 
   init_player_set(BLACK, w);
+  print_world(w);
   init_player_set(WHITE, w);
 
+  print_world(w);
+  
   unsigned int current_player = (rand() % (2 - 1 + 1)) + 1;
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
   unsigned int m;
 
-  if (strcmp(victory_type, "s") == 0)
+  if (strcmp(victory_type[0], "s") == 0)
   {
     while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
@@ -213,7 +252,7 @@ int main(int argc, char *argv[])
     }
   }
   
-  if (strcmp(victory_type, "c") == 0)
+  if (strcmp(victory_type[0], "c") == 0)
   {
     while ((check_complex_victory(current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
@@ -228,11 +267,12 @@ int main(int argc, char *argv[])
       nb_turns++;
     }
   }
-
+  
   delete_set(&black_current_set);
   delete_set(&white_current_set);
   delete_set(&black_init_set);
   delete_set(&white_init_set);
-
+  print_world(w);
+  
   return 0;
 }
