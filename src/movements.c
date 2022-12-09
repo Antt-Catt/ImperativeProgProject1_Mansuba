@@ -67,7 +67,6 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
     }
     j += 2;
   }
-  print_set(&set);
   return set;
 }
 

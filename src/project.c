@@ -221,12 +221,6 @@ int main(int argc, char *argv[])
       nb_turns++;
       p = m;
       print_world(w);
-      /*
-      print_set(&black_init_set);
-      print_set(&black_current_set);
-      print_set(&white_init_set);
-      print_set(&white_current_set);
-      */
     }
     if (current_player == BLACK && nb_turns != MAX_TURNS)
     {
@@ -240,8 +234,6 @@ int main(int argc, char *argv[])
     {
       printf("Pas de gagnant\n");
     }
-    
-    print_world(w);
   }
 
   if (victory_type == 1)
@@ -254,8 +246,11 @@ int main(int argc, char *argv[])
       current_player = current_player % 2 + 1;
       p = m;
       nb_turns++;
+      print_world(w);
     }
   }
+  
+  print_world(w);
 
   delete_set(&black_current_set);
   delete_set(&white_current_set);
