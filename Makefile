@@ -2,9 +2,9 @@ WIDTH ?= 5
 HEIGHT ?= 4
 MANSUBA_FLAGS = -DWIDTH=$(WIDTH) -DHEIGHT=$(HEIGHT)
 CFLAGS = -Wall -Wextra -std=c99 -g3 $(MANSUBA_FLAGS)
-OBJS = src/geometry.o src/world.o src/neighbors.o src/set.o src/movements.o
+OBJS = src/geometry.o src/world.o src/neighbors.o src/set.o src/movements.o src/achiev1.o
 
-all: project test
+all: clean project test
 
 %.o: %.c
 	gcc -c -I src/ $(CFLAGS) $< -o $@

@@ -1,7 +1,7 @@
 #include <stdio.h>
+#include <limits.h>
+
 #include "world.h"
-#include "geometry.h"
-#include "set.h"
 
 /** Abstract struct representing the possible places in the world
     These places are indexed from 0 to WORLD_SIZE-1 */
@@ -16,7 +16,7 @@ struct world_t w;
 
 /** Initializes a world (NO_COLOR, NO_SORT everywhere)
     Always returns the same pointer */
-struct world_t * world_init()
+struct world_t *world_init()
 {
   for (int i = 0; i < WORLD_SIZE; i++)
   {
@@ -29,6 +29,10 @@ struct world_t * world_init()
 /** Return the color at a place */
 enum color_t world_get(const struct world_t *b, unsigned int idx)
 {
+  if (idx == UINT_MAX)
+  {
+    return MAX_COLOR;
+  }
   return (*b).c[idx];
 }
 
@@ -41,6 +45,10 @@ void world_set(struct world_t *b, unsigned int idx, enum color_t c)
 /** Return the sort at a place */
 enum sort_t world_get_sort(const struct world_t *b, unsigned int idx)
 {
+  if (idx == UINT_MAX)
+  {
+    return MAX_SORT;
+  }
   return (*b).s[idx];
 }
 

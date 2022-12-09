@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+
 #include "neighbors.h"
-#include "geometry.h"
 
 /** Initializes the relation between the neighbors, based on an
     integer `seed`. `seed` must be less than MAX_RELATIONS.

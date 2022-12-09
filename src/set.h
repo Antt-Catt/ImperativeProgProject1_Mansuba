@@ -1,10 +1,6 @@
 #ifndef __SET_H__
 #define __SET_H__
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "geometry.h"
-
 typedef struct
 {
     unsigned int *ptr;

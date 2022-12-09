@@ -1,7 +1,8 @@
 #ifndef __MOVEMENTS_H__
 #define __MOVEMENTS_H__
 
-#include "geometry.h"
+#include "neighbors.h"
+#include "achiev1.h"
 #include "world.h"
 #include "neighbors.h"
 #include "set.h"
