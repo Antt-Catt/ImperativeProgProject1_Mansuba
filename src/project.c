@@ -169,41 +169,26 @@ int main(int argc, char *argv[])
 {
   int opt;
   //int optc = 0;
-  int sflag = 1, mflag = 1, tflag = 1;
-  int MAX_TURNS;
-  char* victory_type[1];
-
+  srand(time(NULL));
+  int MAX_TURNS = WIDTH*HEIGHT;
+  int victory_type = 0;
   while ((opt = getopt(argc, argv, "s:m:t:")) != -1)
   {
     switch (opt)
     {
     case 's':
       srand(atoi(optarg));
-      sflag--;
       break;
     case 'm':
       MAX_TURNS = atoi(optarg);
-      mflag--;
       break;
     case 't':
-      printf("%s\\n", optarg);
-      victory_type[0] = optarg;
-      tflag--;
+      if (strcmp(optarg, "c") == 0){
+	victory_type = 1;
+      }
       break;
     }
   }
-
-  if (sflag){
-    srand(time(NULL));
-  }
-
-  if (mflag){
-    MAX_TURNS = WIDTH*HEIGHT;
-  }
-
-  if (tflag){
-    victory_type[0] = "s";
-    }
   
   /*if (optc != 3)
   {
@@ -227,7 +212,7 @@ int main(int argc, char *argv[])
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
   unsigned int m;
 
-  if (strcmp(victory_type[0], "s") == 0)
+  if (victory_type == 0)
   {
     while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
@@ -245,10 +230,10 @@ int main(int argc, char *argv[])
     else
     {
       printf("Victoire simple pour BLACK\n");
-    }
+      }
   }
   
-  if (strcmp(victory_type[0], "c") == 0)
+  if (victory_type == 1)
   {
     while ((check_complex_victory(current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
