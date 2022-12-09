@@ -3,6 +3,7 @@
 #include <limits.h>
 
 #include "movements.h"
+#include "set.h"
 
 set_t black_current_set;
 set_t white_current_set;
