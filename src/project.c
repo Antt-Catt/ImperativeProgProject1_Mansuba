@@ -13,6 +13,7 @@ extern set_t black_current_set;
 extern set_t white_init_set;
 extern set_t white_current_set;
 
+/** Initializes the positions of player p's pieces */
 void init_player_set(unsigned int p, struct world_t *w)
 {
   for (int i = 0; i < HEIGHT; i++)
@@ -34,6 +35,7 @@ void init_player_set(unsigned int p, struct world_t *w)
   }
 }
 
+/** Checks simple victory for piece at index idx of player p */
 int check_simple_victory(unsigned int idx, unsigned int p)
 {
   if (p == BLACK)
@@ -53,6 +55,7 @@ int check_simple_victory(unsigned int idx, unsigned int p)
   return 0;
 }
 
+/** Checks complex victory for player p */
 int check_complex_victory(unsigned int p)
 {
   int j = 0;
@@ -104,6 +107,7 @@ int check_complex_victory(unsigned int p)
   return 1;
 }
 
+/** Chooses random piece belonging to current player */
 unsigned int choose_random_piece_belonging_to(int current_player)
 {
   if (current_player == BLACK)
@@ -117,6 +121,7 @@ unsigned int choose_random_piece_belonging_to(int current_player)
   return white_current_set.ptr[i];
 }
 
+/** Chooses random move for piece in position p */
 unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 {
   set_t set = possible_mvts(p, w);
@@ -131,6 +136,7 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
   return p;
 }
 
+/** Shows world w*/
 void print_world(struct world_t *w)
 {
   for (int i = 0; i < HEIGHT; i++)
@@ -161,6 +167,7 @@ void print_world(struct world_t *w)
 
 int main(int argc, char *argv[])
 {
+  // get optional values
   int opt;
   srand(time(NULL));
   int MAX_TURNS = 2 * WIDTH * HEIGHT;
