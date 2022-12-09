@@ -133,6 +133,7 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
     delete_set(&set);
     return x;
   }
+  delete_set(&set);
   return p;
 }
 
@@ -249,7 +250,7 @@ int main(int argc, char *argv[])
       print_world(w);
     }
   }
-  
+
   print_world(w);
 
   delete_set(&black_current_set);
