@@ -6,10 +6,6 @@
 #include <unistd.h>
 #include <string.h>
 #include "achiev1.h"
-#include "project.h"
-#include "movements.h"
-#include "neighbors.h"
-#include "set.h"
 
 set_t possible_mvts_tower(unsigned int idx, struct world_t *w)
 {
