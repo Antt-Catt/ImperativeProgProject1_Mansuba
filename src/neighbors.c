@@ -16,6 +16,10 @@ void init_neighbors(unsigned int seed)
     UINT_MAX if there is no such neighbor (or any other kind of error) */
 unsigned int get_neighbor(unsigned int idx, enum dir_t d)
 {
+  if (idx == UINT_MAX)
+  {
+    return UINT_MAX;
+  }
   int i = idx / WIDTH;
   int j = idx % WIDTH;
   if (i == 0 && (d == 2 || d == 3 || d == 4))

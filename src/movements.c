@@ -67,17 +67,20 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
 
 void move_piece(struct world_t *w, unsigned int p, unsigned int m)
 {
-  unsigned int current_player = world_get(w, p);
-  world_set(w, m, current_player);
-  world_set_sort(w, m, PAWN);
-  if (current_player == BLACK)
+  if (p != m)
   {
-    modif_set(&black_current_set, p, m);
+    unsigned int current_player = world_get(w, p);
+    world_set(w, m, current_player);
+    world_set_sort(w, m, world_get_sort(w, p));
+    if (current_player == BLACK)
+    {
+      modif_set(&black_current_set, p, m);
+    }
+    else
+    {
+      modif_set(&white_current_set, p, m);
+    }
+    world_set(w, p, NO_COLOR);
+    world_set_sort(w, p, NO_SORT);
   }
-  else
-  {
-    modif_set(&white_current_set, p, m);
-  }
-  world_set(w, p, NO_COLOR);
-  world_set_sort(w, p, NO_SORT);
 }

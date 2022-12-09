@@ -21,8 +21,11 @@ set_t possible_mvts_tower(unsigned int idx, struct world_t *w)
         }
         while (idx_n != UINT_MAX)
         {
-            push_set(&set, idx_n);
             idx_n = get_neighbor(idx_n, j);
+            if (world_get_sort(w, idx_n) == 0)
+            {
+                push_set(&set, idx_n);
+            }
         }
         j += 2;
     }
@@ -32,17 +35,26 @@ set_t possible_mvts_tower(unsigned int idx, struct world_t *w)
 set_t possible_mvts_elephant(unsigned int idx, struct world_t *w)
 {
     set_t set = init_set(0);
-    int j = -4;
+    int j;
+    unsigned int idx_n;
+    j = -3;
+    while (j < 4)
+    {
+        idx_n = get_neighbor(get_neighbor(idx, j), j);
+        if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0)
+        {
+            push_set(&set, idx_n);
+        }
+        j += 2;
+    }
+
+    j = -4;
     while (j < 5)
     {
-        unsigned int idx_n = get_neighbor(idx, j);
-        while (idx_n != UINT_MAX)
+        idx_n = get_neighbor(idx, j);
+        if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0)
         {
-            if (world_get_sort(w, idx_n) == 0)
-            {
-                push_set(&set, idx_n);
-            }
-            idx_n = get_neighbor(idx_n, j);
+            push_set(&set, idx_n);
         }
         j += 2;
         if (j == 0)
@@ -50,5 +62,6 @@ set_t possible_mvts_elephant(unsigned int idx, struct world_t *w)
             j += 2;
         }
     }
+    print_set(&set);
     return set;
 }

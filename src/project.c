@@ -147,7 +147,7 @@ void print_world(struct world_t *w)
       }
       else if (world_get(w, i * WIDTH + j) == WHITE)
       {
-        printf("W(%d)\t", world_get_sort(w, j + i*WIDTH));
+        printf("W(%d)\t", world_get_sort(w, j + i * WIDTH));
       }
       else
       {
@@ -197,11 +197,13 @@ int main(int argc, char *argv[])
   init_player_set(BLACK, w);
   init_player_set(WHITE, w);
 
+  world_set_sort(w, 10, ELEPHANT);
+
   unsigned int current_player = (rand() % (2 - 1 + 1)) + 1;
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
   unsigned int m;
 
-print_world(w);
+  print_world(w);
 
   if (victory_type == 0)
   {
@@ -213,6 +215,7 @@ print_world(w);
       current_player = current_player % 2 + 1;
       nb_turns++;
       p = m;
+      print_world(w);
     }
     if (current_player == BLACK)
     {
@@ -231,10 +234,7 @@ print_world(w);
     {
       p = choose_random_piece_belonging_to(current_player);
       m = choose_random_move_for_piece(w, p);
-      if (p != m)
-      {
-        move_piece(w, p, m);
-      }
+      move_piece(w, p, m);
       current_player = current_player % 2 + 1;
       p = m;
       nb_turns++;
