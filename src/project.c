@@ -214,7 +214,6 @@ int main(int argc, char *argv[])
   int nb_turns = 0;
   struct world_t *w = world_init();
   init_neighbors(0);
-  print_world(w);
 
   black_init_set = init_set(HEIGHT);
   white_init_set = init_set(HEIGHT);
@@ -222,10 +221,7 @@ int main(int argc, char *argv[])
   white_current_set = init_set(HEIGHT);
 
   init_player_set(BLACK, w);
-  print_world(w);
   init_player_set(WHITE, w);
-
-  print_world(w);
   
   unsigned int current_player = (rand() % (2 - 1 + 1)) + 1;
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
@@ -272,7 +268,6 @@ int main(int argc, char *argv[])
   delete_set(&white_current_set);
   delete_set(&black_init_set);
   delete_set(&white_init_set);
-  print_world(w);
   
   return 0;
 }
