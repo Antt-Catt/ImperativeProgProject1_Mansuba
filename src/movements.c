@@ -34,11 +34,11 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
 
 set_t possible_mvts(unsigned int idx, struct world_t *w)
 {
-  if (world_get_sort(w, idx_n) == TOWER)
+  if (world_get_sort(w, idx) == TOWER)
   {
     return possible_mvts_tower(idx, w);
   }
-  if (world_get_sort(w, idx_n) == ELEPHANT)
+  if (world_get_sort(w, idx) == ELEPHANT)
   {
     return possible_mvts_elephant(idx, w);
   }
