@@ -7,8 +7,6 @@
 #include <string.h>
 
 #include "project.h"
-#include "world.h"
-#include "set.h"
 
 set_t black_init_set;
 extern set_t black_current_set;
