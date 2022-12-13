@@ -4,18 +4,22 @@
 
 #include "neighbors.h"
 
+unsigned int neighbors_seed;
+
+
 /** Initializes the relation between the neighbors, based on an
     integer `seed`. `seed` must be less than MAX_RELATIONS.
     Can be called multiple times. */
 void init_neighbors(unsigned int seed)
 {
-  seed = seed;
+  neighbors_seed = seed;
+
 }
 
 /** Returns the seed set by the latest call to `init_neighbors`. */
 unsigned int get_neighbors_seed()
 {
-  return 0;
+  return neighbors_seed;
 }
 
 /** Returns the neighbor of the place `idx`, in direction `d`, and
