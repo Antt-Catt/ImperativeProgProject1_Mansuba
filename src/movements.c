@@ -22,19 +22,16 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
   while (neigh_idx.n[k].i != UINT_MAX)
   {
     j = neigh_idx.n[k].d;
+    idx_n = neigh_idx.n[k].i;
     if (j == -3 || j == -1 || j == 1 || j == 3)
     {
-      if (neigh_idx.n[k].i != UINT_MAX)
       {
-        if (world_get_sort(w, neigh_idx.n[k].i) != 0)
+        if (idx_n != UINT_MAX && world_get_sort(w, idx_n) != 0)
         {
-          idx_n = get_neighbor(neigh_idx.n[k].i, j);
-          if (idx_n != UINT_MAX)
+          idx_n = get_neighbor(idx_n, j);
+          if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0 && exist_in_set(set, idx_n) == UINT_MAX && idx_n != init)
           {
-            if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0 && exist_in_set(set, idx_n) == UINT_MAX && idx_n != init)
-            {
-              possible_mvts_aux(set, idx_n, w, idx);
-            }
+            possible_mvts_aux(set, idx_n, w, idx);
           }
         }
       }
@@ -61,23 +58,17 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
     while (j < 4)
     {
       idx_n = get_neighbor(idx, j);
-      if (idx_n != UINT_MAX)
-      {
-        if (world_get_sort(w, idx_n) == 0)
+        if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0)
         {
           push_set(&set, idx_n);
         }
         else
         {
           idx_n = get_neighbor(idx_n, j);
-          if (idx_n != UINT_MAX)
-          {
-            if (world_get_sort(w, idx_n) == 0)
+            if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0)
             {
               possible_mvts_aux(&set, idx_n, w, idx);
             }
-          }
-        }
       }
       j += 2;
     }
