@@ -6,6 +6,7 @@
 
 unsigned int neighbors_seed;
 
+
 /** Initializes the relation between the neighbors, based on an
     integer `seed`. `seed` must be less than MAX_RELATIONS.
     Can be called multiple times. */
@@ -49,21 +50,14 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d)
   }
   if (i == 0 && (d == 2 || d == 3 || d == 4))
   {
-    if (get_neighbors_seed() == 0)
-    {
-      return UINT_MAX;
-    }
     if (get_neighbors_seed() == 2)
     {
       return idx - d + 3 + WIDTH * (HEIGHT - 1);
     }
+    return UINT_MAX;
   }
   if (j == 0 && (d == -1 || d == -2 || d == 4))
   {
-    if (get_neighbors_seed() == 0)
-    {
-      return UINT_MAX;
-    }
     if (get_neighbors_seed() == 2)
     {
       switch (d)
@@ -82,21 +76,14 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d)
   }
   if (i == (HEIGHT - 1) && (d == -2 || d == -3 || d == -4))
   {
-    if (get_neighbors_seed() == 0)
-    {
-      return UINT_MAX;
-    }
     if (get_neighbors_seed() == 2)
     {
       return idx - (d + 3) - (WIDTH - 1) * (HEIGHT - 1);
     }
+    return UINT_MAX;
   }
   if (j == (WIDTH - 1) && (d == 1 || d == 2 || d == -4))
   {
-    if (get_neighbors_seed() == 0)
-    {
-      return UINT_MAX;
-    }
     if (get_neighbors_seed() == 2)
     {
       switch (d)
@@ -111,6 +98,7 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d)
 	return 0;
       } 
     }
+    return UINT_MAX;
   }
   switch (d)
   {
