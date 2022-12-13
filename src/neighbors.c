@@ -32,21 +32,86 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d)
   }
   int i = idx / WIDTH;
   int j = idx % WIDTH;
+  if (i == 0 && j == 0 && d == 4 && get_neighbors_seed() == 2)
+  {
+    return WORLD_SIZE - 1;
+  }
+  if (i == 0 && j == (WIDTH - 1) && d == 2 && get_neighbors_seed() == 2)
+  {
+    return WIDTH * (HEIGHT - 1);
+  }
+  if (i == (HEIGHT - 1) && j == 0 && d == -2 && get_neighbors_seed() == 2)
+  {
+    return WIDTH - 1;
+  }
+  if (i == (HEIGHT - 1) && j == (WIDTH - 1) && d == -4 && get_neighbors_seed() == 2)
+  {
+    return 0;
+  }
   if (i == 0 && (d == 2 || d == 3 || d == 4))
   {
-    return UINT_MAX;
+    if (get_neighbors_seed() == 0)
+    {
+      return UINT_MAX;
+    }
+    if (get_neighbors_seed() == 2)
+    {
+      return idx - d + 3 + WIDTH * (HEIGHT - 1);
+    }
   }
   if (j == 0 && (d == -1 || d == -2 || d == 4))
   {
+    if (get_neighbors_seed() == 0)
+    {
+      return UINT_MAX;
+    }
+    if (get_neighbors_seed() == 2)
+    {
+      switch (d)
+      {
+      case -1:
+	return idx + WIDTH - 1;
+      case -2:
+	return idx + 2 * WIDTH - 1;
+      case 4:
+	return idx - 1;
+      default:
+	return 0;
+      } 
+    }
     return UINT_MAX;
   }
   if (i == (HEIGHT - 1) && (d == -2 || d == -3 || d == -4))
   {
-    return UINT_MAX;
+    if (get_neighbors_seed() == 0)
+    {
+      return UINT_MAX;
+    }
+    if (get_neighbors_seed() == 2)
+    {
+      return idx - (d + 3) - (WIDTH - 1) * (HEIGHT - 1);
+    }
   }
   if (j == (WIDTH - 1) && (d == 1 || d == 2 || d == -4))
   {
-    return UINT_MAX;
+    if (get_neighbors_seed() == 0)
+    {
+      return UINT_MAX;
+    }
+    if (get_neighbors_seed() == 2)
+    {
+      switch (d)
+      {
+      case 1:
+	return idx - WIDTH + 1;
+      case 2:
+	return idx - 2 * WIDTH + 1;
+      case -4:
+	return idx + 1;
+      default:
+	return 0;
+      } 
+    }
   }
   switch (d)
   {

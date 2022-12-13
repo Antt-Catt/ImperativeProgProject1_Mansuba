@@ -141,7 +141,17 @@ int main(int argc, char* argv[])
   move_piece(w, 6, set.ptr[2]);
   print_world(w);
   
+  //tests achiev2
+  init_neighbors(2);
+  printf("neighbor %d\n", get_neighbor(0,2));
+  printf("neighbor %d\n", get_neighbor(0,4));
+  printf("neighbor %d\n", get_neighbor(10,-3));
+  printf("neighbor %d\n", get_neighbor(14,1));
   
+  result = get_neighbors(9);
+  for(int p = 0; p < MAX_NEIGHBORS + 1; p++){
+    printf("%d %d\n", result.n[p].i, result.n[p].d); 
+  }
   return 0;
 
 }
