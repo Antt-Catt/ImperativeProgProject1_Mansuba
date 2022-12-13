@@ -8,6 +8,30 @@ set_t black_init_set;
 set_t black_current_set;
 set_t white_init_set;
 set_t white_current_set;
+//set_t possible_directions;
+
+set_t possible_drts()
+{
+  set_t set = init_set(0);
+  if (get_neighbors_seed() == 0)
+  {
+    for (int i = -3; i < 4; i += 2)
+    {
+      push_set(&set, i + 4);
+    }
+  }
+  else if (get_neighbors_seed() == 1)
+  {
+    for (int i = -3; i < 4; i++)
+    {
+      if (i != 0)
+      {
+        push_set(&set, i + 4);
+      }
+    }
+  }
+  return set;
+}
 
 void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned int init)
 {
@@ -18,12 +42,13 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
   int j;
   int k = 0;
   unsigned int idx_n;
+  set_t drts = possible_drts();
   struct neighbors_t neigh_idx = get_neighbors(idx);
   while (neigh_idx.n[k].i != UINT_MAX)
   {
     j = neigh_idx.n[k].d;
     idx_n = neigh_idx.n[k].i;
-    if (j == -3 || j == -1 || j == 1 || j == 3)
+    if (exist_in_set(&drts, j + 4))
     {
       {
         if (idx_n != UINT_MAX && world_get_sort(w, idx_n) != 0)
@@ -38,11 +63,13 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
     }
     k++;
   }
+  delete_set(&drts);
 }
 
 set_t possible_mvts(unsigned int idx, struct world_t *w)
 {
   set_t set = init_set(0);
+  set_t drts = possible_drts();
   if (idx != UINT_MAX)
   {
     if (world_get_sort(w, idx) == TOWER)
@@ -53,26 +80,27 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
     {
       return possible_mvts_elephant(idx, w);
     }
-    int j = -3;
+    int j = 0;
     unsigned int idx_n;
-    while (j < 4)
+    while (drts.size != 0)
     {
+      j = pop_set(&drts) - 4;
       idx_n = get_neighbor(idx, j);
+      if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0)
+      {
+        push_set(&set, idx_n);
+      }
+      else
+      {
+        idx_n = get_neighbor(idx_n, j);
         if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0)
         {
-          push_set(&set, idx_n);
+          possible_mvts_aux(&set, idx_n, w, idx);
         }
-        else
-        {
-          idx_n = get_neighbor(idx_n, j);
-            if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0)
-            {
-              possible_mvts_aux(&set, idx_n, w, idx);
-            }
       }
-      j += 2;
     }
   }
+  delete_set(&drts);
   return set;
 }
 

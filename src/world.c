@@ -28,11 +28,7 @@ struct world_t *world_init()
 
 /** Return the color at a place */
 enum color_t world_get(const struct world_t *b, unsigned int idx)
-{/*
-  if (idx == UINT_MAX)
-  {
-    return MAX_COLOR;
-  }*/
+{
   return (*b).c[idx];
 }
 
@@ -44,11 +40,7 @@ void world_set(struct world_t *b, unsigned int idx, enum color_t c)
 
 /** Return the sort at a place */
 enum sort_t world_get_sort(const struct world_t *b, unsigned int idx)
-{/*
-  if (idx == UINT_MAX)
-  {
-    return MAX_SORT;
-  }*/
+{
   return (*b).s[idx];
 }
 

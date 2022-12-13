@@ -140,28 +140,33 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 /** Shows world w*/
 void print_world(struct world_t *w)
 {
+  printf("\n");
   for (int i = 0; i < HEIGHT; i++)
   {
+    if (get_neighbors_seed() == 1 && i%2 == 1)
+    {
+      printf("\t");
+    }
     for (int j = 0; j < WIDTH; j++)
     {
       if (world_get_sort(w, i * WIDTH + j) == NO_SORT)
       {
-        printf(".\t");
+        printf(".\t\t");
       }
       else if (world_get(w, i * WIDTH + j) == BLACK)
       {
-        printf("B(%d)\t", world_get_sort(w, i * WIDTH + j));
+        printf("B(%d)\t\t", world_get_sort(w, i * WIDTH + j));
       }
       else if (world_get(w, i * WIDTH + j) == WHITE)
       {
-        printf("W(%d)\t", world_get_sort(w, j + i * WIDTH));
+        printf("W(%d)\t\t", world_get_sort(w, j + i * WIDTH));
       }
       else
       {
         printf("X");
       }
     }
-    printf("\n");
+    printf("\n\n");
   }
   printf("\n====================================\n\n");
 }
@@ -195,7 +200,7 @@ int main(int argc, char *argv[])
   int nb_turns = 0;
   struct world_t *w = world_init();
 
-  init_neighbors(0);
+  init_neighbors(1);
 
   black_init_set = init_set(HEIGHT);
   white_init_set = init_set(HEIGHT);
