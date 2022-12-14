@@ -5,7 +5,7 @@ typedef struct
 {
     unsigned int *ptr;
     int size;
-} set_t;
+}set_t;
 
 /** Initializes a set with size places */
 set_t init_set(unsigned int size);

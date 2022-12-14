@@ -8,11 +8,12 @@
 
 #include "project.h"
 
-set_t black_init_set;
+extern set_t black_init_set;
 extern set_t black_current_set;
-set_t white_init_set;
+extern set_t white_init_set;
 extern set_t white_current_set;
 
+/** Initializes the positions of player p's pieces */
 void init_player_set(unsigned int p, struct world_t *w)
 {
   for (int i = 0; i < HEIGHT; i++)
@@ -26,14 +27,15 @@ void init_player_set(unsigned int p, struct world_t *w)
     }
     else
     {
-      world_set(w, WIDTH * i + HEIGHT, p);
-      world_set_sort(w, WIDTH * i + HEIGHT, PAWN);
-      white_init_set.ptr[i] = WIDTH * i + HEIGHT;
-      white_current_set.ptr[i] = WIDTH * i + HEIGHT;
+      world_set(w, WIDTH * i + WIDTH - 1, p);
+      world_set_sort(w, WIDTH * i + WIDTH - 1, PAWN);
+      white_init_set.ptr[i] = WIDTH * i + WIDTH - 1;
+      white_current_set.ptr[i] = WIDTH * i + WIDTH - 1;
     }
   }
 }
 
+/** Checks simple victory for piece at index idx of player p */
 int check_simple_victory(unsigned int idx, unsigned int p)
 {
   if (p == BLACK)
@@ -53,6 +55,7 @@ int check_simple_victory(unsigned int idx, unsigned int p)
   return 0;
 }
 
+/** Checks complex victory for player p */
 int check_complex_victory(unsigned int p)
 {
   int j = 0;
@@ -104,6 +107,7 @@ int check_complex_victory(unsigned int p)
   return 1;
 }
 
+/** Chooses random piece belonging to current player */
 unsigned int choose_random_piece_belonging_to(int current_player)
 {
   if (current_player == BLACK)
@@ -117,10 +121,11 @@ unsigned int choose_random_piece_belonging_to(int current_player)
   return white_current_set.ptr[i];
 }
 
+/** Chooses random move for piece in position p */
 unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 {
   set_t set = possible_mvts(p, w);
-  if (set.size > 1)
+  if (set.size > 0)
   {
     unsigned int tmp = set.size - 1;
     int i = (rand() % (tmp - 0 + 1)) + 0;
@@ -128,57 +133,74 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
     delete_set(&set);
     return x;
   }
+  delete_set(&set);
   return p;
 }
 
+/** Shows world w*/
 void print_world(struct world_t *w)
 {
-  for (int i = 0; i < WORLD_SIZE; i++)
-  {
-    if (i % WIDTH == 0 && i != 0)
-    {
-      printf("\n");
-    }
-    printf("i=%d_s=%d_c=%d\t", i, world_get_sort(w, i), world_get(w, i));
-  }
   printf("\n");
+  for (int i = 0; i < HEIGHT; i++)
+  {
+    if (get_neighbors_seed() == 1 && i%2 == 1)
+    {
+      printf("\t");
+    }
+    for (int j = 0; j < WIDTH; j++)
+    {
+      if (world_get_sort(w, i * WIDTH + j) == NO_SORT)
+      {
+        printf(".\t\t");
+      }
+      else if (world_get(w, i * WIDTH + j) == BLACK)
+      {
+        printf("B(%d)\t\t", world_get_sort(w, i * WIDTH + j));
+      }
+      else if (world_get(w, i * WIDTH + j) == WHITE)
+      {
+        printf("W(%d)\t\t", world_get_sort(w, j + i * WIDTH));
+      }
+      else
+      {
+        printf("X");
+      }
+    }
+    printf("\n\n");
+  }
+  printf("\n====================================\n\n");
 }
 
 int main(int argc, char *argv[])
 {
+  // get optional values
   int opt;
-  int optc = 0;
-  int MAX_TURNS;
-  char victory_type[1];
-
+  srand(time(NULL));
+  int MAX_TURNS = 2 * WIDTH * HEIGHT;
+  int victory_type = 0;
   while ((opt = getopt(argc, argv, "s:m:t:")) != -1)
   {
     switch (opt)
     {
     case 's':
-      optc++;
       srand(atoi(optarg));
       break;
     case 'm':
       MAX_TURNS = atoi(optarg);
-      optc++;
       break;
     case 't':
-      strcpy(victory_type, optarg);
-      optc++;
+      if (strcmp(optarg, "c") == 0)
+      {
+        victory_type = 1;
+      }
       break;
     }
   }
 
-  if (optc != 3)
-  {
-    printf("Options needed : -s -m -t\n");
-    return 0;
-  }
-
   int nb_turns = 0;
   struct world_t *w = world_init();
-  init_neighbors(0);
+
+  init_neighbors(1);
 
   black_init_set = init_set(HEIGHT);
   white_init_set = init_set(HEIGHT);
@@ -192,7 +214,9 @@ int main(int argc, char *argv[])
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
   unsigned int m;
 
-  if (strcmp(victory_type, "s") == 0)
+  print_world(w);
+
+  if (victory_type == 0)
   {
     while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
@@ -202,32 +226,37 @@ int main(int argc, char *argv[])
       current_player = current_player % 2 + 1;
       nb_turns++;
       p = m;
+      print_world(w);
     }
-    if (current_player == BLACK)
+    if (current_player == BLACK && nb_turns != MAX_TURNS)
     {
       printf("Victoire simple pour WHITE\n");
     }
-    else
+    else if (current_player == WHITE && nb_turns != MAX_TURNS)
     {
       printf("Victoire simple pour BLACK\n");
     }
+    else
+    {
+      printf("Pas de gagnant\n");
+    }
   }
-  
-  if (strcmp(victory_type, "c") == 0)
+
+  if (victory_type == 1)
   {
     while ((check_complex_victory(current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
       p = choose_random_piece_belonging_to(current_player);
       m = choose_random_move_for_piece(w, p);
-      if (p != m)
-      {
-        move_piece(w, p, m);
-      }
+      move_piece(w, p, m);
       current_player = current_player % 2 + 1;
       p = m;
       nb_turns++;
+      print_world(w);
     }
   }
+
+  print_world(w);
 
   delete_set(&black_current_set);
   delete_set(&white_current_set);

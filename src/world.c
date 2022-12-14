@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 
 #include "world.h"
 
@@ -15,7 +16,7 @@ struct world_t w;
 
 /** Initializes a world (NO_COLOR, NO_SORT everywhere)
     Always returns the same pointer */
-struct world_t * world_init()
+struct world_t *world_init()
 {
   for (int i = 0; i < WORLD_SIZE; i++)
   {

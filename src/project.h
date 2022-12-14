@@ -3,7 +3,9 @@
 
 #include "movements.h"
 #include "world.h"
+#include "neighbors.h"
 #include "set.h"
+#include "movements.h"
 
 /** Initializes the positions of player p's pieces */
 void init_player_set(unsigned int p, struct world_t * w);
@@ -20,7 +22,7 @@ unsigned int choose_random_piece_belonging_to(int current_player);
 /** Chooses random move for piece in position p */
 unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p);
 
-/** Shows the world */
+/** Shows world w*/
 void print_world(struct world_t *w);
 
 #endif // __PROJECT_H__
