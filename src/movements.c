@@ -20,11 +20,11 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
   {
     if (world_get_sort(w, neigh_idx.n[j].i) != 0)
     {
-      idx_n = get_neighbor(idx_n, neigh_idx.n[j].d);
+      idx_n = get_neighbor(idx, neigh_idx.n[j].d);
       if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0 && exist_in_set(set, idx_n) == UINT_MAX && idx_n != init)
       {
         possible_mvts_aux(set, idx_n, w, init);
-      }
+      } 
     }
     j++;
   }
