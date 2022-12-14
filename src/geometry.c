@@ -7,9 +7,11 @@ const char* names_sort[] = {
   "NO_SORT","PAWN"
 };
 
-static const char* place_strings[MAX_COLOR][MAX_SORT] = {  
+static const char* place_strings[MAX_SORT][MAX_COLOR] = {  
    {"NO_COLOR NO_SORT", "BLACK NO_SORT", "WHITE NO_SORT"} ,   
-   {"NO_COLOR PAWN", "BLACK PAWN", "WHITE PAWN"} ,   
+   {"NO_COLOR PAWN", "BLACK PAWN", "WHITE PAWN"} ,
+   {"NO_COLOR TOWER", "BLACK TOWER", "WHITE TOWER"} ,
+   {"NO_COLOR ELEPHANT", "BLACK ELEPHANT", "WHITE ELEPHANT"} ,
 };
 
 /** Return a string describing the color `c` and sort `s` */
