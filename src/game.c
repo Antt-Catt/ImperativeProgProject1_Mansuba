@@ -167,5 +167,4 @@ void print_world(struct world_t *w)
     printf("\n\n");
   }
   printf("\n====================================\n\n");
-  printf("%d\n", HEIGHT);
 }

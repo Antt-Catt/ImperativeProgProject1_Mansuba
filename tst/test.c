@@ -4,53 +4,6 @@
 
 #include "test.h"
 
-/*unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
-{
-  set_t set = possible_mvts(p, w);
-  if (set.size > 1)
-  {
-    unsigned int tmp = set.size - 1;
-    int i = (rand() % (tmp - 0 + 1)) + 0;
-    unsigned int x = set.ptr[i];
-    delete_set(&set);
-    return x;
-  }
-  return p;
-  }
-
-void print_world(struct world_t *w)
-{
-  printf("\n");
-  for (int i = 0; i < HEIGHT; i++)
-  {
-    if (get_neighbors_seed() == 1 && i%2 == 1)
-    {
-      printf("\t");
-    }
-    for (int j = 0; j < WIDTH; j++)
-    {
-      if (world_get_sort(w, i * WIDTH + j) == NO_SORT)
-      {
-        printf(".\t\t");
-      }
-      else if (world_get(w, i * WIDTH + j) == BLACK)
-      {
-        printf("B(%d)\t\t", world_get_sort(w, i * WIDTH + j));
-      }
-      else if (world_get(w, i * WIDTH + j) == WHITE)
-      {
-        printf("W(%d)\t\t", world_get_sort(w, j + i * WIDTH));
-      }
-      else
-      {
-        printf("X");
-      }
-    }
-    printf("\n\n");
-  }
-  printf("\n====================================\n\n");
-}*/
-
 int main(int argc, char* argv[])
 {
   argc = argc;
@@ -78,7 +31,7 @@ int main(int argc, char* argv[])
   world_set_sort(w, 16, 1);
   world_set(w, 16, 2);
   printf("\nset place 5 at color 1\n");
-printf("place 5, color %d, sort %d\n", world_get(w, 5), world_get_sort(w, 5));
+  printf("place 5, color %d, sort %d\n", world_get(w, 5), world_get_sort(w, 5));
   printf("set place 16 at color 2 and sort 1\n");
   printf("place 16, color %d, sort %d\n", world_get(w, 16), world_get_sort(w, 16));
   
@@ -156,7 +109,6 @@ printf("place 5, color %d, sort %d\n", world_get(w, 5), world_get_sort(w, 5));
   printf("{ 1 8 18 16 5 } expected\n");
   move_piece(w, 6, set.ptr[2]);
   print_world(w);
-  printf("%d\n", HEIGHT);
   
   //tests achiev2
   init_neighbors(2);
