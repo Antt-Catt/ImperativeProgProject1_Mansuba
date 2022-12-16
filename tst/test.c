@@ -4,7 +4,7 @@
 
 #include "test.h"
 
-unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
+/*unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 {
   set_t set = possible_mvts(p, w);
   if (set.size > 1)
@@ -16,7 +16,7 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
     return x;
   }
   return p;
-}
+  }*/
 
 void print_world(struct world_t *w)
 {
@@ -49,7 +49,7 @@ void print_world(struct world_t *w)
     printf("\n\n");
   }
   printf("\n====================================\n\n");
-}
+  }
 
 int main(int argc, char* argv[])
 {
