@@ -35,22 +35,22 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d)
   
   if (i == 0 && j == 0 && d == 4 && get_neighbors_seed() == 2)
   {
-    return WORLD_SIZE - 1;
+    return UINT_MAX;
   }
   
   if (i == 0 && j == (WIDTH - 1) && d == 2 && get_neighbors_seed() == 2)
   {
-    return WIDTH * (HEIGHT - 1);
+    return UINT_MAX;
   }
   
   if (i == (HEIGHT - 1) && j == 0 && d == -2 && get_neighbors_seed() == 2)
   {
-    return WIDTH - 1;
+    return UINT_MAX;
   }
   
   if (i == (HEIGHT - 1) && j == (WIDTH - 1) && d == -4 && get_neighbors_seed() == 2)
   {
-    return 0;
+    return UINT_MAX;
   }
   
   if (i == 0 && (d == 2 || d == 3 || d == 4))
@@ -64,20 +64,6 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d)
   
   if (j == 0 && (d == -1 || d == -2 || d == 4))
   {
-    if (get_neighbors_seed() == 2)
-    {
-      switch (d)
-      {
-      case -1:
-	return idx + WIDTH - 1;
-      case -2:
-	return idx + 2 * WIDTH - 1;
-      case 4:
-	return idx - 1;
-      default:
-	return 0;
-      } 
-    }
     return UINT_MAX;
   }
   
@@ -92,22 +78,9 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d)
   
   if (j == (WIDTH - 1) && (d == 1 || d == 2 || d == -4))
   {
-    if (get_neighbors_seed() == 2)
-    {
-      switch (d)
-      {
-      case 1:
-	return idx - WIDTH + 1;
-      case 2:
-	return idx - 2 * WIDTH + 1;
-      case -4:
-	return idx + 1;
-      default:
-	return 0;
-      } 
-    }
     return UINT_MAX;
   }
+
   switch (d)
   {
   case -4:

@@ -113,10 +113,12 @@ int main(int argc, char* argv[])
   //tests achiev2
   init_neighbors(2);
   printf("neighbor of %d in dir %s is %d ; expected 16\n", 0, dir_to_string(2), get_neighbor(0,2));
-  printf("neighbor of %d in direction %s is %d ; expected 19\n", 0, dir_to_string(4), get_neighbor(0,4));
+  printf("neighbor of %d in direction %s is %d ; expected -1\n", 0, dir_to_string(4), get_neighbor(0,4));
   printf("neighbor of %d in direction %s is %d ; expected 18\n", 3, dir_to_string(3), get_neighbor(3,3));
-  printf("neighbor of %d in direction %s is %d ; expected 15\n", 4, dir_to_string(2), get_neighbor(4,2));
-  printf("neighbor of %d in direction %s is %d ; expected 4\n", 15, dir_to_string(-2), get_neighbor(15,-2));
+  printf("neighbor of %d in direction %s is %d ; expected -1\n", 4, dir_to_string(2), get_neighbor(4,2));
+  printf("neighbor of %d in direction %s is %d ; expected -1\n", 15, dir_to_string(-2), get_neighbor(15,-2));
+  printf("neighbor of %d in direction %s is %d ; expected -1\n", 10, dir_to_string(-2), get_neighbor(10,-2));
+  printf("neighbor of %d in direction %s is %d ; expected 2\n", 16, dir_to_string(-4), get_neighbor(16,-4));
   printf("\n");
   
   result = get_neighbors(9);
