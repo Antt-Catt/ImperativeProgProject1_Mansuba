@@ -35,6 +35,7 @@ set_t possible_drts()
 
 void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned int init)
 {
+  printf("0 %d\t", idx);
   if (exist_in_set(set, idx) == UINT_MAX && idx != init)
   {
     push_set(set, idx);
@@ -48,13 +49,13 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
   {
     j = neigh_idx.n[k].d;
     idx_n = neigh_idx.n[k].i;
-    if (exist_in_set(&drts, j + 4))
+    if (exist_in_set(&drts, j + 4) != UINT_MAX)
     {
       {
         if (idx_n != UINT_MAX && world_get_sort(w, idx_n) != 0)
         {
           idx_n = get_neighbor(idx_n, j);
-          if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0 && exist_in_set(set, idx_n) == UINT_MAX && idx_n != init)
+          if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0 && idx_n != init)
           {
             possible_mvts_aux(set, idx_n, w, idx);
           }
