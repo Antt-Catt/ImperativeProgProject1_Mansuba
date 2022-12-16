@@ -35,7 +35,6 @@ set_t possible_drts()
 
 void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned int init)
 {
-  printf("0 %d\t", idx);
   if (exist_in_set(set, idx) == UINT_MAX && idx != init)
   {
     push_set(set, idx);
