@@ -16,7 +16,7 @@
     return x;
   }
   return p;
-  }*/
+  }
 
 void print_world(struct world_t *w)
 {
@@ -49,7 +49,7 @@ void print_world(struct world_t *w)
     printf("\n\n");
   }
   printf("\n====================================\n\n");
-  }
+}*/
 
 int main(int argc, char* argv[])
 {
@@ -156,6 +156,7 @@ printf("place 5, color %d, sort %d\n", world_get(w, 5), world_get_sort(w, 5));
   printf("{ 1 8 18 16 5 } expected\n");
   move_piece(w, 6, set.ptr[2]);
   print_world(w);
+  printf("%d\n", HEIGHT);
   
   //tests achiev2
   init_neighbors(2);
