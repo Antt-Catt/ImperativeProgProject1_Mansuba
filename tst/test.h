@@ -3,4 +3,6 @@
 
 #include "project.h"
 
+/** this is an easter egg */
+
 #endif // __TEST_H__
