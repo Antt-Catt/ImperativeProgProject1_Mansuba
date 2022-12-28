@@ -114,6 +114,8 @@ int main(int argc, char *argv[])
   delete_set(&white_current_set);
   delete_set(&black_init_set);
   delete_set(&white_init_set);
+  delete_set(&black_prison);
+  delete_set(&white_prison);
 
   return 0;
 }
