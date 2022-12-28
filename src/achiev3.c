@@ -20,27 +20,30 @@ extern set_t white_current_set;
 
 unsigned int imprison(unsigned int idx, struct world_t *w)
 {
-    if (exist_in_set(&black_init_set, idx) == UINT_MAX && exist_in_set(&white_init_set, idx) == UINT_MAX)
+  
+  if (exist_in_set(&black_init_set, idx) == UINT_MAX && exist_in_set(&white_init_set, idx) == UINT_MAX)
+  {
+    unsigned int player = world_get(w, idx);
+    unsigned int sort = world_get_sort(w, idx);
+    // piece disappears from world
+    world_set(w, idx, 0);
+    world_set_sort(w, idx, 0);
+    // piece (idx, player, sort) stored in prison
+    if (player == BLACK)
     {
-        unsigned int player = world_get(w, idx);
-        unsigned int sort = world_get_sort(w, idx);
-        // piece disappears from world
-        world_set(w, idx, 0);
-        world_set_sort(w, idx, 0);
-        // piece (idx, player, sort) stored in prison
-        if (player == BLACK)
-        {
-            push_set(&black_prison, idx);
-            push_set(&black_prison, sort);
-        }
-        else if (player == BLACK)
-        {
-            push_set(&white_prison, idx);
-            push_set(&white_prison, sort);
-        }
-        return 0;
+      push_set(&black_prison, idx);
+      push_set(&black_prison, sort);
+      print_set(&black_prison);
     }
-    return UINT_MAX;
+    else if (player == WHITE)
+    {
+      push_set(&white_prison, idx);
+      push_set(&white_prison, sort);
+      print_set(&white_prison);
+    }
+    return 0;
+  }
+  return UINT_MAX;
 }
 
 unsigned int escape(unsigned int player, struct world_t *w)

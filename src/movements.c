@@ -109,18 +109,17 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
 
 unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
 {
-  if (p != m)
-  {
-    unsigned int playerInP = world_get(w, p);
+  if (p != m){
+    unsigned int player_in_p = world_get(w, p);
 
     // for achiev3
-    unsigned int playerInM = world_get(w, m);
-    if (playerInM != 0 && achiev3 == 0)
+    unsigned int player_in_m = world_get(w, m);
+    if (player_in_m != 0 && achiev3 == 0)
     {
       // stop function, cant move piece to an occupied place if achiev3 conditions not in place
       return 0;
     }
-    if (playerInP != playerInM)
+    if (player_in_m != 0 && player_in_p != player_in_m)
     {
       unsigned int tmp = imprison(m, w);
       if (tmp == UINT_MAX)
@@ -130,9 +129,9 @@ unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
       }
     }
 
-    world_set(w, m, playerInP);
+    world_set(w, m, player_in_p);
     world_set_sort(w, m, world_get_sort(w, p));
-    if (playerInP == BLACK)
+    if (player_in_p == BLACK)
     {
       modif_set(&black_current_set, p, m);
     }
@@ -143,7 +142,20 @@ unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
     world_set(w, p, NO_COLOR);
     world_set_sort(w, p, NO_SORT);
   }
-  return 0;
+  return 0;/*
+    unsigned int current_player = world_get(w, p);
+    world_set(w, m, current_player);
+    world_set_sort(w, m, world_get_sort(w,p));
+    if (current_player == BLACK){
+      modif_set(&black_current_set, p, m);
+    }
+    else{
+      modif_set(&white_current_set, p, m);
+    }
+    world_set(w, p, NO_COLOR);
+    world_set_sort(w, p, NO_SORT);
+  }
+  return 0;*/
 }
 
 set_t achiev4_function(set_t *set, unsigned int player)
@@ -189,4 +201,4 @@ set_t achiev4_function(set_t *set, unsigned int player)
     }
   }
   return result;
-}
+  }
