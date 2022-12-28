@@ -2,7 +2,9 @@
 #define __GAME_H__
 
 #include "movements.h"
-#include "achiev1.h"
+
+// adding this fixed some errors in make project ?!
+#include "world.h"
 
 /** Initializes the positions of player p's pieces */
 void init_player_set(unsigned int p, struct world_t * w);

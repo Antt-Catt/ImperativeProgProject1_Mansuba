@@ -8,13 +8,19 @@
 
 #include "project.h"
 
+extern unsigned int achiev3;
+
 extern set_t black_init_set;
 extern set_t black_current_set;
+extern set_t black_prison;
 extern set_t white_init_set;
 extern set_t white_current_set;
+extern set_t white_prison;
 
 int main(int argc, char *argv[])
 {
+  // for achiev3
+  achiev3 = 0;
   // get optional values
   int opt;
   srand(time(NULL));
@@ -48,6 +54,10 @@ int main(int argc, char *argv[])
   white_init_set = init_set(HEIGHT);
   black_current_set = init_set(HEIGHT);
   white_current_set = init_set(HEIGHT);
+
+  // for achiev3
+  black_prison = init_set(0);
+  white_prison = init_set(0);
 
   init_player_set(BLACK, w);
   init_player_set(WHITE, w);

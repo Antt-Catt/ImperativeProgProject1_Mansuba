@@ -2,9 +2,10 @@
 #define __MOVEMENTS_H__
 
 #include "neighbors.h"
+#include "achiev1.h"
+#include "achiev3.h"
 #include "world.h"
 #include "set.h"
-#include "achiev1.h"
 
 /** Sub function for possible_mvts */ 
 void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned int init);
@@ -13,6 +14,6 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
 set_t possible_mvts(unsigned int idx, struct world_t *w);
 
 /** Move piece in position p to position m */
-void move_piece(struct world_t *w, unsigned int p, unsigned int m);
+unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m);
 
 #endif // __MOVEMENTS_H__

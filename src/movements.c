@@ -4,11 +4,14 @@
 
 #include "movements.h"
 
+extern unsigned int achiev3;
+
 set_t black_init_set;
 set_t black_current_set;
 set_t white_init_set;
 set_t white_current_set;
-//set_t possible_directions;
+
+// set_t possible_directions;
 
 set_t possible_drts()
 {
@@ -104,14 +107,32 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
   return set;
 }
 
-void move_piece(struct world_t *w, unsigned int p, unsigned int m)
+unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
 {
   if (p != m)
   {
-    unsigned int current_player = world_get(w, p);
-    world_set(w, m, current_player);
+    unsigned int playerInP = world_get(w, p);
+
+    // for achiev3
+    unsigned int playerInM = world_get(w, m);
+    if (playerInM != 0 && achiev3 == 0)
+    {
+      //stop function, cant move piece to an occupied place if achiev3 not in place
+      return 0;
+    }
+    if (playerInP != playerInM)
+    {
+      unsigned int tmp = imprison(m, w);
+      if (tmp == UINT_MAX)
+      {
+        // imprisoning didnt work, we cant put p in m then
+        return 0;
+      }
+    }
+
+    world_set(w, m, playerInP);
     world_set_sort(w, m, world_get_sort(w, p));
-    if (current_player == BLACK)
+    if (playerInP == BLACK)
     {
       modif_set(&black_current_set, p, m);
     }
@@ -122,4 +143,5 @@ void move_piece(struct world_t *w, unsigned int p, unsigned int m)
     world_set(w, p, NO_COLOR);
     world_set_sort(w, p, NO_SORT);
   }
+  return 0;
 }
