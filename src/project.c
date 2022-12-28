@@ -9,6 +9,7 @@
 #include "project.h"
 
 extern unsigned int achiev3;
+extern unsigned int achiev4;
 
 extern set_t black_init_set;
 extern set_t black_current_set;
@@ -19,8 +20,9 @@ extern set_t white_prison;
 
 int main(int argc, char *argv[])
 {
-  // for achiev3
+  // for achiev3 and achiev4
   achiev3 = 0;
+  achiev4 = 1;
   // get optional values
   int opt;
   srand(time(NULL));

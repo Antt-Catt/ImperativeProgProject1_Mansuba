@@ -8,6 +8,7 @@
 
 //0 to not apply achiev3 rules, otherwise apply
 extern unsigned int achiev3;
+unsigned int achiev4;
 
 extern set_t black_init_set;
 extern set_t black_current_set;
@@ -129,6 +130,14 @@ unsigned int choose_random_piece_belonging_to(int current_player)
 unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 {
   set_t set = possible_mvts(p, w);
+  print_set(&set);
+  unsigned int player = world_get(w, p);
+  if (achiev4 != 0)
+  {
+    // changes set if we want achiev4 conditions to take place
+    set = achiev4_function(&set, player);
+  }
+  print_set(&set);
   if (set.size > 0)
   {
     unsigned int tmp = set.size - 1;
