@@ -81,11 +81,11 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
   set_t drts = possible_drts();
   if (idx != UINT_MAX)
   {
-    if (world_get(w, idx) == TOWER)
+    if (world_get_sort(w, idx) == TOWER)
     {
       return possible_mvts_tower(idx, w);
     }
-    if (world_get(w, idx) == ELEPHANT)
+    if (world_get_sort(w, idx) == ELEPHANT)
     {
       return possible_mvts_elephant(idx, w);
     }
