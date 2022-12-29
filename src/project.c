@@ -21,7 +21,7 @@ extern set_t white_prison;
 int main(int argc, char *argv[])
 {
   // for achiev3 and achiev4
-  achiev3 = 0;
+  achiev3 = 1;
   achiev4 = 0;
   // get optional values
   int opt;

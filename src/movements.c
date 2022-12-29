@@ -51,17 +51,12 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
   {
     j = neigh_idx.n[k].d;
     idx_n = neigh_idx.n[k].i;
-    if (exist_in_set(&drts, j + 4) != UINT_MAX)
+    if (exist_in_set(&drts, j + 4) != UINT_MAX && world_get_sort(w, idx_n) != 0)
     {
+      idx_n = get_neighbor(idx_n, j);
+      if (idx_n != UINT_MAX && world_get_sort(w, idx_n) != 0 && idx_n != init)
       {
-        if (idx_n != UINT_MAX && world_get_sort(w, idx_n) != 0)
-        {
-          idx_n = get_neighbor(idx_n, j);
-          if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0 && idx_n != init)
-          {
-            possible_mvts_aux(set, idx_n, w, idx);
-          }
-        }
+	possible_mvts_aux(set, idx_n, w, idx);
       }
     }
     k++;
@@ -75,11 +70,11 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
   set_t drts = possible_drts();
   if (idx != UINT_MAX)
   {
-    if (world_get_sort(w, idx) == TOWER)
+    if (world_get(w, idx) == TOWER)
     {
       return possible_mvts_tower(idx, w);
     }
-    if (world_get_sort(w, idx) == ELEPHANT)
+    if (world_get(w, idx) == ELEPHANT)
     {
       return possible_mvts_elephant(idx, w);
     }
@@ -89,14 +84,14 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
     {
       j = pop_set(&drts) - 4;
       idx_n = get_neighbor(idx, j);
-      if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0)
-      {
+      if (idx_n != UINT_MAX && world_get(w, idx_n) )
+      
         push_set(&set, idx_n);
       }
       else
       {
         idx_n = get_neighbor(idx_n, j);
-        if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0)
+        if (idx_n != UINT_MAX && world_get(w, idx_n) == 0)
         {
           possible_mvts_aux(&set, idx_n, w, idx);
         }
@@ -142,20 +137,7 @@ unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
     world_set(w, p, NO_COLOR);
     world_set_sort(w, p, NO_SORT);
   }
-  return 0;/*
-    unsigned int current_player = world_get(w, p);
-    world_set(w, m, current_player);
-    world_set_sort(w, m, world_get_sort(w,p));
-    if (current_player == BLACK){
-      modif_set(&black_current_set, p, m);
-    }
-    else{
-      modif_set(&white_current_set, p, m);
-    }
-    world_set(w, p, NO_COLOR);
-    world_set_sort(w, p, NO_SORT);
-  }
-  return 0;*/
+  return 0;
 }
 
 set_t achiev4_function(set_t *set, unsigned int player)
