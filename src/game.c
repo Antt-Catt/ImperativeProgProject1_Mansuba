@@ -6,14 +6,8 @@
 
 #include "game.h"
 
-//0 to not apply achiev3 rules, otherwise apply
-extern unsigned int achiev3;
+//0 to not apply achiev4 rules, otherwise apply
 unsigned int achiev4;
-
-extern set_t black_init_set;
-extern set_t black_current_set;
-extern set_t white_init_set;
-extern set_t white_current_set;
 
 /** Initializes the positions of player p's pieces */
 void init_player_set(unsigned int p, struct world_t *w)

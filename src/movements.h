@@ -2,10 +2,15 @@
 #define __MOVEMENTS_H__
 
 #include "neighbors.h"
-#include "achiev1.h"
-#include "achiev3.h"
 #include "world.h"
 #include "set.h"
+#include "achiev1.h"
+#include "achiev3.h"
+
+extern set_t black_init_set;
+extern set_t black_current_set;
+extern set_t white_init_set;
+extern set_t white_current_set;
 
 /** Sub function for possible_mvts */ 
 void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned int init);

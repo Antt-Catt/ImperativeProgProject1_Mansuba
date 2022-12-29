@@ -8,16 +8,6 @@
 
 #include "project.h"
 
-extern unsigned int achiev3;
-extern unsigned int achiev4;
-
-extern set_t black_init_set;
-extern set_t black_current_set;
-extern set_t black_prison;
-extern set_t white_init_set;
-extern set_t white_current_set;
-extern set_t white_prison;
-
 int main(int argc, char *argv[])
 {
   // for achiev3 and achiev4

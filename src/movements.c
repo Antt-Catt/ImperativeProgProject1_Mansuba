@@ -4,8 +4,6 @@
 
 #include "movements.h"
 
-extern unsigned int achiev3;
-
 set_t black_init_set;
 set_t black_current_set;
 set_t white_init_set;

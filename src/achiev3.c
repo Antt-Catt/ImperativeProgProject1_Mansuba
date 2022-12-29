@@ -3,20 +3,14 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <time.h>
-#include <getopt.h>
-#include <unistd.h>
-#include <string.h>
 
 #include "achiev3.h"
 
+//0 to not apply achiev3 rules, otherwise apply
 unsigned int achiev3;
+
 set_t black_prison;
 set_t white_prison;
-
-extern set_t black_init_set;
-extern set_t black_current_set;
-extern set_t white_init_set;
-extern set_t white_current_set;
 
 unsigned int imprison(unsigned int idx, struct world_t *w)
 {

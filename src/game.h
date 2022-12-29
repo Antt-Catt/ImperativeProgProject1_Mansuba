@@ -3,8 +3,7 @@
 
 #include "movements.h"
 
-// adding this fixed some errors in make project ?!
-#include "world.h"
+extern unsigned int achiev4;
 
 /** Initializes the positions of player p's pieces */
 void init_player_set(unsigned int p, struct world_t * w);
