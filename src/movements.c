@@ -49,22 +49,19 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
   {
     j = neigh_idx.n[k].d;
     idx_n = neigh_idx.n[k].i;
-    if (exist_in_set(&drts, j + 4) != UINT_MAX && world_get_sort(w, idx_n) != 0)
+    if (exist_in_set(&drts, j + 4) != UINT_MAX && world_get(w, idx_n) != 0)
     {
       idx_n = get_neighbor(idx_n, j);
       if (idx_n != UINT_MAX && world_get(w, idx_n) != 0 && idx_n != init)
       {
-        if (idx_n != UINT_MAX && world_get(w, idx_n) != 0)
+	if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && idx_n != init)
         {
-          idx_n = get_neighbor(idx_n, j);
-          if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && idx_n != init && achiev3 == 0)
-          {
-            possible_mvts_aux(set, idx_n, w, idx);
-          }
-          else if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, init) && idx_n != init && achiev3 != 0)
-          {
-            possible_mvts_aux(set, idx_n, w, idx);
-          }
+	  printf("%d\n", idx_n);
+	  possible_mvts_aux(set, idx_n, w, idx);
+        }
+	else if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, init) && idx_n != init && achiev3 != 0)
+        {
+	  push_set(set, idx_n);
         }
       }
     }
@@ -93,7 +90,7 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
     {
       j = pop_set(&drts) - 4;
       idx_n = get_neighbor(idx, j);
-      if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && achiev3 == 0)
+      /*if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && achiev3 == 0)
       {
         push_set(&set, idx_n);
       }
@@ -112,7 +109,35 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
         {
           possible_mvts_aux(&set, idx_n, w, idx);
         }
+	}*/
+
+
+      
+      if (idx_n != UINT_MAX)
+      {
+      char next = 0;
+      if (world_get(w, idx_n) == 0)
+      {
+	push_set(&set, idx_n);
+	next = 1;
       }
+      else if (achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx))
+      {
+        push_set(&set, idx_n);
+      }
+      if (next == 0)
+      {
+        idx_n = get_neighbor(idx_n, j);
+	if (idx_n != UINT_MAX && world_get(w, idx_n) == 0)
+	{
+	  possible_mvts_aux(&set, idx_n, w, idx);
+	}
+	else if (achiev3 != 0 && idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx))
+	{
+	  push_set(&set, idx_n);
+        }
+     }
+     }      
     }
   }
   delete_set(&drts);

@@ -12,9 +12,6 @@ unsigned int achiev4;
 /** Initializes the positions of player p's pieces */
 void init_player_set(unsigned int p, struct world_t *w)
 {
-  // for achiev3
-  achiev3 = 0;
-
   for (int i = 0; i < HEIGHT; i++)
   {
     if (p == BLACK)
