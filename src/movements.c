@@ -54,7 +54,7 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
     if (exist_in_set(&drts, j + 4) != UINT_MAX)
     {
       {
-        if (idx_n != UINT_MAX && world_get_sort(w, idx_n) != 0)
+        if (idx_n != UINT_MAX && world_get(w, idx_n) != 0)
         {
           idx_n = get_neighbor(idx_n, j);
           if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && idx_n != init && achiev3 == 0)
@@ -93,7 +93,7 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
     {
       j = pop_set(&drts) - 4;
       idx_n = get_neighbor(idx, j);
-      if (idx_n != UINT_MAX && world_get_sort(w, idx_n) == 0 && achiev3 == 0)
+      if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && achiev3 == 0)
       {
         push_set(&set, idx_n);
       }
