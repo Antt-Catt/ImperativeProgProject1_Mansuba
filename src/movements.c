@@ -54,9 +54,20 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
     if (exist_in_set(&drts, j + 4) != UINT_MAX && world_get_sort(w, idx_n) != 0)
     {
       idx_n = get_neighbor(idx_n, j);
-      if (idx_n != UINT_MAX && world_get_sort(w, idx_n) != 0 && idx_n != init)
+      if (idx_n != UINT_MAX && world_get(w, idx_n) != 0 && idx_n != init)
       {
-	possible_mvts_aux(set, idx_n, w, idx);
+        if (idx_n != UINT_MAX && world_get(w, idx_n) != 0)
+        {
+          idx_n = get_neighbor(idx_n, j);
+          if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && idx_n != init && achiev3 == 0)
+          {
+            possible_mvts_aux(set, idx_n, w, idx);
+          }
+          else if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, init) && idx_n != init && achiev3 != 0)
+          {
+            possible_mvts_aux(set, idx_n, w, idx);
+          }
+        }
       }
     }
     k++;
@@ -84,14 +95,22 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
     {
       j = pop_set(&drts) - 4;
       idx_n = get_neighbor(idx, j);
-      if (idx_n != UINT_MAX && world_get(w, idx_n) )
-      
+      if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && achiev3 == 0)
+      {
+        push_set(&set, idx_n);
+      }
+      else if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && achiev3 != 0)
+      {
         push_set(&set, idx_n);
       }
       else
       {
         idx_n = get_neighbor(idx_n, j);
-        if (idx_n != UINT_MAX && world_get(w, idx_n) == 0)
+        if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && achiev3 == 0)
+        {
+          possible_mvts_aux(&set, idx_n, w, idx);
+        }
+        else if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && achiev3 != 0)
         {
           possible_mvts_aux(&set, idx_n, w, idx);
         }
@@ -114,7 +133,7 @@ unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
       // stop function, cant move piece to an occupied place if achiev3 conditions not in place
       return 0;
     }
-    if (player_in_m != 0 && player_in_p != player_in_m)
+    else if (player_in_m != 0 && player_in_p != player_in_m)
     {
       unsigned int tmp = imprison(m, w);
       if (tmp == UINT_MAX)
@@ -123,7 +142,6 @@ unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
         return 0;
       }
     }
-
     world_set(w, m, player_in_p);
     world_set_sort(w, m, world_get_sort(w, p));
     if (player_in_p == BLACK)
