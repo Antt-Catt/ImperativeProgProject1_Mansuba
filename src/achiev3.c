@@ -49,8 +49,8 @@ unsigned int imprison(unsigned int idx, struct world_t *w)
 unsigned int escape(unsigned int player, struct world_t *w)
 {
     unsigned int idx;
-    unsigned int sort;
     unsigned int tmp;
+    unsigned int sort;
     srand(time(NULL));
     if (player == BLACK)
     {
