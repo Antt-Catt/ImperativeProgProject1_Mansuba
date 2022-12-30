@@ -9,6 +9,7 @@
 //0 to not apply achiev4 rules, otherwise apply
 unsigned int achiev4;
 
+/** Initializes the parameters of the game depends on what achievs are selected */
 void init_game(struct world_t *w, unsigned int seed, unsigned int prison)
 {
   init_neighbors(seed);
