@@ -49,20 +49,18 @@ void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned
   {
     j = neigh_idx.n[k].d;
     idx_n = neigh_idx.n[k].i;
+    printf("idx = %d, dir = %d\n", idx_n, j);
     if (exist_in_set(&drts, j + 4) != UINT_MAX && world_get(w, idx_n) != 0)
     {
+      printf("salut\n");
       idx_n = get_neighbor(idx_n, j);
-      if (idx_n != UINT_MAX && world_get(w, idx_n) != 0 && idx_n != init)
+      if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && idx_n != init)
       {
-	if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && idx_n != init)
-        {
-	  printf("%d\n", idx_n);
-	  possible_mvts_aux(set, idx_n, w, idx);
-        }
-	else if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, init) && idx_n != init && achiev3 != 0)
-        {
-	  push_set(set, idx_n);
-        }
+	possible_mvts_aux(set, idx_n, w, idx);
+      }
+      else if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, init) && idx_n != init && achiev3 != 0)
+      {
+	push_set(set, idx_n);
       }
     }
     k++;
