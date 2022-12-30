@@ -157,7 +157,17 @@ void test_movements()
 
 void test_game()
 {
-
+  struct world_t * w = world_init();
+  init_game(w, 0, 1);
+  printf("the game is initialized :\n");
+  print_world(w);
+  print_set(&black_init_set);
+  print_set(&black_current_set);
+  printf("{ 0 5 10 15 } expected\n");
+  print_set(&white_init_set);
+  print_set(&white_current_set);
+  printf("{ 4 9 14 19 } expected\n");
+    
 }
 
 void test_achiev1()
@@ -250,6 +260,17 @@ int main(int argc, char *argv[])
   test_movements();
   printf("\n\n");
 
+  // tests game
+  printf("game tests :\n");
+  test_game();
+  printf("\n\n");
+
+  // tests achiev1
+  printf("achiev1 tests :\n");
+  test_achiev1();
+  printf("\n\n");
+
+  
   // tests achiev2
   printf("achiev 2 tests :\n");
   test_achiev2();
