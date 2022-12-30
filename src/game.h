@@ -5,6 +5,8 @@
 
 extern unsigned int achiev4;
 
+void init_game(struct world_t *w, unsigned int seed, unsigned int prison);
+
 /** Initializes the positions of player p's pieces */
 void init_player_set(unsigned int p, struct world_t * w);
 

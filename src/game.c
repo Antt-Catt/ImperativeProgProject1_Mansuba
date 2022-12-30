@@ -9,6 +9,25 @@
 //0 to not apply achiev4 rules, otherwise apply
 unsigned int achiev4;
 
+void init_game(struct world_t *w, unsigned int seed, unsigned int prison)
+{
+  init_neighbors(seed);
+  
+  black_init_set = init_set(HEIGHT);
+  white_init_set = init_set(HEIGHT);
+  black_current_set = init_set(HEIGHT);
+  white_current_set = init_set(HEIGHT);
+
+  if (prison != 0)
+  {
+    black_prison = init_set(0);
+    white_prison = init_set(0);
+  }
+
+  init_player_set(BLACK, w);
+  init_player_set(WHITE, w);
+}
+
 /** Initializes the positions of player p's pieces */
 void init_player_set(unsigned int p, struct world_t *w)
 {

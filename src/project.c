@@ -40,19 +40,7 @@ int main(int argc, char *argv[])
   int nb_turns = 0;
   struct world_t *w = world_init();
 
-  init_neighbors(0);
-
-  black_init_set = init_set(HEIGHT);
-  white_init_set = init_set(HEIGHT);
-  black_current_set = init_set(HEIGHT);
-  white_current_set = init_set(HEIGHT);
-
-  // for achiev3
-  black_prison = init_set(0);
-  white_prison = init_set(0);
-
-  init_player_set(BLACK, w);
-  init_player_set(WHITE, w);
+  init_game(w, 0, 1); // first arg for world, second for seed, thir for achiev3
 
   unsigned int current_player = (rand() % (2 - 1 + 1)) + 1;
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
