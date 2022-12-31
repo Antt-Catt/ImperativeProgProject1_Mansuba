@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <limits.h>
+#include <time.h>
 
 #include "test.h"
 
@@ -69,7 +70,6 @@ void test_set()
   push_set(&set, 17);
   print_set(&set);
   printf("{ 17 } expected\n\n");
-  // int x = ens.size;
   modif_set(&set, 17, 19);
   print_set(&set);
   printf("{ 19 } expected\n\n");
@@ -158,16 +158,66 @@ void test_movements()
 void test_game()
 {
   struct world_t * w = world_init();
-  init_game(w, 0, 1);
+  init_game(w, 0, 0);
   printf("the game is initialized :\n");
   print_world(w);
   print_set(&black_init_set);
   print_set(&black_current_set);
-  printf("{ 0 5 10 15 } expected\n");
+  printf("{ 0 5 10 15 } expected (black pieces)\n");
   print_set(&white_init_set);
   print_set(&white_current_set);
-  printf("{ 4 9 14 19 } expected\n");
-    
+  printf("{ 4 9 14 19 } expected (white pieces)\n");
+  print_set(&black_prison);
+  printf("{ } expected\n");
+
+  printf("BLACK simple victory on place %d : %d ; expected 0\n", black_current_set.ptr[3], check_simple_victory(black_current_set.ptr[3], BLACK));
+  
+  move_piece(w, 4, 12);
+  move_piece(w, 10, 4);
+
+  print_world(w);
+
+  print_set(&white_current_set);
+  printf("{ 12 9 14 19 } expected (white pieces)\n");
+  print_set(&black_current_set);
+  printf("{ 0 5 4 15 } expected (black pieces)\n");
+
+  srand(time(NULL));
+  
+  printf("\nrandom BLACK piece : %d\n", choose_random_piece_belonging_to(BLACK));
+  printf("random move for WHITE's 12th piece : %d\n\n", choose_random_move_for_piece(w, 12));
+
+  printf("WHITE simple victory on place %d : %d ; expected 0\n", white_current_set.ptr[0], check_simple_victory(white_current_set.ptr[0], WHITE));
+  printf("BLACK simple victory on place %d : %d ; expected 1\n", black_current_set.ptr[2], check_simple_victory(black_current_set.ptr[2], BLACK));
+  printf("BLACK complex victory : %d ; expected 0\n\n", check_complex_victory(BLACK));
+  
+  print_set(&black_current_set);
+  printf("{ 0 5 15 } expected (black pieces)\n");
+  
+  move_piece(w, 9, 1);
+  move_piece(w, 14, 10);
+  move_piece(w, 19, 3);
+  move_piece(w, 0, 19);
+  move_piece(w, 5, 9);
+  move_piece(w, 15, 14);
+
+  print_world(w);
+  
+  printf("WHITE simple victory on place %d : %d ; expected 2\n", white_current_set.ptr[2], check_simple_victory(white_current_set.ptr[2], WHITE));
+  printf("WHITE complex victory : %d ; expected 0\n", check_complex_victory(WHITE));
+
+  print_set(&white_current_set);
+  printf("{ 12 1 3 } expected (white pieces)\n");
+
+  printf("BLACK complex victory : %d ; expected 1\n", check_complex_victory(BLACK));
+
+  print_set(&black_current_set);
+  printf("{ } expected (black pieces)\n");
+  
+  delete_set(&black_init_set);
+  delete_set(&black_current_set);
+  delete_set(&white_init_set);
+  delete_set(&white_current_set);
 }
 
 void test_achiev1()
@@ -210,9 +260,7 @@ void test_achiev2()
 
 void test_achiev3()
 {
-  struct world_t * w = world_init();
-  /*extern unsigned int achiev3;
-    extern set_t black_prison;*/
+  /*struct world_t * w = world_init();
   print_world(w);
   achiev3 = 1;
   move_piece(w, 11, 7);
@@ -221,7 +269,7 @@ void test_achiev3()
   move_piece(w, 7, 8);
   escape(BLACK, w);
   print_world(w);
-  print_set(&black_prison);
+  print_set(&black_prison);*/
 }
 
 int main(int argc, char *argv[])

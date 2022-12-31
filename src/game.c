@@ -141,7 +141,7 @@ unsigned int choose_random_piece_belonging_to(int current_player)
 unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 {
   set_t set = possible_mvts(p, w);
-  print_set(&set);
+   print_set(&set);
   unsigned int player = world_get(w, p);
   if (achiev4 != 0)
   {
