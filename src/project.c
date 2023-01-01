@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
   // for achiev3 and achiev4
   achiev3 = 1;
   achiev4 = 0;
+  scanf("%d", &achiev3);
   // get optional values
   int opt;
   srand(time(NULL));
