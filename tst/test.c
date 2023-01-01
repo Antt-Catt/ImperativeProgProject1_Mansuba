@@ -94,7 +94,7 @@ void test_set()
 
 void test_movements()
 {
-  struct world_t* w = world_init();
+  struct world_t * w = world_init();
   world_set_sort(w, 6, 1);
   world_set(w, 6, 2);
   world_set_sort(w, 7, 1);
@@ -222,7 +222,35 @@ void test_game()
 
 void test_achiev1()
 {
+  struct world_t * w = world_init();
+  world_set_sort(w, 15, 2);
+  world_set(w, 15, 2);
+  world_set_sort(w, 4, 2);
+  world_set(w, 4, 1);
+  world_set_sort(w, 1, 1);
+  world_set(w, 1, 2);
+  print_world(w);
+  set_t set = possible_mvts(15, w);
+  printf("possible movements for tower 15 :\n");
+  print_set(&set);
+  printf("{ 16 17 18 19 10 5 0 } expected\n");
+  delete_set(&set);
+  set = possible_mvts(4, w);
+  printf("possible movements for tower 4 :\n");
+  print_set(&set);
+  printf("{ 9 14 19 3 2 } expected\n");
+  delete_set(&set);
 
+  world_set_sort(w, 12, 3);
+  world_set(w, 12, 1);
+  world_set_sort(w, 8, 1);
+  world_set(w, 8, 2);
+  set = possible_mvts(12, w);
+  print_world(w);
+  printf("possible movements for elephant 12 :\n");
+  print_set(&set);
+  printf("{ 2 6 10 16 18 14 } expected\n");
+  delete_set(&set);
 }
 
 void test_achiev2()

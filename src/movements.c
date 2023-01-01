@@ -74,10 +74,14 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
   {
     if (world_get_sort(w, idx) == TOWER)
     {
+      delete_set(&drts);
+      delete_set(&set);
       return possible_mvts_tower(idx, w);
     }
     if (world_get_sort(w, idx) == ELEPHANT)
     {
+      delete_set(&drts);
+      delete_set(&set);
       return possible_mvts_elephant(idx, w);
     }
     int j = 0;
@@ -106,11 +110,11 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
 	  possible_mvts_aux(&set, idx_n, w, idx);
 	}
 	else if (achiev3 != 0 && idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx))
-	{
+        {
 	  push_set(&set, idx_n);
         }
-     }
-     }      
+      }
+      }      
     }
   }
   delete_set(&drts);
