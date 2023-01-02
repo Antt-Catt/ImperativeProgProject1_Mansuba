@@ -98,7 +98,7 @@ int check_complex_victory(unsigned int p)
   }
   else
   {
-    if (white_prison).size != 0)
+    if ((white_prison).size != 0)
     {
       return 0;
     }
