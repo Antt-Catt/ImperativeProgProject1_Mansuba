@@ -11,12 +11,13 @@
 int main(int argc, char *argv[])
 {
   // for achiev3 and achiev4
-  // achiev3 = 1;
+  achiev3 = 1;
   achiev4 = 0;
-  printf("Activer l'achievement 3 ? (0 pour oui, autre sinon)\n");
+  /*printf("Activer l'achievement 3 ? (0 pour non, autre sinon)\n");
   printf("%d\n", achiev3);
   scanf("%d", &achiev3);
-  printf("%d\n", achiev3);
+  printf("%d\n", achiev3);*/
+  
   // get optional values
   int opt;
   srand(time(NULL));
