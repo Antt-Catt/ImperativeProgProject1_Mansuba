@@ -27,12 +27,14 @@ unsigned int imprison(unsigned int idx, struct world_t *w)
     {
       push_set(&black_prison, idx);
       push_set(&black_prison, sort);
+      delete_from_set(&black_current_set, idx);
       print_set(&black_prison);
     }
     else if (player == WHITE)
     {
       push_set(&white_prison, idx);
       push_set(&white_prison, sort);
+      delete_from_set(&white_current_set, idx);
       print_set(&white_prison);
     }
     return 0;

@@ -78,6 +78,10 @@ int check_complex_victory(unsigned int p)
   int i = 0;
   if (p == BLACK)
   {
+    if (black_prison.size != 0)
+    {
+      return 0;
+    }
     while (i < black_current_set.size)
     {
       if (check_simple_victory(black_current_set.ptr[i], BLACK) == 0)
@@ -94,6 +98,10 @@ int check_complex_victory(unsigned int p)
   }
   else
   {
+    if (white_prison).size != 0)
+    {
+      return 0;
+    }
     while (i < white_current_set.size)
     {
       if (check_simple_victory(white_current_set.ptr[i], WHITE) == 0)
@@ -128,12 +136,10 @@ unsigned int choose_random_piece_belonging_to(int current_player)
 {
   if (current_player == BLACK)
   {
-    unsigned int tmp = black_current_set.size - 1;
-    int i = (rand() % (tmp - 0 + 1)) + 0;
+    int i = rand() % black_current_set.size;
     return black_current_set.ptr[i];
   }
-  unsigned int tmp = white_current_set.size - 1;
-  int i = (rand() % (tmp - 0 + 1)) + 0;
+  int i = rand() % white_current_set.size;
   return white_current_set.ptr[i];
 }
 
@@ -173,7 +179,7 @@ void print_world(struct world_t *w)
     }
     for (int j = 0; j < WIDTH; j++)
     {
-      if (world_get_sort(w, i * WIDTH + j) == NO_SORT)
+      if (world_get_sort(w, i * WIDTH + j) == NO_SORT && world_get(w, i * WIDTH + j) == NO_COLOR)
       {
         printf(".\t\t");
       }
@@ -187,7 +193,7 @@ void print_world(struct world_t *w)
       }
       else
       {
-        printf("X");
+        printf("X\t\t");
       }
     }
     printf("\n\n");

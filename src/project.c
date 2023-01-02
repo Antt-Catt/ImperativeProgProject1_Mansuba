@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
   // get optional values
   int opt;
   srand(time(NULL));
-  int MAX_TURNS = 2 * WIDTH * HEIGHT;
+  int MAX_TURNS = 9;
   int victory_type = 0;
   while ((opt = getopt(argc, argv, "s:m:t:")) != -1)
   {
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
   int nb_turns = 0;
   struct world_t *w = world_init();
 
-  init_game(w, 0, 1); // first arg for world, second for seed, thir for achiev3
+  init_game(w, 0, 1); // first arg for world, second for seed, third for achiev3
 
   unsigned int current_player = (rand() % (2 - 1 + 1)) + 1;
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
@@ -82,17 +82,19 @@ int main(int argc, char *argv[])
   {
     while ((check_complex_victory(current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
+      printf("non\n");
       p = choose_random_piece_belonging_to(current_player);
       m = choose_random_move_for_piece(w, p);
       move_piece(w, p, m);
+      printf("oui\n");
       current_player = current_player % 2 + 1;
       p = m;
       nb_turns++;
       print_world(w);
     }
+    //if (
+    
   }
-
-  print_world(w);
 
   delete_set(&black_current_set);
   delete_set(&white_current_set);
