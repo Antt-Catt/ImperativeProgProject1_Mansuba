@@ -135,9 +135,11 @@ unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
     }
     else if (player_in_m != 0 && player_in_p != player_in_m)
     {
+      printf("oui\n");
       unsigned int tmp = imprison(m, w);
       if (tmp == UINT_MAX)
       {
+	printf("yes\n");
         // imprisoning didnt work, we cant put p in m then
         return 0;
       }

@@ -39,6 +39,7 @@ unsigned int imprison(unsigned int idx, struct world_t *w)
     }
     return 0;
   }
+  printf("non\n");
   return UINT_MAX;
 }
 
