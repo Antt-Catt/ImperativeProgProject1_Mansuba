@@ -83,18 +83,14 @@ int main(int argc, char *argv[])
   {
     while ((check_complex_victory(current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
-      printf("non\n");
       p = choose_random_piece_belonging_to(current_player);
       m = choose_random_move_for_piece(w, p);
       move_piece(w, p, m);
-      printf("oui\n");
       current_player = current_player % 2 + 1;
       p = m;
       nb_turns++;
       print_world(w);
-    }
-    //if (
-    
+    }   
   }
 
   delete_set(&black_current_set);
