@@ -53,11 +53,11 @@ void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsign
       idx_n = get_neighbor(idx_n, j);
       if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && idx_n != idx)
       {
-	possible_mvts_aux(set, idx_n, w, idx);
+        possible_mvts_aux(set, idx_n, w, idx);
       }
-      else if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && idx_n != idx && achiev3 != 0 && exist_in_set(&black_init_set, idx_n) && exist_in_set(&white_init_set, idx_n))
+      else if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && idx_n != idx && achiev3 != 0 && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
       {
-	push_set(set, idx_n);
+        push_set(set, idx_n);
       }
     }
     k++;
@@ -67,62 +67,60 @@ void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsign
 
 set_t possible_mvts(unsigned int idx, struct world_t *w)
 {
-  set_t set = init_set(0);
-  set_t drts = possible_drts();
-  if (idx != UINT_MAX)
+  if (idx == UINT_MAX)
   {
+    return init_set(0);
+  }
     if (world_get_sort(w, idx) == TOWER)
     {
-      delete_set(&drts);
-      delete_set(&set);
       return possible_mvts_tower(idx, w);
     }
     if (world_get_sort(w, idx) == ELEPHANT)
     {
-      delete_set(&drts);
-      delete_set(&set);
       return possible_mvts_elephant(idx, w);
     }
     int j = 0;
     unsigned int idx_n;
+    set_t set = init_set(0);
+    set_t drts = possible_drts();
     while (drts.size != 0)
     {
       j = pop_set(&drts) - 4;
       idx_n = get_neighbor(idx, j);
       if (idx_n != UINT_MAX)
       {
-      char next = 0;
-      if (world_get(w, idx_n) == 0)
-      {
-	push_set(&set, idx_n);
-	next = 1;
-      }
-      else if (achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) && exist_in_set(&white_init_set, idx_n))
-      {
-        push_set(&set, idx_n);
-      }
-      if (next == 0)
-      {
-        idx_n = get_neighbor(idx_n, j);
-	if (idx_n != UINT_MAX && world_get(w, idx_n) == 0)
-	{
-	  possible_mvts_aux(&set, idx_n, w, idx);
-	}
-	else if (achiev3 != 0 && idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) && exist_in_set(&white_init_set, idx_n))
+        char next = 0;
+        if (world_get(w, idx_n) == 0)
         {
-	  push_set(&set, idx_n);
+          push_set(&set, idx_n);
+          next = 1;
+        }
+        else if (achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
+        {
+          push_set(&set, idx_n);
+        }
+        if (next == 0)
+        {
+          idx_n = get_neighbor(idx_n, j);
+          if (idx_n != UINT_MAX && world_get(w, idx_n) == 0)
+          {
+            possible_mvts_aux(&set, idx_n, w, idx);
+          }
+          else if (achiev3 != 0 && idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
+          {
+            push_set(&set, idx_n);
+          }
         }
       }
-      }      
     }
-  }
   delete_set(&drts);
   return set;
 }
 
 unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
 {
-  if (p != m && m != UINT_MAX){
+  if (p != m && m != UINT_MAX)
+  {
     unsigned int player_in_p = world_get(w, p);
 
     // for achiev3
@@ -166,7 +164,7 @@ set_t achiev4_function(set_t *set, unsigned int player)
     tmp = 0;
     for (int i = 0; i < (*set).size; i++)
     {
-    // we look for (*set).ptr[i] % WIDTH maximized for player black (moving >>)
+      // we look for (*set).ptr[i] % WIDTH maximized for player black (moving >>)
       if ((*set).ptr[i] % WIDTH > tmp)
       {
         tmp = (*set).ptr[i] % WIDTH;
@@ -200,4 +198,4 @@ set_t achiev4_function(set_t *set, unsigned int player)
     }
   }
   return result;
-  }
+}
