@@ -71,8 +71,8 @@ int main(int argc, char *argv[])
       printf("current_player %d\n", current_player);
       nb_turns++;
       p = m;
-      print_set(&black_current_set);
-      print_set(&white_current_set);
+      //print_set(&black_current_set);
+      //print_set(&white_current_set);
       print_world(w);
     }
     if (current_player == BLACK && nb_turns != MAX_TURNS)
