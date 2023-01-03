@@ -61,6 +61,7 @@ int main(int argc, char *argv[])
       if (p != UINT_MAX)
       {
         m = choose_random_move_for_piece(w, p);
+        printf("p %d, m %d\n", p, m)
         move_piece(w, p, m);
       }
       else
