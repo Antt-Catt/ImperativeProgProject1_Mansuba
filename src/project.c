@@ -11,8 +11,8 @@
 int main(int argc, char *argv[])
 {
   // for achiev3 and achiev4
-  achiev3 = 1;
-  achiev4 = 1;
+  achiev3 = 0;
+  achiev4 = 0;
   /*printf("Activer l'achievement 3 ? (0 pour non, autre sinon)\n");
   printf("%d\n", achiev3);
   scanf("%d", &achiev3);
@@ -68,11 +68,8 @@ int main(int argc, char *argv[])
         escape(current_player, w);
       }
       current_player = current_player % 2 + 1;
-      printf("current_player %d\n", current_player);
       nb_turns++;
       p = m;
-      print_set(&black_current_set);
-      print_set(&white_current_set);
       print_world(w);
     }
     if (current_player == BLACK && nb_turns != MAX_TURNS)

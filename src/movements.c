@@ -67,39 +67,22 @@ void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsign
 
 set_t possible_mvts(unsigned int idx, struct world_t *w)
 {
-  /*if (idx == UINT_MAX)
+  if (idx == UINT_MAX)
   {
-    set_t set = init_set(0);
-    return set;
+    return init_set(0);
   }
-  if (world_get_sort(w, idx) == TOWER)
-    {
-      return possible_mvts_tower(idx, w);
-    }
-    if (world_get_sort(w, idx) == ELEPHANT)
-    {
-      return possible_mvts_elephant(idx, w);
-      }*/
-  set_t set = init_set(0);
-  set_t drts = possible_drts();
-  if (idx != UINT_MAX)
-  {
     if (world_get_sort(w, idx) == TOWER)
     {
-      delete_set(&drts);
-      delete_set(&set);
       return possible_mvts_tower(idx, w);
     }
     if (world_get_sort(w, idx) == ELEPHANT)
     {
-      delete_set(&drts);
-      delete_set(&set);
       return possible_mvts_elephant(idx, w);
     }
     int j = 0;
     unsigned int idx_n;
-    //set_t set = init_set(0);
-    //set_t drts = possible_drts();
+    set_t set = init_set(0);
+    set_t drts = possible_drts();
     while (drts.size != 0)
     {
       j = pop_set(&drts) - 4;
@@ -130,7 +113,6 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
         }
       }
     }
-  }
   delete_set(&drts);
   return set;
 }
@@ -150,11 +132,9 @@ unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
     }
     else if (player_in_m != 0 && player_in_p != player_in_m)
     {
-      printf("oui\n");
       unsigned int tmp = imprison(m, w);
       if (tmp == UINT_MAX)
       {
-	printf("yes\n");
         // imprisoning didnt work, we cant put p in m then
         return 0;
       }
