@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
   int nb_turns = 0;
   struct world_t *w = world_init();
 
-  init_game(w, 0, 1); // first arg for world, second for seed, third for achiev3
+  init_game(w, 0); // first arg for world, second for seed, third for achiev3
 
   unsigned int current_player = (rand() % (2 - 1 + 1)) + 1;
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);

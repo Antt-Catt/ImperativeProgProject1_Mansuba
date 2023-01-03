@@ -10,7 +10,7 @@
 unsigned int achiev4;
 
 /** Initializes the parameters of the game depends on what achievs are selected */
-void init_game(struct world_t *w, unsigned int seed, unsigned int prison)
+void init_game(struct world_t *w, unsigned int seed)
 {
   init_neighbors(seed);
   
@@ -19,11 +19,8 @@ void init_game(struct world_t *w, unsigned int seed, unsigned int prison)
   black_current_set = init_set(HEIGHT);
   white_current_set = init_set(HEIGHT);
 
-  //if (prison != 0)
-  //{
-    black_prison = init_set(0);
-    white_prison = init_set(0);
-    //}
+  black_prison = init_set(0);
+  white_prison = init_set(0);
 
   init_player_set(w);
 }
