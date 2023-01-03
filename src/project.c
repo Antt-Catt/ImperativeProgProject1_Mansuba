@@ -58,9 +58,15 @@ int main(int argc, char *argv[])
     while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
       p = choose_random_piece_belonging_to(current_player);
-      m = choose_random_move_for_piece(w, p);
-      move_piece(w, p, m);
-      printf("current_player %d\n", current_player);
+      if (p != UINT_MAX)
+      {
+        m = choose_random_move_for_piece(w, p);
+        move_piece(w, p, m);
+      }
+      else
+      {
+        escape(current_player, w);
+      }
       current_player = current_player % 2 + 1;
       printf("current_player %d\n", current_player);
       nb_turns++;

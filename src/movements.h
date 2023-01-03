@@ -12,6 +12,8 @@ extern set_t black_current_set;
 extern set_t white_init_set;
 extern set_t white_current_set;
 
+set_t possible_drts();
+
 /** Sub function for possible_mvts */ 
 void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned int init);
 

@@ -146,25 +146,48 @@ unsigned int choose_random_piece_belonging_to(int current_player)
 {
   if (current_player == BLACK)
   {
-    int i = rand() % black_current_set.size;
-    return black_current_set.ptr[i];
+    unsigned int tmp = black_current_set.size + black_prison.size - 1;
+    int i = (rand() % (tmp - 0 + 1)) + 0;
+    if (i < black_current_set.size)
+    {
+      return black_current_set.ptr[i];
+    }
   }
-  int i = rand() % white_current_set.size;
-  return white_current_set.ptr[i];
+  if (current_player == WHITE)
+  {
+    unsigned int tmp = white_current_set.size + white_prison.size - 1;
+    int i = (rand() % (tmp - 0 + 1)) + 0;
+    if (i < white_current_set.size)
+    {
+      return white_current_set.ptr[i];
+    }
+  }
+  return UINT_MAX;
 }
 
 /** Chooses random move for piece in position p */
 unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 {
-  set_t set = possible_mvts(p, w);
-   print_set(&set);
+  unsigned int tmp;
   unsigned int player = world_get(w, p);
+  while (p == UINT_MAX)
+  {
+    tmp = escape(player, w);
+    if (tmp == UINT_MAX)
+    {
+     p = choose_random_piece_belonging_to(player);
+    }
+    else
+    {
+      return UINT_MAX;
+    }
+  }
+  set_t set = possible_mvts(p, w);
   if (achiev4 != 0)
   {
     // changes set if we want achiev4 conditions to take place
     set = achiev4_function(&set, player);
   }
-  print_set(&set);
   if (set.size > 0)
   {
     unsigned int tmp = set.size - 1;
@@ -183,7 +206,7 @@ void print_world(struct world_t *w)
   printf("\n");
   for (int i = 0; i < HEIGHT; i++)
   {
-    if (get_neighbors_seed() == 1 && i%2 == 1)
+    if (get_neighbors_seed() == 1 && i % 2 == 1)
     {
       printf("\t");
     }
