@@ -4,8 +4,6 @@
 
 #include "movements.h"
 
-extern unsigned int achiev3;
-
 set_t black_init_set;
 set_t black_current_set;
 set_t white_init_set;
@@ -50,21 +48,16 @@ void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsign
   {
     j = neigh_idx.n[k].d;
     idx_n = neigh_idx.n[k].i;
-    if (exist_in_set(&drts, j + 4) != UINT_MAX)
+    if (exist_in_set(&drts, j + 4) != UINT_MAX && world_get(w, idx_n) != 0)
     {
+      idx_n = get_neighbor(idx_n, j);
+      if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && idx_n != idx)
       {
-        if (idx_n != UINT_MAX && world_get(w, idx_n) != 0)
-        {
-          idx_n = get_neighbor(idx_n, j);
-          if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && idx_n != idx && achiev3 == 0)
-          {
-            possible_mvts_aux(set, idx_n, w, idx);
-          }
-          else if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && idx_n != idx && achiev3 != 0 && exist_in_set(&black_init_set, idx_n) && exist_in_set(&white_init_set, idx_n))
-          {
-            possible_mvts_aux(set, idx_n, w, idx);
-          }
-        }
+	possible_mvts_aux(set, idx_n, w, idx);
+      }
+      else if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && idx_n != idx && achiev3 != 0 && exist_in_set(&black_init_set, idx_n) && exist_in_set(&white_init_set, idx_n))
+      {
+	push_set(set, idx_n);
       }
     }
     k++;
@@ -80,10 +73,14 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
   {
     if (world_get_sort(w, idx) == TOWER)
     {
+      delete_set(&drts);
+      delete_set(&set);
       return possible_mvts_tower(idx, w);
     }
     if (world_get_sort(w, idx) == ELEPHANT)
     {
+      delete_set(&drts);
+      delete_set(&set);
       return possible_mvts_elephant(idx, w);
     }
     int j = 0;
@@ -92,26 +89,31 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
     {
       j = pop_set(&drts) - 4;
       idx_n = get_neighbor(idx, j);
-      if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && achiev3 == 0)
+      if (idx_n != UINT_MAX)
+      {
+      char next = 0;
+      if (world_get(w, idx_n) == 0)
+      {
+	push_set(&set, idx_n);
+	next = 1;
+      }
+      else if (achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) && exist_in_set(&white_init_set, idx_n))
       {
         push_set(&set, idx_n);
       }
-      else if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && achiev3 != 0 && exist_in_set(&black_init_set, idx_n) && exist_in_set(&white_init_set, idx_n))
-      {
-        push_set(&set, idx_n);
-      }
-      else
+      if (next == 0)
       {
         idx_n = get_neighbor(idx_n, j);
-        if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && achiev3 == 0)
+	if (idx_n != UINT_MAX && world_get(w, idx_n) == 0)
+	{
+	  possible_mvts_aux(&set, idx_n, w, idx);
+	}
+	else if (achiev3 != 0 && idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) && exist_in_set(&white_init_set, idx_n))
         {
-          possible_mvts_aux(&set, idx_n, w, idx);
-        }
-        else if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && achiev3 != 0 && exist_in_set(&black_init_set, idx_n) && exist_in_set(&white_init_set, idx_n))
-        {
-          possible_mvts_aux(&set, idx_n, w, idx);
+	  push_set(&set, idx_n);
         }
       }
+      }      
     }
   }
   delete_set(&drts);

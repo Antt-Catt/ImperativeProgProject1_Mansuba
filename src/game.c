@@ -6,40 +6,58 @@
 
 #include "game.h"
 
-// 0 to not apply achiev3 rules, otherwise apply
-extern unsigned int achiev3;
+//0 to not apply achiev4 rules, otherwise apply
 unsigned int achiev4;
 
-extern set_t black_init_set;
-extern set_t black_current_set;
-extern set_t black_prison;
+/** Initializes the parameters of the game depends on what achievs are selected */
+void init_game(struct world_t *w, unsigned int seed, unsigned int prison)
+{
+  init_neighbors(seed);
+  
+  black_init_set = init_set(HEIGHT);
+  white_init_set = init_set(HEIGHT);
+  black_current_set = init_set(HEIGHT);
+  white_current_set = init_set(HEIGHT);
 
-extern set_t white_init_set;
-extern set_t white_current_set;
-extern set_t white_prison;
+  if (prison != 0)
+  {
+    black_prison = init_set(0);
+    white_prison = init_set(0);
+  }
+
+  init_player_set(w);
+}
 
 /** Initializes the positions of player p's pieces */
-void init_player_set(unsigned int p, struct world_t *w)
+void init_player_set(struct world_t *w)
 {
-  // for achiev3
-  achiev3 = 0;
-
   for (int i = 0; i < HEIGHT; i++)
   {
-    if (p == BLACK)
+    if (i == 0 || i == 3)
     {
-      world_set(w, WIDTH * i, p);
+      world_set(w, WIDTH * i, BLACK);
       world_set_sort(w, WIDTH * i, PAWN);
-      black_init_set.ptr[i] = WIDTH * i;
-      black_current_set.ptr[i] = WIDTH * i;
+      world_set(w, WIDTH * i + WIDTH - 1, WHITE);
+      world_set_sort(w, WIDTH * i + WIDTH - 1, PAWN);
+    }
+    else if (i == 1)
+    {
+      world_set(w, WIDTH * i, BLACK);
+      world_set_sort(w, WIDTH * i, TOWER);
+      world_set(w, WIDTH * i + WIDTH - 1, WHITE);
+      world_set_sort(w, WIDTH * i + WIDTH - 1, TOWER);
     }
     else
     {
-      world_set(w, WIDTH * i + WIDTH - 1, p);
-      world_set_sort(w, WIDTH * i + WIDTH - 1, PAWN);
-      white_init_set.ptr[i] = WIDTH * i + WIDTH - 1;
-      white_current_set.ptr[i] = WIDTH * i + WIDTH - 1;
+      world_set(w, WIDTH * i, BLACK);
+      world_set_sort(w, WIDTH * i, ELEPHANT);
+      world_set(w, WIDTH * i + WIDTH - 1, WHITE);
+      world_set_sort(w, WIDTH * i + WIDTH - 1, ELEPHANT);
     }
+    black_init_set.ptr[i] = WIDTH * i;
+    black_current_set.ptr[i] = WIDTH * i;
+    white_init_set.ptr[i] = WIDTH * i + WIDTH - 1;
+    white_current_set.ptr[i] = WIDTH * i + WIDTH - 1;
   }
 }
 
@@ -70,6 +88,10 @@ int check_complex_victory(unsigned int p)
   int i = 0;
   if (p == BLACK)
   {
+    if (black_prison.size != 0)
+    {
+      return 0;
+    }
     while (i < black_current_set.size)
     {
       if (check_simple_victory(black_current_set.ptr[i], BLACK) == 0)
@@ -86,6 +108,10 @@ int check_complex_victory(unsigned int p)
   }
   else
   {
+    if ((white_prison).size != 0)
+    {
+      return 0;
+    }
     while (i < white_current_set.size)
     {
       if (check_simple_victory(white_current_set.ptr[i], WHITE) == 0)
@@ -186,7 +212,7 @@ void print_world(struct world_t *w)
     }
     for (int j = 0; j < WIDTH; j++)
     {
-      if (world_get_sort(w, i * WIDTH + j) == NO_SORT)
+      if (world_get_sort(w, i * WIDTH + j) == NO_SORT && world_get(w, i * WIDTH + j) == NO_COLOR)
       {
         printf(".\t\t");
       }
@@ -200,7 +226,7 @@ void print_world(struct world_t *w)
       }
       else
       {
-        printf("X");
+        printf("X\t\t");
       }
     }
     printf("\n\n");

@@ -1,9 +1,11 @@
 #ifndef __ACHIEV3_H__
 #define __ACHIEV3_H__
 
-#include "world.h"
-#include "game.h"
-#include "set.h"
+#include "movements.h"
+
+extern unsigned int achiev3;
+extern set_t black_prison;
+extern set_t white_prison;
 
 // imprisons a piece in place in world w, returns whether function succeeded
 unsigned int imprison(unsigned int place, struct world_t *w);

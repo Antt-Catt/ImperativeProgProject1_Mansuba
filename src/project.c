@@ -8,25 +8,20 @@
 
 #include "project.h"
 
-extern unsigned int achiev3;
-extern unsigned int achiev4;
-
-extern set_t black_init_set;
-extern set_t black_current_set;
-extern set_t black_prison;
-extern set_t white_init_set;
-extern set_t white_current_set;
-extern set_t white_prison;
-
 int main(int argc, char *argv[])
 {
   // for achiev3 and achiev4
   achiev3 = 0;
   achiev4 = 0;
+  /*printf("Activer l'achievement 3 ? (0 pour non, autre sinon)\n");
+  printf("%d\n", achiev3);
+  scanf("%d", &achiev3);
+  printf("%d\n", achiev3);*/
+  
   // get optional values
   int opt;
   srand(time(NULL));
-  int MAX_TURNS = 2 * WIDTH * HEIGHT;
+  int MAX_TURNS = 9;
   int victory_type = 0;
   while ((opt = getopt(argc, argv, "s:m:t:")) != -1)
   {
@@ -50,19 +45,7 @@ int main(int argc, char *argv[])
   int nb_turns = 0;
   struct world_t *w = world_init();
 
-  init_neighbors(0);
-
-  black_init_set = init_set(HEIGHT);
-  white_init_set = init_set(HEIGHT);
-  black_current_set = init_set(HEIGHT);
-  white_current_set = init_set(HEIGHT);
-
-  // for achiev3
-  black_prison = init_set(0);
-  white_prison = init_set(0);
-
-  init_player_set(BLACK, w);
-  init_player_set(WHITE, w);
+  init_game(w, 0, 1); // first arg for world, second for seed, third for achiev3
 
   unsigned int current_player = (rand() % (2 - 1 + 1)) + 1;
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
@@ -114,10 +97,8 @@ int main(int argc, char *argv[])
       p = m;
       nb_turns++;
       print_world(w);
-    }
+    }   
   }
-
-  print_world(w);
 
   delete_set(&black_current_set);
   delete_set(&white_current_set);
