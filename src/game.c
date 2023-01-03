@@ -25,29 +25,39 @@ void init_game(struct world_t *w, unsigned int seed, unsigned int prison)
     white_prison = init_set(0);
   }
 
-  init_player_set(BLACK, w);
-  init_player_set(WHITE, w);
+  init_player_set(w);
 }
 
 /** Initializes the positions of player p's pieces */
-void init_player_set(unsigned int p, struct world_t *w)
+void init_player_set(struct world_t *w)
 {
   for (int i = 0; i < HEIGHT; i++)
   {
-    if (p == BLACK)
+    if (i == 0 || i == 3)
     {
-      world_set(w, WIDTH * i, p);
+      world_set(w, WIDTH * i, BLACK);
       world_set_sort(w, WIDTH * i, PAWN);
-      black_init_set.ptr[i] = WIDTH * i;
-      black_current_set.ptr[i] = WIDTH * i;
+      world_set(w, WIDTH * i + WIDTH - 1, WHITE);
+      world_set_sort(w, WIDTH * i + WIDTH - 1, PAWN);
+    }
+    else if (i == 1)
+    {
+      world_set(w, WIDTH * i, BLACK);
+      world_set_sort(w, WIDTH * i, TOWER);
+      world_set(w, WIDTH * i + WIDTH - 1, WHITE);
+      world_set_sort(w, WIDTH * i + WIDTH - 1, TOWER);
     }
     else
     {
-      world_set(w, WIDTH * i + WIDTH - 1, p);
-      world_set_sort(w, WIDTH * i + WIDTH - 1, PAWN);
-      white_init_set.ptr[i] = WIDTH * i + WIDTH - 1;
-      white_current_set.ptr[i] = WIDTH * i + WIDTH - 1;
+      world_set(w, WIDTH * i, BLACK);
+      world_set_sort(w, WIDTH * i, ELEPHANT);
+      world_set(w, WIDTH * i + WIDTH - 1, WHITE);
+      world_set_sort(w, WIDTH * i + WIDTH - 1, ELEPHANT);
     }
+    black_init_set.ptr[i] = WIDTH * i;
+    black_current_set.ptr[i] = WIDTH * i;
+    white_init_set.ptr[i] = WIDTH * i + WIDTH - 1;
+    white_current_set.ptr[i] = WIDTH * i + WIDTH - 1;
   }
 }
 
