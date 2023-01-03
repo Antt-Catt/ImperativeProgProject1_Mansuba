@@ -158,7 +158,7 @@ void test_movements()
 void test_game()
 {
   struct world_t * w = world_init();
-  init_game(w, 0, 0);
+  init_game(w, 0);
   printf("the game is initialized :\n");
   print_world(w);
   print_set(&black_init_set);
