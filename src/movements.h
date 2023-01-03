@@ -7,6 +7,8 @@
 #include "world.h"
 #include "set.h"
 
+set_t possible_drts();
+
 /** Sub function for possible_mvts */ 
 void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned int init);
 

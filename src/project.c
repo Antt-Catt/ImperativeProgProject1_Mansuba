@@ -21,7 +21,7 @@ extern set_t white_prison;
 int main(int argc, char *argv[])
 {
   // for achiev3 and achiev4
-  achiev3 = 1;
+  achiev3 = 0;
   achiev4 = 0;
   // get optional values
   int opt;
@@ -75,8 +75,15 @@ int main(int argc, char *argv[])
     while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
       p = choose_random_piece_belonging_to(current_player);
-      m = choose_random_move_for_piece(w, p);
-      move_piece(w, p, m);
+      if (p != UINT_MAX)
+      {
+        m = choose_random_move_for_piece(w, p);
+        move_piece(w, p, m);
+      }
+      else
+      {
+        escape(current_player, w);
+      }
       current_player = current_player % 2 + 1;
       nb_turns++;
       p = m;

@@ -71,7 +71,7 @@ unsigned int escape(unsigned int player, struct world_t *w)
         tmp = (rand() % (2 - 1 + 1)) + 1;
         if (tmp != 2)
         {
-            return UINT_MAX;
+            return 1;
         }
         world_set(w, idx, player);
         world_set_sort(w, idx, sort);
@@ -95,7 +95,7 @@ unsigned int escape(unsigned int player, struct world_t *w)
         tmp = (rand() % (2 - 1 + 1)) + 1;
         if (tmp != 2)
         {
-            return UINT_MAX;
+            return 1;
         }
         world_set(w, idx, player);
         world_set_sort(w, idx, sort);
