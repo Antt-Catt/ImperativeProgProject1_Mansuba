@@ -19,11 +19,11 @@ void init_game(struct world_t *w, unsigned int seed, unsigned int prison)
   black_current_set = init_set(HEIGHT);
   white_current_set = init_set(HEIGHT);
 
-  if (prison != 0)
-  {
+  //if (prison != 0)
+  //{
     black_prison = init_set(0);
     white_prison = init_set(0);
-  }
+    //}
 
   init_player_set(w);
 }
@@ -175,7 +175,7 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
     tmp = escape(player, w);
     if (tmp == UINT_MAX)
     {
-     p = choose_random_piece_belonging_to(player);
+      p = choose_random_piece_belonging_to(player);
     }
     else
     {
@@ -183,6 +183,7 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
     }
   }
   set_t set = possible_mvts(p, w);
+  printf("salut\n");
   if (achiev4 != 0)
   {
     // changes set if we want achiev4 conditions to take place
