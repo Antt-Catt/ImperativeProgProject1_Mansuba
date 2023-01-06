@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
   // get optional values
   int opt;
   srand(time(NULL));
-  int MAX_TURNS = 100;
+  int MAX_TURNS = 2*WIDTH*HEIGHT;
   int victory_type = 0;
   while ((opt = getopt(argc, argv, "s:m:t:")) != -1)
   {
@@ -96,13 +96,6 @@ int main(int argc, char *argv[])
       print_world(w);
     }
   }
-
-  delete_set(&black_current_set);
-  delete_set(&white_current_set);
-  delete_set(&black_init_set);
-  delete_set(&white_init_set);
-  delete_set(&black_prison);
-  delete_set(&white_prison);
 
   return 0;
 }

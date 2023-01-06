@@ -40,7 +40,6 @@ void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsign
   {
     push_set(set, idx_n);
   }
-  print_set(set);
   int j;
   int k = 0;
   set_t drts = possible_drts();
@@ -115,8 +114,6 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
       }
     }
   delete_set(&drts);
-  printf("psbl mvts for %d\n", idx);
-  print_set(&set);
   return set;
 }
 

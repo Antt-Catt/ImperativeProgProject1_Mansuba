@@ -6,14 +6,14 @@
 
 #include "game.h"
 
-//0 to not apply achiev4 rules, otherwise apply
+// 0 to not apply achiev4 rules, otherwise apply
 unsigned int achiev4;
 
 /** Initializes the parameters of the game depends on what achievs are selected */
 void init_game(struct world_t *w, unsigned int seed)
 {
   init_neighbors(seed);
-  
+
   black_init_set = init_set(HEIGHT);
   white_init_set = init_set(HEIGHT);
   black_current_set = init_set(HEIGHT);
@@ -65,8 +65,6 @@ int check_simple_victory(unsigned int idx, unsigned int p)
   {
     if (exist_in_set(&white_init_set, idx) != UINT_MAX)
     {
-      printf("%d\n", idx);
-      print_set(&white_init_set);
       return p;
     }
   }
@@ -74,8 +72,6 @@ int check_simple_victory(unsigned int idx, unsigned int p)
   {
     if (exist_in_set(&black_init_set, idx) != UINT_MAX)
     {
-      printf("%d\n", idx);
-      print_set(&black_init_set);
       return p;
     }
   }
@@ -233,4 +229,14 @@ void print_world(struct world_t *w)
     printf("\n\n");
   }
   printf("\n====================================\n\n");
+}
+
+void end_game()
+{
+  delete_set(&black_current_set);
+  delete_set(&white_current_set);
+  delete_set(&black_init_set);
+  delete_set(&white_init_set);
+  delete_set(&black_prison);
+  delete_set(&white_prison);
 }

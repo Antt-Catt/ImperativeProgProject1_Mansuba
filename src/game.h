@@ -5,6 +5,7 @@
 
 extern unsigned int achiev4;
 
+/** Initializes the game */
 void init_game(struct world_t *w, unsigned int seed);
 
 /** Initializes the positions of player p's pieces */
@@ -24,5 +25,8 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p);
 
 /** Shows world w*/
 void print_world(struct world_t *w);
+
+/** Ends the game */
+void end_game();
 
 #endif // __GAME_H__

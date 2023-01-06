@@ -18,7 +18,7 @@ set_t possible_mvts_tower(unsigned int idx, struct world_t *w)
     idx_n = get_neighbor(idx, j);
     while (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx))
     {
-      if (world_get(w, idx_n) != 0 && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
+      if (world_get(w, idx_n) != 0 && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX && achiev3 != 0)
       {
         push_set(&set, idx_n);
         idx_n = UINT_MAX;
@@ -33,12 +33,9 @@ set_t possible_mvts_tower(unsigned int idx, struct world_t *w)
       {
         idx_n = UINT_MAX;
       }
-      printf("%d\n", idx_n);
     }
     j += 2;
   }
-  printf("psbl mvts for %d\n", idx);
-  print_set(&set);
   return set;
 }
 
@@ -52,7 +49,7 @@ set_t possible_mvts_elephant(unsigned int idx, struct world_t *w)
     idx_n = get_neighbor(get_neighbor(idx, j), j);
     if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx))
     {
-      if ((world_get(w, idx_n) != 0 && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX) || world_get(w, idx_n) == 0)
+      if ((world_get(w, idx_n) != 0 && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX && achiev3 != 0) || world_get(w, idx_n) == 0)
       {
         push_set(&set, idx_n);
       }
@@ -63,9 +60,9 @@ set_t possible_mvts_elephant(unsigned int idx, struct world_t *w)
   while (j < 5)
   {
     idx_n = get_neighbor(idx, j);
-    if (idx_n != UINT_MAX && world_get(w, idx_n) == world_get(w, idx))
+    if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx))
     {
-      if ((world_get(w, idx_n) != 0 && exist_in_set(&black_init_set, idx_n) && exist_in_set(&white_init_set, idx_n)) || world_get(w, idx_n) == 0)
+      if ((world_get(w, idx_n) != 0 && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX && achiev3 != 0) || world_get(w, idx_n) == 0)
       {
         push_set(&set, idx_n);
       }
