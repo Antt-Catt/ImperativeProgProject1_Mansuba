@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
   // get optional values
   int opt;
   srand(time(NULL));
-  int MAX_TURNS = 2*WIDTH*HEIGHT;
+  int MAX_TURNS = 2 * WIDTH * HEIGHT;
   int victory_type = 0;
   while ((opt = getopt(argc, argv, "s:m:t:")) != -1)
   {
@@ -98,4 +98,6 @@ int main(int argc, char *argv[])
   }
 
   return 0;
+
+  end_game();
 }
