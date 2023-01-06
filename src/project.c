@@ -17,11 +17,11 @@ int main(int argc, char *argv[])
   printf("%d\n", achiev3);
   scanf("%d", &achiev3);
   printf("%d\n", achiev3);*/
-  
+
   // get optional values
   int opt;
   srand(time(NULL));
-  int MAX_TURNS = 9;
+  int MAX_TURNS = 100;
   int victory_type = 0;
   while ((opt = getopt(argc, argv, "s:m:t:")) != -1)
   {
@@ -58,18 +58,15 @@ int main(int argc, char *argv[])
     while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
       p = choose_random_piece_belonging_to(current_player);
-      if (p != UINT_MAX)
-      {
-        m = choose_random_move_for_piece(w, p);
-        move_piece(w, p, m);
-      }
-      else
-      {
-        escape(current_player, w);
-      }
+      m = choose_random_move_for_piece(w, p);
+      move_piece(w, p, m);
       current_player = current_player % 2 + 1;
       nb_turns++;
       p = m;
+      // tout sauf les tours ne depacent pas le milieu du terrain, mais ca marche lorsque achiev4 = 1 ??!
+      // cest a cause du max turns = 9 hahah maintenant cest 100 ca marche, on doit penser apres ca a reduire la complexite peux etre?
+      print_set(&black_current_set);
+      print_set(&white_current_set);
       print_world(w);
     }
     if (current_player == BLACK && nb_turns != MAX_TURNS)
@@ -97,7 +94,7 @@ int main(int argc, char *argv[])
       p = m;
       nb_turns++;
       print_world(w);
-    }   
+    }
   }
 
   delete_set(&black_current_set);

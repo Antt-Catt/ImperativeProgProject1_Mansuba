@@ -44,7 +44,6 @@ void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsign
   int j;
   int k = 0;
   set_t drts = possible_drts();
-	printf("a idx_n %d\n", idx_n);
   struct neighbors_t neigh_idx = get_neighbors(idx_n);
   while (neigh_idx.n[k].i != UINT_MAX)
   {
@@ -52,11 +51,9 @@ void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsign
     idx_n = neigh_idx.n[k].i;
     if (exist_in_set(&drts, j + 4) != UINT_MAX && world_get(w, idx_n) != 0)
     {
-	printf("b idx_n %d\n", idx_n);
       idx_n = get_neighbor(idx_n, j);
       if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && idx_n != idx && exist_in_set(set, idx_n) == UINT_MAX)
       {
-	printf("c idx_n %d\n", idx_n);
         possible_mvts_aux(set, idx_n, w, idx);
       }
       else if (idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && idx_n != idx && achiev3 != 0 && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
@@ -118,6 +115,8 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
       }
     }
   delete_set(&drts);
+  printf("psbl mvts for %d\n", idx);
+  print_set(&set);
   return set;
 }
 

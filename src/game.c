@@ -65,6 +65,8 @@ int check_simple_victory(unsigned int idx, unsigned int p)
   {
     if (exist_in_set(&white_init_set, idx) != UINT_MAX)
     {
+      printf("%d\n", idx);
+      print_set(&white_init_set);
       return p;
     }
   }
@@ -72,6 +74,8 @@ int check_simple_victory(unsigned int idx, unsigned int p)
   {
     if (exist_in_set(&black_init_set, idx) != UINT_MAX)
     {
+      printf("%d\n", idx);
+      print_set(&black_init_set);
       return p;
     }
   }
@@ -176,11 +180,10 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
     }
     else
     {
-      return UINT_MAX;
+      return p;
     }
   }
   set_t set = possible_mvts(p, w);
-  printf("salut\n");
   if (achiev4 != 0)
   {
     // changes set if we want achiev4 conditions to take place
@@ -212,15 +215,15 @@ void print_world(struct world_t *w)
     {
       if (world_get_sort(w, i * WIDTH + j) == NO_SORT && world_get(w, i * WIDTH + j) == NO_COLOR)
       {
-        printf(".\t\t");
+        printf("%d) .\t\t", i * WIDTH + j);
       }
       else if (world_get(w, i * WIDTH + j) == BLACK)
       {
-        printf("B(%d)\t\t", world_get_sort(w, i * WIDTH + j));
+        printf("%d) B(%d)\t\t", i * WIDTH + j, world_get_sort(w, i * WIDTH + j));
       }
       else if (world_get(w, i * WIDTH + j) == WHITE)
       {
-        printf("W(%d)\t\t", world_get_sort(w, j + i * WIDTH));
+        printf("%d) W(%d)\t\t", i * WIDTH + j, world_get_sort(w, j + i * WIDTH));
       }
       else
       {
