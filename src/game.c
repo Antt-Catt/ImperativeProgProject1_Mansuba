@@ -150,7 +150,6 @@ void print_world(struct world_t *w)
         default:
           break;
         }
-        // printf("B(%d)\t\t", world_get_sort(w, i * WIDTH + j));
       }
       else if (world_get(w, i * WIDTH + j) == WHITE)
       {
@@ -168,7 +167,6 @@ void print_world(struct world_t *w)
         default:
           break;
         }
-        // printf("W(%d)\t\t", world_get_sort(w, j + i * WIDTH));
       }
       else
       {

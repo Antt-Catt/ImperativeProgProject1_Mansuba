@@ -8,6 +8,7 @@
 
 #include "achiev1.h"
 
+/** Returns possible movements for a tower piece */
 set_t possible_mvts_tower(unsigned int idx, struct world_t *w)
 {
   set_t set = init_set(0);
@@ -43,6 +44,7 @@ set_t possible_mvts_tower(unsigned int idx, struct world_t *w)
   return set;
 }
 
+/** Returns possible movements for an elephant piece */
 set_t possible_mvts_elephant(unsigned int idx, struct world_t *w)
 {
   set_t set = init_set(0);

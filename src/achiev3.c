@@ -11,6 +11,7 @@ unsigned int achiev3;
 set_t black_prison;
 set_t white_prison;
 
+// Imprisons a piece in place in world w, returns whether function succeeded
 unsigned int imprison(unsigned int idx, struct world_t *w)
 {
 
@@ -37,6 +38,7 @@ unsigned int imprison(unsigned int idx, struct world_t *w)
   return UINT_MAX;
 }
 
+// Tries to make a piece of player escape its prison, returns whether function succeeded
 unsigned int escape(unsigned int player, struct world_t *w)
 {
     unsigned int idx;
