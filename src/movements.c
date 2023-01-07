@@ -123,7 +123,6 @@ unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
   {
     unsigned int player_in_p = world_get(w, p);
     unsigned int player_in_m = world_get(w, m);
-  printf("aaa\n");
     if (player_in_m != 0 && achiev3 == 0)
     {
       return 0;
