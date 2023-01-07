@@ -42,16 +42,16 @@ void init_player_set(struct world_t *w)
     else if (i == 1)
     {
       world_set(w, WIDTH * i, BLACK);
-      world_set_sort(w, WIDTH * i, PAWN);
+      world_set_sort(w, WIDTH * i, TOWER);
       world_set(w, WIDTH * i + WIDTH - 1, WHITE);
-      world_set_sort(w, WIDTH * i + WIDTH - 1, PAWN);
+      world_set_sort(w, WIDTH * i + WIDTH - 1, TOWER);
     }
     else
     {
       world_set(w, WIDTH * i, BLACK);
-      world_set_sort(w, WIDTH * i, PAWN);
+      world_set_sort(w, WIDTH * i, ELEPHANT);
       world_set(w, WIDTH * i + WIDTH - 1, WHITE);
-      world_set_sort(w, WIDTH * i + WIDTH - 1, PAWN);
+      world_set_sort(w, WIDTH * i + WIDTH - 1, ELEPHANT);
     }
     black_init_set.ptr[i] = WIDTH * i;
     black_current_set.ptr[i] = WIDTH * i;
