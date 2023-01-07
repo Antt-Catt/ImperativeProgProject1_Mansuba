@@ -30,25 +30,21 @@ void init_player_set(struct world_t *w)
 {
   for (int i = 0; i < HEIGHT; i++)
   {
+      world_set(w, WIDTH * i, BLACK);
+      world_set(w, WIDTH * i + WIDTH - 1, WHITE);
     if ((i % 3) == 0)
     {
-      world_set(w, WIDTH * i, BLACK);
       world_set_sort(w, WIDTH * i, PAWN);
-      world_set(w, WIDTH * i + WIDTH - 1, WHITE);
       world_set_sort(w, WIDTH * i + WIDTH - 1, PAWN);
     }
     else if ((i % 3 == 1))
     {
-      world_set(w, WIDTH * i, BLACK);
       world_set_sort(w, WIDTH * i, TOWER);
-      world_set(w, WIDTH * i + WIDTH - 1, WHITE);
       world_set_sort(w, WIDTH * i + WIDTH - 1, ELEPHANT);
     }
     else
     {
-      world_set(w, WIDTH * i, BLACK);
       world_set_sort(w, WIDTH * i, ELEPHANT);
-      world_set(w, WIDTH * i + WIDTH - 1, WHITE);
       world_set_sort(w, WIDTH * i + WIDTH - 1, TOWER);
     }
     black_init_set.ptr[i] = WIDTH * i;
@@ -70,7 +66,7 @@ unsigned int choose_random_piece_belonging_to(int player)
       return black_current_set.ptr[i];
     }
   }
-  if (player == WHITE)
+  else if (player == WHITE)
   {
     unsigned int tmp = white_current_set.size + (white_prison.size / 2) - 1;
     int i = (rand() % (tmp - 0 + 1)) + 0;
@@ -85,11 +81,9 @@ unsigned int choose_random_piece_belonging_to(int player)
 /** Chooses random move for piece in position p */
 unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 {
-  unsigned int tmp;
   while (p == UINT_MAX)
   {
-    tmp = escape(current_player, w);
-    if (tmp == UINT_MAX)
+    if (escape(current_player, w) == UINT_MAX)
     {
       p = choose_random_piece_belonging_to(current_player);
       if (p != UINT_MAX)
