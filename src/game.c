@@ -66,7 +66,7 @@ unsigned int choose_random_piece_belonging_to(int player)
       return black_current_set.ptr[i];
     }
   }
-  else if (player == WHITE)
+  if (player == WHITE)
   {
     unsigned int tmp = white_current_set.size + (white_prison.size / 2) - 1;
     int i = (rand() % (tmp - 0 + 1)) + 0;
@@ -81,9 +81,11 @@ unsigned int choose_random_piece_belonging_to(int player)
 /** Chooses random move for piece in position p */
 unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 {
+  unsigned int tmp;
   while (p == UINT_MAX)
   {
-    if (escape(current_player, w) == UINT_MAX)
+    tmp = escape(current_player, w);
+    if (tmp == UINT_MAX)
     {
       p = choose_random_piece_belonging_to(current_player);
       if (p != UINT_MAX)
