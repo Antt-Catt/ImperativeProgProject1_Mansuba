@@ -44,7 +44,7 @@ unsigned int escape(unsigned int player, struct world_t *w)
     unsigned int idx;
     unsigned int tmp;
     unsigned int sort;
-    srand(time(NULL));
+    
     if (player == BLACK)
     {
         if (black_prison.size < 2)
