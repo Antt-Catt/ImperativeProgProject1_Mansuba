@@ -2,6 +2,7 @@
 #define __TEST_H__
 
 #include "game.h"
+#include "victory.h"
 
 void test_geometry();
 
