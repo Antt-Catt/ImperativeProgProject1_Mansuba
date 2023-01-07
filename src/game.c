@@ -104,7 +104,6 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
       return UINT_MAX;
     }
   }
-
   set_t set = possible_mvts(p, w);
   if (set.size > 0)
   {
