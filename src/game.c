@@ -94,7 +94,7 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
       p = choose_random_piece_belonging_to(current_player);
       if (p != UINT_MAX)
       {
-        m = choose_random_move_for_piece(w, p);
+        unsigned int m = choose_random_move_for_piece(w, p);
         move_piece(w, p, m);
         return UINT_MAX;
       }
