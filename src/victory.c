@@ -31,10 +31,6 @@ int check_complex_victory(unsigned int p)
   int i = 0;
   if (p == BLACK)
   {
-    if (black_prison.size != 0)
-    {
-      return 0;
-    }
     while (i < black_current_set.size)
     {
       if (check_simple_victory(black_current_set.ptr[i], BLACK) == 0)
@@ -51,10 +47,6 @@ int check_complex_victory(unsigned int p)
   }
   else
   {
-    if ((white_prison).size != 0)
-    {
-      return 0;
-    }
     while (i < white_current_set.size)
     {
       if (check_simple_victory(white_current_set.ptr[i], WHITE) == 0)
@@ -69,7 +61,7 @@ int check_complex_victory(unsigned int p)
       i++;
     }
   }
-  if (j == 1)
+  if (j == 1 || black_prison.size != 0 || white_prison.size != 0)
   {
     return 0;
   }
