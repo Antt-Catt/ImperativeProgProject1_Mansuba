@@ -7,10 +7,10 @@ extern unsigned int achiev3;
 extern set_t black_prison;
 extern set_t white_prison;
 
-// imprisons a piece in place in world w, returns whether function succeeded
+// Imprisons a piece in place in world w, returns whether function succeeded
 unsigned int imprison(unsigned int place, struct world_t *w);
 
-// tries to make a piece of player escape its prison, returns whether function succeeded
+// Tries to make a piece of player escape its prison, returns whether function succeeded
 unsigned int escape(unsigned int player, struct world_t *w);
 
 #endif // __ACHIEV3_H__
