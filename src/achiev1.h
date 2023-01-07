@@ -8,11 +8,11 @@
 
 extern unsigned int achiev4;
 
-/** COMMENT HERE */
+/** Returns possible movements for a tower piece */
 
 set_t possible_mvts_tower(unsigned int idx, struct world_t *w);
 
-/** COMMENT HERE */
+/** Returns possible movements for an elephant piece */
 
 set_t possible_mvts_elephant(unsigned int idx, struct world_t *w);
 
