@@ -30,14 +30,14 @@ void init_player_set(struct world_t *w)
 {
   for (int i = 0; i < HEIGHT; i++)
   {
-    if (i == 0 || i == 3)
+    if ((i % 3) == 0)
     {
       world_set(w, WIDTH * i, BLACK);
       world_set_sort(w, WIDTH * i, PAWN);
       world_set(w, WIDTH * i + WIDTH - 1, WHITE);
       world_set_sort(w, WIDTH * i + WIDTH - 1, PAWN);
     }
-    else if (i == 1)
+    else if ((i % 3 == 1))
     {
       world_set(w, WIDTH * i, BLACK);
       world_set_sort(w, WIDTH * i, TOWER);
