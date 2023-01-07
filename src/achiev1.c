@@ -35,6 +35,11 @@ set_t possible_mvts_tower(unsigned int idx, struct world_t *w)
     }
     j += 2;
   }
+  unsigned int player = world_get(w, idx);
+  if (achiev4 != 0)
+  {
+    set = achiev4_mvts(&set, player);
+  }
   return set;
 }
 
@@ -71,6 +76,11 @@ set_t possible_mvts_elephant(unsigned int idx, struct world_t *w)
     {
       j += 2;
     }
+  }
+  unsigned int player = world_get(w, idx);
+  if (achiev4 != 0)
+  {
+    set = achiev4_mvts(&set, player);
   }
   return set;
 }
