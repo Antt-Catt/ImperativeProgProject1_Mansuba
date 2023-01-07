@@ -87,29 +87,29 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
     j = pop_set(&drts) - 4;
     idx_n = get_neighbor(idx, j);
     next = 0;
-      if (idx_n != UINT_MAX && world_get(w, idx_n) == 0)
+    if (idx_n != UINT_MAX && world_get(w, idx_n) == 0)
+    {
+      push_set(&set, idx_n);
+      next = 1;
+    }
+    else if (idx_n != UINT_MAX && achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
+    {
+      push_set(&set, idx_n);
+    }
+    if (idx_n != UINT_MAX && next == 0)
+    {
+      idx_n = get_neighbor(idx_n, j);
+      if (idx_n != UINT_MAX)
       {
-        push_set(&set, idx_n);
-        next = 1;
-      }
-      else if (idx_n != UINT_MAX && achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
-      {
-        push_set(&set, idx_n);
-      }
-      if (idx_n != UINT_MAX && next == 0)
-      {
-        idx_n = get_neighbor(idx_n, j);
-        if (idx_n != UINT_MAX)
+        if (world_get(w, idx_n) == 0)
         {
-          if (world_get(w, idx_n) == 0)
-          {
-            possible_mvts_aux(&set, idx_n, w, idx);
-          }
-          else if (achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
-          {
-            push_set(&set, idx_n);
-          }
+          possible_mvts_aux(&set, idx_n, w, idx);
         }
+        else if (achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
+        {
+          push_set(&set, idx_n);
+        }
+      }
     }
   }
   delete_set(&drts);
@@ -131,13 +131,9 @@ unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
     {
       return 0;
     }
-    else if (player_in_m != 0 && player_in_p != player_in_m)
+    else if (player_in_m != 0 && player_in_p != player_in_m && imprison(m, w) == UINT_MAX)
     {
-      unsigned int tmp = imprison(m, w);
-      if (tmp == UINT_MAX)
-      {
-        return 0;
-      }
+      return 0;
     }
     world_set(w, m, player_in_p);
     world_set_sort(w, m, world_get_sort(w, p));
