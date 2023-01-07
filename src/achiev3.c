@@ -6,7 +6,6 @@
 
 #include "achiev3.h"
 
-//0 to not apply achiev3 rules, otherwise apply
 unsigned int achiev3;
 
 set_t black_prison;
@@ -19,10 +18,8 @@ unsigned int imprison(unsigned int idx, struct world_t *w)
   {
     unsigned int player = world_get(w, idx);
     unsigned int sort = world_get_sort(w, idx);
-    // piece disappears from world
     world_set(w, idx, 0);
     world_set_sort(w, idx, 0);
-    // piece (idx, player, sort) stored in prison
     if (player == BLACK)
     {
       push_set(&black_prison, idx);
@@ -52,16 +49,13 @@ unsigned int escape(unsigned int player, struct world_t *w)
         {
             return UINT_MAX;
         }
-        // taking last imprisoned piece, can be changed later
         idx = black_prison.ptr[black_prison.size - 2];
         sort = black_prison.ptr[black_prison.size - 1];
-        // to make sure place is empty
         tmp = world_get(w, idx);
         if (tmp != 0)
         {
             return UINT_MAX;
         }
-        // to achieve 50% probability
         tmp = (rand() % (2 - 1 + 1)) + 1;
         if (tmp != 2)
         {

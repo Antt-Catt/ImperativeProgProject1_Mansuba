@@ -9,8 +9,6 @@ set_t black_current_set;
 set_t white_init_set;
 set_t white_current_set;
 
-// set_t possible_directions;
-
 set_t possible_drts()
 {
   set_t set = init_set(0);
@@ -149,50 +147,4 @@ unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
     world_set_sort(w, p, NO_SORT);
   }
   return 0;
-}
-
-set_t achiev4_function(set_t *set, unsigned int player)
-{
-  unsigned int tmp;
-  set_t result = init_set(0);
-  if (player == BLACK)
-  {
-    tmp = 0;
-    for (int i = 0; i < (*set).size; i++)
-    {
-      // we look for (*set).ptr[i] % WIDTH maximized for player black (moving >>)
-      if ((*set).ptr[i] % WIDTH > tmp)
-      {
-        tmp = (*set).ptr[i] % WIDTH;
-      }
-    }
-    for (int i = 0; i < (*set).size; i++)
-    {
-      if ((*set).ptr[i] % WIDTH == tmp)
-      {
-        push_set(&result, (*set).ptr[i]);
-      }
-    }
-  }
-  else if (player == WHITE)
-  {
-    tmp = WIDTH;
-    for (int i = 0; i < (*set).size; i++)
-    {
-      // we look for (*set).ptr[i] % WIDTH minimized for player white (moving <<)
-      if ((*set).ptr[i] % WIDTH < tmp)
-      {
-        tmp = (*set).ptr[i] % WIDTH;
-      }
-    }
-    for (int i = 0; i < (*set).size; i++)
-    {
-      if ((*set).ptr[i] % WIDTH == tmp)
-      {
-        push_set(&result, (*set).ptr[i]);
-      }
-    }
-  }
-  delete_set(set);
-  return result;
 }

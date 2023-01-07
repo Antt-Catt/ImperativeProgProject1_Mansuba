@@ -15,7 +15,7 @@ void test_geometry()
 
 void test_world()
 {
-  printf("world init :\n");
+  printf("World init :\n");
   struct world_t *w = world_init();
   for (int i = 0; i < WORLD_SIZE; i++)
   {
@@ -25,22 +25,22 @@ void test_world()
   world_set(w, 5, 1);
   world_set_sort(w, 16, 1);
   world_set(w, 16, 2);
-  printf("\nset place 5 at color 1\n");
-  printf("place 5, color %d, sort %d\n", world_get(w, 5), world_get_sort(w, 5));
-  printf("set place 16 at color 2 and sort 1\n");
-  printf("place 16, color %d, sort %d\n", world_get(w, 16), world_get_sort(w, 16));
+  printf("\nSet place 5 at color 1\n");
+  printf("Place 5, color %d, sort %d\n", world_get(w, 5), world_get_sort(w, 5));
+  printf("Set place 16 at color 2 and sort 1\n");
+  printf("Place 16, color %d, sort %d\n", world_get(w, 16), world_get_sort(w, 16));
 }
 
 void test_neighbors()
 {
-  printf("neighbor of %d in direction %s is %d ; expected -1\n", 0, dir_to_string(2), get_neighbor(0, 2));
-  printf("neighbor of %d in direction %s is %d ; expected 5\n", 0, dir_to_string(-3), get_neighbor(0, -3));
-  printf("neighbor of %d in direction %s is %d ; expected 6\n", 12, dir_to_string(4), get_neighbor(12, 4));
-  printf("neighbor of %d in direction %s is %d ; expected -1\n", 14, dir_to_string(1), get_neighbor(14, 1));
+  printf("Neighbor of %d in direction %s is %d ; expected -1\n", 0, dir_to_string(2), get_neighbor(0, 2));
+  printf("Neighbor of %d in direction %s is %d ; expected 5\n", 0, dir_to_string(-3), get_neighbor(0, -3));
+  printf("Neighbor of %d in direction %s is %d ; expected 6\n", 12, dir_to_string(4), get_neighbor(12, 4));
+  printf("Neighbor of %d in direction %s is %d ; expected -1\n", 14, dir_to_string(1), get_neighbor(14, 1));
   printf("\n");
 
   struct neighbors_t result = get_neighbors(9);
-  printf("neighbors of 9 in all directions are ");
+  printf("Neighbors of 9 in all directions are ");
   for (int p = 0; p < MAX_NEIGHBORS + 1; p++)
   {
     printf("%d ", result.n[p].i);
@@ -48,7 +48,7 @@ void test_neighbors()
   printf("\nexpected 14 13 8 4 3 -1 0 0 0\n\n");
 
   result = get_neighbors(15);
-  printf("neighbors of 15 in all directions are ");
+  printf("Neighbors of 15 in all directions are ");
   for (int p = 0; p < MAX_NEIGHBORS + 1; p++)
   {
     printf("%d ", result.n[p].i);
@@ -56,7 +56,7 @@ void test_neighbors()
   printf("\nexpected 16 11 10 -1 0 0 0 0 0\n\n");
 
   result = get_neighbors(7);
-  printf("neighbors of 7 in all directions are ");
+  printf("Neighbors of 7 in all directions are ");
   for (int p = 0; p < MAX_NEIGHBORS + 1; p++)
   {
     printf("%d ", result.n[p].i);
@@ -105,7 +105,7 @@ void test_movements()
   world_set(w, 11, 2);
   print_world(w);
   set_t set = possible_mvts(6, w);
-  printf("possible movements for piece 6 :\n");
+  printf("Possible movements for piece 6 :\n");
   print_set(&set);
   printf("{ 1 8 18 16 5 } expected\n");
   move_piece(w, 6, set.ptr[2]);
@@ -122,7 +122,7 @@ void test_movements()
   world_set(w, 17, 2);
   print_world(w);
   set = possible_mvts(16, w);
-  printf("possible movements for piece 16 :\n");
+  printf("Possible movements for piece 16 :\n");
   print_set(&set);
   printf("{ 18 15 6 } expected\n");
   move_piece(w, 16, set.ptr[0]);
@@ -147,7 +147,7 @@ void test_movements()
   world_set(w, 5, 2);
   print_world(w);
   set = possible_mvts(0, w);
-  printf("possible movements for piece 0 :\n");
+  printf("Possible movements for piece 0 :\n");
   print_set(&set);
   printf("{ 2 4 14 12 10 } expected\n");
   move_piece(w, 0, set.ptr[4]);
@@ -159,7 +159,7 @@ void test_game()
 {
   struct world_t *w = world_init();
   init_game(w, 0);
-  printf("the game is initialized :\n");
+  printf("The game is initialized :\n");
   print_world(w);
   print_set(&black_init_set);
   print_set(&black_current_set);
@@ -184,8 +184,8 @@ void test_game()
 
   srand(time(NULL));
 
-  printf("\nrandom BLACK piece : %d\n", choose_random_piece_belonging_to(BLACK));
-  printf("random move for WHITE's 12th piece : %d\n\n", choose_random_move_for_piece(w, 12));
+  printf("\nRandom BLACK piece : %d\n", choose_random_piece_belonging_to(BLACK));
+  printf("Random move for WHITE's 12th piece : %d\n\n", choose_random_move_for_piece(w, 12));
 
   printf("WHITE simple victory on place %d : %d ; expected 0\n", white_current_set.ptr[0], check_simple_victory(white_current_set.ptr[0], WHITE));
   printf("BLACK simple victory on place %d : %d ; expected 1\n", black_current_set.ptr[2], check_simple_victory(black_current_set.ptr[2], BLACK));
@@ -231,12 +231,12 @@ void test_achiev1()
   world_set(w, 1, 2);
   print_world(w);
   set_t set = possible_mvts(15, w);
-  printf("possible movements for tower 15 :\n");
+  printf("Possible movements for tower 15 :\n");
   print_set(&set);
   printf("{ 16 17 18 19 10 5 0 } expected\n");
   delete_set(&set);
   set = possible_mvts(4, w);
-  printf("possible movements for tower 4 :\n");
+  printf("Possible movements for tower 4 :\n");
   print_set(&set);
   printf("{ 9 14 19 3 2 } expected\n");
   delete_set(&set);
@@ -247,7 +247,7 @@ void test_achiev1()
   world_set(w, 8, 2);
   set = possible_mvts(12, w);
   print_world(w);
-  printf("possible movements for elephant 12 :\n");
+  printf("Possible movements for elephant 12 :\n");
   print_set(&set);
   printf("{ 2 6 10 16 18 14 } expected\n");
   delete_set(&set);
@@ -256,17 +256,17 @@ void test_achiev1()
 void test_achiev2()
 {
   init_neighbors(2);
-  printf("neighbor of %d in dir %s is %d ; expected 16\n", 0, dir_to_string(2), get_neighbor(0, 2));
-  printf("neighbor of %d in direction %s is %d ; expected -1\n", 0, dir_to_string(4), get_neighbor(0, 4));
-  printf("neighbor of %d in direction %s is %d ; expected 18\n", 3, dir_to_string(3), get_neighbor(3, 3));
-  printf("neighbor of %d in direction %s is %d ; expected -1\n", 4, dir_to_string(2), get_neighbor(4, 2));
-  printf("neighbor of %d in direction %s is %d ; expected -1\n", 15, dir_to_string(-2), get_neighbor(15, -2));
-  printf("neighbor of %d in direction %s is %d ; expected -1\n", 10, dir_to_string(-2), get_neighbor(10, -2));
-  printf("neighbor of %d in direction %s is %d ; expected 2\n", 16, dir_to_string(-4), get_neighbor(16, -4));
+  printf("Neighbor of %d in dir %s is %d ; expected 16\n", 0, dir_to_string(2), get_neighbor(0, 2));
+  printf("Neighbor of %d in direction %s is %d ; expected -1\n", 0, dir_to_string(4), get_neighbor(0, 4));
+  printf("Neighbor of %d in direction %s is %d ; expected 18\n", 3, dir_to_string(3), get_neighbor(3, 3));
+  printf("Neighbor of %d in direction %s is %d ; expected -1\n", 4, dir_to_string(2), get_neighbor(4, 2));
+  printf("Neighbor of %d in direction %s is %d ; expected -1\n", 15, dir_to_string(-2), get_neighbor(15, -2));
+  printf("Neighbor of %d in direction %s is %d ; expected -1\n", 10, dir_to_string(-2), get_neighbor(10, -2));
+  printf("Neighbor of %d in direction %s is %d ; expected 2\n", 16, dir_to_string(-4), get_neighbor(16, -4));
   printf("\n");
 
   struct neighbors_t result = get_neighbors(9);
-  printf("neighbors of 9 in all directions are ");
+  printf("Neighbors of 9 in all directions are ");
   for (int p = 0; p < MAX_NEIGHBORS + 1; p++)
   {
     if (result.n[p].i != UINT_MAX)
@@ -278,7 +278,7 @@ void test_achiev2()
   printf("\n");
 
   result = get_neighbors(17);
-  printf("neighbors of 17 in all directions are ");
+  printf("Neighbors of 17 in all directions are ");
   for (int p = 0; p < MAX_NEIGHBORS + 1; p++)
   {
     printf("%d ", result.n[p].i);
@@ -308,9 +308,6 @@ void test_achiev3()
 
 int main()
 {
-  // int argc, char *argv[]
-  // argc = argc;
-  // argv[0] = argv[0];
   init_neighbors(0);
 
   achiev3 = 0;
@@ -318,48 +315,39 @@ int main()
   init_neighbors(0);
 
   printf("\n");
-  // tests geometry
-  printf("geometry tests :\n");
+  printf("Geometry tests :\n");
   test_geometry();
   printf("\n\n");
 
-  // tests world
-  printf("world tests :\n");
+  printf("World tests :\n");
   test_world();
   printf("\n\n");
 
-  // tests neighbors
-  printf("neighbors tests :\n");
+  printf("Neighbors tests :\n");
   test_neighbors();
   printf("\n\n");
 
-  // tests set
-  printf("set tests :\n");
+  printf("Set tests :\n");
   test_set();
   printf("\n\n");
 
-  // tests movements
-  printf("movements tests :\n");
+  printf("Movements tests :\n");
   test_movements();
   printf("\n\n");
 
-  // tests game
-  printf("game tests :\n");
+  printf("Game tests :\n");
   test_game();
   printf("\n\n");
 
-  // tests achiev1
-  printf("achiev1 tests :\n");
+  printf("Achiev1 tests :\n");
   test_achiev1();
   printf("\n\n");
 
-  // tests achiev2
-  printf("achiev 2 tests :\n");
+  printf("Achiev2 tests :\n");
   test_achiev2();
   printf("\n\n");
 
-  // tests achiev3
-  printf("achiev3 tests : \n");
+  printf("Achiev3 tests : \n");
   test_achiev3();
   printf("\n\n");
 

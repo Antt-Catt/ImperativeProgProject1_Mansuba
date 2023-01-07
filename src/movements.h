@@ -23,6 +23,4 @@ set_t possible_mvts(unsigned int idx, struct world_t *w);
 /** Move piece in position p to position m */
 unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m);
 
-set_t achiev4_function(set_t *set, unsigned int player);
-
 #endif // __MOVEMENTS_H__

@@ -22,7 +22,6 @@ set_t possible_mvts_tower(unsigned int idx, struct world_t *w)
       {
         push_set(&set, idx_n);
         idx_n = UINT_MAX;
-        // le break ici ne marchait pas, cest pourquoi on avait ce probleme avec les tours
       }
       else if (world_get(w, idx_n) == 0)
       {

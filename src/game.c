@@ -184,7 +184,7 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
   // unsigned int player = world_get(w, p);
   if (achiev4 != 0)
   {
-    set = achiev4_function(&set, current_player);
+    set = achiev4_mvts(&set, current_player);
   }
   if (set.size > 0)
   {
