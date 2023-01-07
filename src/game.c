@@ -30,21 +30,25 @@ void init_player_set(struct world_t *w)
 {
   for (int i = 0; i < HEIGHT; i++)
   {
-      world_set(w, WIDTH * i, BLACK);
-      world_set(w, WIDTH * i + WIDTH - 1, WHITE);
     if ((i % 3) == 0)
     {
+      world_set(w, WIDTH * i, BLACK);
       world_set_sort(w, WIDTH * i, PAWN);
+      world_set(w, WIDTH * i + WIDTH - 1, WHITE);
       world_set_sort(w, WIDTH * i + WIDTH - 1, PAWN);
     }
     else if ((i % 3 == 1))
     {
+      world_set(w, WIDTH * i, BLACK);
       world_set_sort(w, WIDTH * i, TOWER);
+      world_set(w, WIDTH * i + WIDTH - 1, WHITE);
       world_set_sort(w, WIDTH * i + WIDTH - 1, ELEPHANT);
     }
     else
     {
+      world_set(w, WIDTH * i, BLACK);
       world_set_sort(w, WIDTH * i, ELEPHANT);
+      world_set(w, WIDTH * i + WIDTH - 1, WHITE);
       world_set_sort(w, WIDTH * i + WIDTH - 1, TOWER);
     }
     black_init_set.ptr[i] = WIDTH * i;
