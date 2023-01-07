@@ -94,7 +94,7 @@ void test_set()
 
 void test_movements()
 {
-  struct world_t * w = world_init();
+  struct world_t *w = world_init();
   world_set_sort(w, 6, 1);
   world_set(w, 6, 2);
   world_set_sort(w, 7, 1);
@@ -157,7 +157,7 @@ void test_movements()
 
 void test_game()
 {
-  struct world_t * w = world_init();
+  struct world_t *w = world_init();
   init_game(w, 0);
   printf("the game is initialized :\n");
   print_world(w);
@@ -171,7 +171,7 @@ void test_game()
   printf("{ } expected\n");
 
   printf("BLACK simple victory on place %d : %d ; expected 0\n", black_current_set.ptr[3], check_simple_victory(black_current_set.ptr[3], BLACK));
-  
+
   move_piece(w, 4, 12);
   move_piece(w, 10, 4);
 
@@ -183,17 +183,17 @@ void test_game()
   printf("{ 0 5 4 15 } expected (black pieces)\n");
 
   srand(time(NULL));
-  
+
   printf("\nrandom BLACK piece : %d\n", choose_random_piece_belonging_to(BLACK));
   printf("random move for WHITE's 12th piece : %d\n\n", choose_random_move_for_piece(w, 12));
 
   printf("WHITE simple victory on place %d : %d ; expected 0\n", white_current_set.ptr[0], check_simple_victory(white_current_set.ptr[0], WHITE));
   printf("BLACK simple victory on place %d : %d ; expected 1\n", black_current_set.ptr[2], check_simple_victory(black_current_set.ptr[2], BLACK));
   printf("BLACK complex victory : %d ; expected 0\n\n", check_complex_victory(BLACK));
-  
+
   print_set(&black_current_set);
   printf("{ 0 5 15 } expected (black pieces)\n");
-  
+
   move_piece(w, 9, 1);
   move_piece(w, 14, 10);
   move_piece(w, 19, 3);
@@ -202,7 +202,7 @@ void test_game()
   move_piece(w, 15, 14);
 
   print_world(w);
-  
+
   printf("WHITE simple victory on place %d : %d ; expected 2\n", white_current_set.ptr[2], check_simple_victory(white_current_set.ptr[2], WHITE));
   printf("WHITE complex victory : %d ; expected 0\n", check_complex_victory(WHITE));
 
@@ -213,7 +213,7 @@ void test_game()
 
   print_set(&black_current_set);
   printf("{ } expected (black pieces)\n");
-  
+
   delete_set(&black_init_set);
   delete_set(&black_current_set);
   delete_set(&white_init_set);
@@ -222,7 +222,7 @@ void test_game()
 
 void test_achiev1()
 {
-  struct world_t * w = world_init();
+  struct world_t *w = world_init();
   world_set_sort(w, 15, 2);
   world_set(w, 15, 2);
   world_set_sort(w, 4, 2);
@@ -288,49 +288,56 @@ void test_achiev2()
 
 void test_achiev3()
 {
-  /*struct world_t * w = world_init();
-  print_world(w);
+  struct world_t *w = world_init();
   achiev3 = 1;
+  world_set_sort(w, 11, 1);
+  world_set(w, 11, 2);
+  push_set(&white_current_set, 11);
+  world_set_sort(w, 7, 1);
+  world_set(w, 7, 1);
+  push_set(&black_current_set, 7);
+  print_world(w);
   move_piece(w, 11, 7);
   print_world(w);
   print_set(&black_prison);
   move_piece(w, 7, 8);
   escape(BLACK, w);
   print_world(w);
-  print_set(&black_prison);*/
+  print_set(&black_prison);
 }
 
-int main(int argc, char *argv[])
+int main()
 {
-  argc = argc;
-  argv[0] = argv[0];
+  // int argc, char *argv[]
+  // argc = argc;
+  // argv[0] = argv[0];
   init_neighbors(0);
 
   achiev3 = 0;
   achiev4 = 0;
   init_neighbors(0);
-  
+
   printf("\n");
   // tests geometry
   printf("geometry tests :\n");
   test_geometry();
   printf("\n\n");
-  
+
   // tests world
   printf("world tests :\n");
   test_world();
   printf("\n\n");
-  
+
   // tests neighbors
   printf("neighbors tests :\n");
   test_neighbors();
   printf("\n\n");
-  
+
   // tests set
   printf("set tests :\n");
   test_set();
   printf("\n\n");
-  
+
   // tests movements
   printf("movements tests :\n");
   test_movements();
@@ -346,17 +353,15 @@ int main(int argc, char *argv[])
   test_achiev1();
   printf("\n\n");
 
-  
   // tests achiev2
   printf("achiev 2 tests :\n");
   test_achiev2();
   printf("\n\n");
-  
+
   // tests achiev3
   printf("achiev3 tests : \n");
   test_achiev3();
   printf("\n\n");
 
-  
   return 0;
 }

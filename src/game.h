@@ -3,6 +3,7 @@
 
 #include "movements.h"
 
+extern unsigned int current_player;
 extern unsigned int achiev4;
 
 /** Initializes the game */

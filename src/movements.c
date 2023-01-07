@@ -71,63 +71,61 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
   {
     return init_set(0);
   }
-    if (world_get_sort(w, idx) == TOWER)
+  if (world_get_sort(w, idx) == TOWER)
+  {
+    return possible_mvts_tower(idx, w);
+  }
+  if (world_get_sort(w, idx) == ELEPHANT)
+  {
+    return possible_mvts_elephant(idx, w);
+  }
+  int j = 0;
+  unsigned int idx_n;
+  set_t set = init_set(0);
+  set_t drts = possible_drts();
+  while (drts.size != 0)
+  {
+    j = pop_set(&drts) - 4;
+    idx_n = get_neighbor(idx, j);
+    if (idx_n != UINT_MAX)
     {
-      return possible_mvts_tower(idx, w);
-    }
-    if (world_get_sort(w, idx) == ELEPHANT)
-    {
-      return possible_mvts_elephant(idx, w);
-    }
-    int j = 0;
-    unsigned int idx_n;
-    set_t set = init_set(0);
-    set_t drts = possible_drts();
-    while (drts.size != 0)
-    {
-      j = pop_set(&drts) - 4;
-      idx_n = get_neighbor(idx, j);
-      if (idx_n != UINT_MAX)
+      unsigned int next = 0;
+      if (world_get(w, idx_n) == 0)
       {
-        unsigned int next = 0;
-        if (world_get(w, idx_n) == 0)
+        push_set(&set, idx_n);
+        next = 1;
+      }
+      else if (achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
+      {
+        push_set(&set, idx_n);
+      }
+      if (next == 0)
+      {
+        idx_n = get_neighbor(idx_n, j);
+        if (idx_n != UINT_MAX && world_get(w, idx_n) == 0)
+        {
+          possible_mvts_aux(&set, idx_n, w, idx);
+        }
+        else if (achiev3 != 0 && idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
         {
           push_set(&set, idx_n);
-          next = 1;
-        }
-        else if (achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
-        {
-          push_set(&set, idx_n);
-        }
-        if (next == 0)
-        {
-          idx_n = get_neighbor(idx_n, j);
-          if (idx_n != UINT_MAX && world_get(w, idx_n) == 0)
-          {
-            possible_mvts_aux(&set, idx_n, w, idx);
-          }
-          else if (achiev3 != 0 && idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
-          {
-            push_set(&set, idx_n);
-          }
         }
       }
     }
+  }
   delete_set(&drts);
   return set;
 }
 
 unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
 {
-  if (p != m && m != UINT_MAX)
+  if (p != m && p != UINT_MAX && m != UINT_MAX)
   {
     unsigned int player_in_p = world_get(w, p);
-
-    // for achiev3
     unsigned int player_in_m = world_get(w, m);
+  printf("aaa\n");
     if (player_in_m != 0 && achiev3 == 0)
     {
-      // stop function, cant move piece to an occupied place if achiev3 conditions not in place
       return 0;
     }
     else if (player_in_m != 0 && player_in_p != player_in_m)
@@ -135,7 +133,6 @@ unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
       unsigned int tmp = imprison(m, w);
       if (tmp == UINT_MAX)
       {
-        // imprisoning didnt work, we cant put p in m then
         return 0;
       }
     }

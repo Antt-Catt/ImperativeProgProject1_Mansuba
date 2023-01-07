@@ -6,6 +6,8 @@
 
 #include "game.h"
 
+unsigned int current_player;
+
 // 0 to not apply achiev4 rules, otherwise apply
 unsigned int achiev4;
 
@@ -139,9 +141,9 @@ int check_complex_victory(unsigned int p)
 }
 
 /** Chooses random piece belonging to current player */
-unsigned int choose_random_piece_belonging_to(int current_player)
+unsigned int choose_random_piece_belonging_to(int player)
 {
-  if (current_player == BLACK)
+  if (player == BLACK)
   {
     unsigned int tmp = black_current_set.size + black_prison.size - 1;
     int i = (rand() % (tmp - 0 + 1)) + 0;
@@ -150,7 +152,7 @@ unsigned int choose_random_piece_belonging_to(int current_player)
       return black_current_set.ptr[i];
     }
   }
-  if (current_player == WHITE)
+  if (player == WHITE)
   {
     unsigned int tmp = white_current_set.size + white_prison.size - 1;
     int i = (rand() % (tmp - 0 + 1)) + 0;
@@ -166,24 +168,23 @@ unsigned int choose_random_piece_belonging_to(int current_player)
 unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 {
   unsigned int tmp;
-  unsigned int player = world_get(w, p);
   while (p == UINT_MAX)
   {
-    tmp = escape(player, w);
+    tmp = escape(current_player, w);
     if (tmp == UINT_MAX)
     {
-      p = choose_random_piece_belonging_to(player);
+      p = choose_random_piece_belonging_to(current_player);
     }
     else
     {
-      return p;
+      return UINT_MAX;
     }
   }
   set_t set = possible_mvts(p, w);
+  // unsigned int player = world_get(w, p);
   if (achiev4 != 0)
   {
-    // changes set if we want achiev4 conditions to take place
-    set = achiev4_function(&set, player);
+    set = achiev4_function(&set, current_player);
   }
   if (set.size > 0)
   {

@@ -14,7 +14,7 @@ set_t white_prison;
 
 unsigned int imprison(unsigned int idx, struct world_t *w)
 {
-  
+
   if (exist_in_set(&black_init_set, idx) == UINT_MAX && exist_in_set(&white_init_set, idx) == UINT_MAX)
   {
     unsigned int player = world_get(w, idx);
@@ -28,18 +28,15 @@ unsigned int imprison(unsigned int idx, struct world_t *w)
       push_set(&black_prison, idx);
       push_set(&black_prison, sort);
       delete_from_set(&black_current_set, idx);
-      print_set(&black_prison);
     }
     else if (player == WHITE)
     {
       push_set(&white_prison, idx);
       push_set(&white_prison, sort);
       delete_from_set(&white_current_set, idx);
-      print_set(&white_prison);
     }
     return 0;
   }
-  printf("non\n");
   return UINT_MAX;
 }
 
