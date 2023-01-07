@@ -2,9 +2,7 @@
 #define __GAME_H__
 
 #include "movements.h"
-#include "achiev4.h"
 
-extern unsigned int achiev4;
 extern unsigned int current_player;
 
 /** Initializes the game */

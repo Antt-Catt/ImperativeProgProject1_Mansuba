@@ -2,10 +2,11 @@
 #define __ACHIEV1_H__
 
 #include "game.h"
-
-// adding this fixed some errors in make project ?!
 #include "world.h"
 #include "set.h"
+#include "achiev4.h"
+
+extern unsigned int achiev4;
 
 /** COMMENT HERE */
 
