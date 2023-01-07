@@ -194,6 +194,6 @@ set_t achiev4_function(set_t *set, unsigned int player)
       }
     }
   }
-  delete_set(&set);
+  delete_set(set);
   return result;
 }
