@@ -51,13 +51,8 @@ int main(int argc, char *argv[])
   {
     while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
-      print_set(&black_current_set);
-      print_set(&black_prison);
-      print_set(&white_current_set);
-      print_set(&white_prison);
       p = choose_random_piece_belonging_to(current_player);
       m = choose_random_move_for_piece(w, p);
-      printf("p %d, m %d\n", p, m);
       move_piece(w, p, m);
       print_world(w);
       current_player = current_player % 2 + 1;

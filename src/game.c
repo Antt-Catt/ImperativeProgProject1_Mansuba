@@ -63,7 +63,7 @@ unsigned int choose_random_piece_belonging_to(int player)
 {
   if (player == BLACK)
   {
-    unsigned int tmp = black_current_set.size + (black_prison.size/2) - 1;
+    unsigned int tmp = black_current_set.size + (black_prison.size / 2) - 1;
     int i = (rand() % (tmp - 0 + 1)) + 0;
     if (i < black_current_set.size)
     {
@@ -72,7 +72,7 @@ unsigned int choose_random_piece_belonging_to(int player)
   }
   if (player == WHITE)
   {
-    unsigned int tmp = white_current_set.size + (white_prison.size/2) - 1;
+    unsigned int tmp = white_current_set.size + (white_prison.size / 2) - 1;
     int i = (rand() % (tmp - 0 + 1)) + 0;
     if (i < white_current_set.size)
     {
@@ -130,15 +130,43 @@ void print_world(struct world_t *w)
     {
       if (world_get_sort(w, i * WIDTH + j) == NO_SORT && world_get(w, i * WIDTH + j) == NO_COLOR)
       {
-        printf("%d) .\t\t", i * WIDTH + j);
+        printf(".\t");
       }
       else if (world_get(w, i * WIDTH + j) == BLACK)
       {
-        printf("%d) B(%d)\t\t", i * WIDTH + j, world_get_sort(w, i * WIDTH + j));
+        switch (world_get_sort(w, j + i * WIDTH))
+        {
+        case 1:
+          printf("♟\t");
+          break;
+        case 2:
+          printf("♜\t");
+          break;
+        case 3:
+          printf("♝\t");
+          break;
+        default:
+          break;
+        }
+        // printf("B(%d)\t\t", world_get_sort(w, i * WIDTH + j));
       }
       else if (world_get(w, i * WIDTH + j) == WHITE)
       {
-        printf("%d) W(%d)\t\t", i * WIDTH + j, world_get_sort(w, j + i * WIDTH));
+        switch (world_get_sort(w, j + i * WIDTH))
+        {
+        case 1:
+          printf("♙\t");
+          break;
+        case 2:
+          printf("♖\t");
+          break;
+        case 3:
+          printf("♗\t");
+          break;
+        default:
+          break;
+        }
+        // printf("W(%d)\t\t", world_get_sort(w, j + i * WIDTH));
       }
       else
       {
@@ -147,7 +175,7 @@ void print_world(struct world_t *w)
     }
     printf("\n\n");
   }
-  printf("\n====================================\n\n");
+  printf("\n=================================\n\n");
 }
 
 void end_game()
