@@ -269,12 +269,9 @@ void test_achiev2()
   printf("Neighbors of 9 in all directions are ");
   for (int p = 0; p < MAX_NEIGHBORS + 1; p++)
   {
-    if (result.n[p].i != UINT_MAX)
-    {
-      printf("%d ", result.n[p].i);
-    }
+    printf("%d ", result.n[p].i);
   }
-  printf("\nexpected 10 14 13 8 5 0 4 3\n");
+  printf("\nexpected 14 13 8 4 3 -1 0 0 0\n");
   printf("\n");
 
   result = get_neighbors(17);
