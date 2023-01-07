@@ -92,14 +92,20 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
     if (tmp == UINT_MAX)
     {
       p = choose_random_piece_belonging_to(current_player);
+      if (p != UINT_MAX)
+      {
+        m = choose_random_move_for_piece(w, p);
+        move_piece(w, p, m);
+        return UINT_MAX;
+      }
     }
     else
     {
       return UINT_MAX;
     }
   }
+
   set_t set = possible_mvts(p, w);
-  // unsigned int player = world_get(w, p);
   if (achiev4 != 0)
   {
     set = achiev4_mvts(&set, current_player);
