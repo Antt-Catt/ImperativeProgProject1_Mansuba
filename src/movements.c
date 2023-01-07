@@ -34,7 +34,7 @@ set_t possible_drts()
 
 void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsigned int idx)
 {
-  if ( idx_n != idx && exist_in_set(set, idx_n) == UINT_MAX)
+  if (idx_n != idx && exist_in_set(set, idx_n) == UINT_MAX)
   {
     push_set(set, idx_n);
   }
@@ -49,16 +49,14 @@ void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsign
     if (exist_in_set(&drts, j + 4) != UINT_MAX && world_get(w, idx_n) != 0)
     {
       idx_n = get_neighbor(idx_n, j);
-      if (idx_n != UINT_MAX)
-    {
-      if (world_get(w, idx_n) == 0 && idx_n != idx && exist_in_set(set, idx_n) == UINT_MAX)
+      if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && idx_n != idx && exist_in_set(set, idx_n) == UINT_MAX)
       {
         possible_mvts_aux(set, idx_n, w, idx);
       }
-      else if (achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
+      else if (achiev3 != 0 && idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
       {
         push_set(set, idx_n);
-      }}
+      }
     }
     k++;
   }
@@ -83,23 +81,22 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
   unsigned int idx_n;
   set_t set = init_set(0);
   set_t drts = possible_drts();
+  unsigned int next;
   while (drts.size != 0)
   {
     j = pop_set(&drts) - 4;
     idx_n = get_neighbor(idx, j);
-    if (idx_n != UINT_MAX)
-    {
-      unsigned int next = 0;
-      if (world_get(w, idx_n) == 0)
+    next = 0;
+      if (idx_n != UINT_MAX && world_get(w, idx_n) == 0)
       {
         push_set(&set, idx_n);
         next = 1;
       }
-      else if (achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
+      else if (idx_n != UINT_MAX && achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
       {
         push_set(&set, idx_n);
       }
-      if (next == 0)
+      if (idx_n != UINT_MAX && next == 0)
       {
         idx_n = get_neighbor(idx_n, j);
         if (idx_n != UINT_MAX)
@@ -113,7 +110,6 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
             push_set(&set, idx_n);
           }
         }
-      }
     }
   }
   delete_set(&drts);
