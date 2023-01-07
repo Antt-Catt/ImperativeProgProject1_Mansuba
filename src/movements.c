@@ -112,6 +112,11 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
     }
   }
   delete_set(&drts);
+  unsigned int player = world_get(w, idx);
+  if (achiev4 != 0)
+  {
+    set = achiev4_mvts(&set, player);
+  }
   return set;
 }
 
