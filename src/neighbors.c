@@ -24,82 +24,58 @@ unsigned int get_neighbors_seed()
     UINT_MAX if there is no such neighbor (or any other kind of error) */
 unsigned int get_neighbor(unsigned int idx, enum dir_t d)
 {
-  if (idx == UINT_MAX)
-    {
-      return UINT_MAX;
-    }
   int i = idx / WIDTH;
   int j = idx % WIDTH;
-  
-  if (i == 0 && j == 0 && d == 4 && get_neighbors_seed() == 2)
-    {
-      return UINT_MAX;
-    }
-  
-  if (i == 0 && j == (WIDTH - 1) && d == 2 && get_neighbors_seed() == 2)
-    {
-      return UINT_MAX;
-    }
-  
-  if (i == (HEIGHT - 1) && j == 0 && d == -2 && get_neighbors_seed() == 2)
-    {
-      return UINT_MAX;
-    }
-  
-  if (i == (HEIGHT - 1) && j == (WIDTH - 1) && d == -4 && get_neighbors_seed() == 2)
-    {
-      return UINT_MAX;
-    }
-  
+
+  if (idx == UINT_MAX || (i == 0 && j == 0 && d == 4 && get_neighbors_seed() == 2) || (i == 0 && j == (WIDTH - 1) && d == 2 && get_neighbors_seed() == 2) || (i == (HEIGHT - 1) && j == 0 && d == -2 && get_neighbors_seed() == 2) || (i == (HEIGHT - 1) && j == (WIDTH - 1) && d == -4 && get_neighbors_seed() == 2))
+  {
+    return UINT_MAX;
+  }
+
   if (i == 0 && (d == 2 || d == 3 || d == 4))
+  {
+    if (get_neighbors_seed() == 2)
     {
-      if (get_neighbors_seed() == 2)
-	{
-	  return idx - d + 3 + WIDTH * (HEIGHT - 1);
-	}
-      return UINT_MAX;
+      return idx - d + 3 + WIDTH * (HEIGHT - 1);
     }
-  
-  if (j == 0 && (d == -1 || d == -2 || d == 4))
-    {
-      return UINT_MAX;
-    }
-  
+    return UINT_MAX;
+  }
+
+  if (j == 0 && (d == -1 || d == -2 || d == 4) || (j == (WIDTH - 1) && (d == 1 || d == 2 || d == -4)))
+  {
+    return UINT_MAX;
+  }
+
   if (i == (HEIGHT - 1) && (d == -2 || d == -3 || d == -4))
+  {
+    if (get_neighbors_seed() == 2)
     {
-      if (get_neighbors_seed() == 2)
-	{
-	  return idx - (d + 3) - WIDTH * (HEIGHT - 1);
-	}
-      return UINT_MAX;
+      return idx - (d + 3) - WIDTH * (HEIGHT - 1);
     }
-  
-  if (j == (WIDTH - 1) && (d == 1 || d == 2 || d == -4))
-    {
-      return UINT_MAX;
-    }
+    return UINT_MAX;
+  }
 
   switch (d)
-    {
-    case -4:
-      return idx + WIDTH + 1;
-    case -3:
-      return idx + WIDTH;
-    case -2:
-      return idx + WIDTH - 1;
-    case -1:
-      return idx - 1;
-    case 1:
-      return idx + 1;
-    case 2:
-      return idx - WIDTH + 1;
-    case 3:
-      return idx - WIDTH;
-    case 4:
-      return idx - WIDTH - 1;
-    default:
-      return UINT_MAX;
-    }
+  {
+  case -4:
+    return idx + WIDTH + 1;
+  case -3:
+    return idx + WIDTH;
+  case -2:
+    return idx + WIDTH - 1;
+  case -1:
+    return idx - 1;
+  case 1:
+    return idx + 1;
+  case 2:
+    return idx - WIDTH + 1;
+  case 3:
+    return idx - WIDTH;
+  case 4:
+    return idx - WIDTH - 1;
+  default:
+    return UINT_MAX;
+  }
 }
 
 /** Returns the list of the neighbors of the place `idx`, terminated
