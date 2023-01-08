@@ -97,7 +97,7 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
         return UINT_MAX;
       }
     }
-    else if (tmp != UINT_MAX || count > HEIGHT)
+    if (tmp != UINT_MAX || count > HEIGHT)
     {
       return UINT_MAX;
     }

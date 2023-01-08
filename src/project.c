@@ -80,10 +80,10 @@ int main(int argc, char *argv[])
       p = choose_random_piece_belonging_to(current_player);
       m = choose_random_move_for_piece(w, p);
       move_piece(w, p, m);
+      print_world(w);
       current_player = current_player % 2 + 1;
       p = m;
       nb_turns++;
-      print_world(w);
     }
   }
 
