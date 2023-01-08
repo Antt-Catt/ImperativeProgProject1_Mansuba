@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
   int opt;
   srand(time(NULL));
-  int MAX_TURNS = 2 * WIDTH * HEIGHT;
+  unsigned int MAX_TURNS = 2 * WIDTH * HEIGHT;
   int victory_type = 0;
 
   while ((opt = getopt(argc, argv, "s:m:t:")) != -1)
@@ -37,7 +37,6 @@ int main(int argc, char *argv[])
     }
   }
 
-  int nb_turns = 0;
   struct world_t *w = world_init();
   init_game(w, 0);
 
@@ -51,25 +50,31 @@ int main(int argc, char *argv[])
   {
     while ((check_simple_victory(p, current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
+      nb_turns++;
       p = choose_random_piece_belonging_to(current_player);
       m = choose_random_move_for_piece(w, p);
       move_piece(w, p, m);
       print_world(w);
       current_player = current_player % 2 + 1;
-      nb_turns++;
       p = m;
     }
     if (current_player == BLACK && nb_turns != MAX_TURNS)
     {
-      printf("Victoire simple pour WHITE\n");
+      printf("\n\n░░▒▒░░▒▒▒░  GAME OVER  ░▒▒▒░░▒▒░░\n");
+      printf("░░ WHITE WON  (SIMPLE VICTORY) ░░\n");
+      printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n\n");
     }
     else if (current_player == WHITE && nb_turns != MAX_TURNS)
     {
-      printf("Victoire simple pour BLACK\n");
+      printf("\n\n░░▒▒░░▒▒▒░  GAME OVER  ░▒▒▒░░▒▒░░\n");
+      printf("░░ BLACK WON  (SIMPLE VICTORY) ░░\n");
+      printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n\n");
     }
     else
     {
-      printf("Pas de gagnant\n");
+      printf("\n\n░░▒▒░░▒▒░   GAME OVER   ░▒▒░░▒▒░░\n");
+      printf("░░▒▒░░▒▒░  NO ONE  WON  ░▒▒░░▒▒░░\n");
+      printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n\n");
     }
   }
 
@@ -77,13 +82,17 @@ int main(int argc, char *argv[])
   {
     while ((check_complex_victory(current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
+      nb_turns++;
       p = choose_random_piece_belonging_to(current_player);
       m = choose_random_move_for_piece(w, p);
       move_piece(w, p, m);
       print_world(w);
       current_player = current_player % 2 + 1;
       p = m;
-      nb_turns++;
+    }
+    if (nb_turns == MAX_TURNS)
+    {
+      printf("\n\nGAME OVER: NO ONE WON!\n\n");
     }
   }
 

@@ -3,6 +3,7 @@
 
 #include "movements.h"
 
+extern unsigned int nb_turns;
 extern unsigned int current_player;
 
 /** Initializes the game */

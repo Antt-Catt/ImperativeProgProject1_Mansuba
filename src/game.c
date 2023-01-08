@@ -7,6 +7,7 @@
 #include "game.h"
 
 unsigned int achiev4;
+unsigned int nb_turns;
 unsigned int current_player;
 
 /** Initializes the parameters of the game depends on what achievs are selected */
@@ -120,6 +121,15 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 void print_world(struct world_t *w)
 {
   printf("\n");
+  if (nb_turns<10)
+  {
+  printf("░░▒▒░░▒▒▒░  GAME N 0%d  ░▒▒▒░░▒▒░░\n", nb_turns);
+  printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n\n");
+  }
+  else{
+  printf("░░▒▒░░▒▒▒░  GAME N %d  ░▒▒▒░░▒▒░░\n", nb_turns);
+  printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n\n");
+  }
   for (int i = 0; i < HEIGHT; i++)
   {
     if (get_neighbors_seed() == 1 && i % 2 == 1)
@@ -130,7 +140,7 @@ void print_world(struct world_t *w)
     {
       if (world_get_sort(w, i * WIDTH + j) == NO_SORT && world_get(w, i * WIDTH + j) == NO_COLOR)
       {
-        printf(".\t");
+        printf("·\t");
       }
       else if (world_get(w, i * WIDTH + j) == BLACK)
       {
@@ -173,7 +183,7 @@ void print_world(struct world_t *w)
     }
     printf("\n\n");
   }
-  printf("\n=================================\n\n");
+  printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░");
 }
 
 void end_game()
