@@ -122,12 +122,12 @@ void print_world(struct world_t *w)
 {
   if (nb_turns<10)
   {
-  printf("░░▒▒░░▒▒▒░  TURN N 0%d  ░▒▒▒░░▒▒░░\n", nb_turns);
-  printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n\n");
+  printf("▒░▒▒░░▒▒▒░  TURN N 0%d  ░▒▒▒░░▒▒░▒\n", nb_turns);
+  printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
   }
   else{
-  printf("░░▒▒░░▒▒▒░  TURN N %d  ░▒▒▒░░▒▒░░\n", nb_turns);
-  printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n\n");
+  printf("▒░▒▒░░▒▒▒░  TURN N %d  ░▒▒▒░░▒▒░▒\n", nb_turns);
+  printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
   }
   for (int i = 0; i < HEIGHT; i++)
   {
@@ -182,7 +182,7 @@ void print_world(struct world_t *w)
     }
     printf("\n\n");
   }
-  printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n");
+  printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
 }
 
 void end_game()

@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
   unsigned int m;
 
-  printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n");
+  printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
   print_world(w);
 
   if (victory_type == 0)
@@ -61,21 +61,21 @@ int main(int argc, char *argv[])
     }
     if (current_player == BLACK && nb_turns != MAX_TURNS)
     {
-      printf("░░▒▒░░▒▒▒░  GAME OVER  ░▒▒▒░░▒▒░░\n");
-      printf("░░ WHITE WON  (SIMPLE VICTORY) ░░\n");
-      printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n\n");
+      printf("▒░▒▒░░▒▒▒░  GAME OVER  ░▒▒▒░░▒▒░▒\n");
+      printf("▒░ WHITE WON  (SIMPLE VICTORY) ░▒\n");
+      printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
     }
     else if (current_player == WHITE && nb_turns != MAX_TURNS)
     {
-      printf("░░▒▒░░▒▒▒░  GAME OVER  ░▒▒▒░░▒▒░░\n");
-      printf("░░ BLACK WON  (SIMPLE VICTORY) ░░\n");
-      printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n\n");
+      printf("▒░▒▒░░▒▒▒░  GAME OVER  ░▒▒▒░░▒▒░▒\n");
+      printf("▒░ BLACK WON  (SIMPLE VICTORY) ░▒\n");
+      printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
     }
     else
     {
-      printf("░░▒▒░░▒▒░   GAME OVER   ░▒▒░░▒▒░░\n");
-      printf("░░▒▒░░▒▒░  NO ONE  WON  ░▒▒░░▒▒░░\n");
-      printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n\n");
+      printf("▒░▒▒░░▒▒░   GAME OVER   ░▒▒░░▒▒░▒\n");
+      printf("▒░▒▒░░▒▒░  NO ONE  WON  ░▒▒░░▒▒░▒\n");
+      printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
     }
   }
 
@@ -93,7 +93,9 @@ int main(int argc, char *argv[])
     }
     if (nb_turns == MAX_TURNS)
     {
-      printf("\n\nGAME OVER: NO ONE WON!\n\n");
+      printf("▒░▒▒░░▒▒░   GAME OVER   ░▒▒░░▒▒░▒\n");
+      printf("▒░▒▒░░▒▒░  NO ONE  WON  ░▒▒░░▒▒░▒\n");
+      printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
     }
   }
 
