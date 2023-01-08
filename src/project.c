@@ -77,9 +77,13 @@ int main(int argc, char *argv[])
   {
     while ((check_complex_victory(current_player % 2 + 1) == 0) && (nb_turns != MAX_TURNS))
     {
+      printf("a\n");
       p = choose_random_piece_belonging_to(current_player);
+      printf("b\n");
       m = choose_random_move_for_piece(w, p);
+      printf("c\n");
       move_piece(w, p, m);
+      printf("d\n");
       current_player = current_player % 2 + 1;
       p = m;
       nb_turns++;
