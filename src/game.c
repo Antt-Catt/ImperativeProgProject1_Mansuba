@@ -96,12 +96,12 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
         move_piece(w, p, m);
         return UINT_MAX;
       }
-      count++;
     }
     else if (tmp != UINT_MAX || count > HEIGHT)
     {
       return UINT_MAX;
     }
+    count++;
   }
   set_t set = possible_mvts(p, w);
   if (set.size > 0)
