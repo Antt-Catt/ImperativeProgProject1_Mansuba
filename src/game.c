@@ -82,6 +82,8 @@ unsigned int choose_random_piece_belonging_to(int player)
 unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 {
   unsigned int tmp;
+  unsigned int count = 0;
+
   while (p == UINT_MAX)
   {
     tmp = escape(current_player, w);
@@ -94,8 +96,9 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
         move_piece(w, p, m);
         return UINT_MAX;
       }
+      count++;
     }
-    else
+    else if (tmp != UINT_MAX || count > HEIGHT)
     {
       return UINT_MAX;
     }
