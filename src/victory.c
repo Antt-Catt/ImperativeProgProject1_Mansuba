@@ -61,7 +61,7 @@ int check_complex_victory(unsigned int p)
       i++;
     }
   }
-  if (j == 1 || black_prison.size != 0 || white_prison.size != 0)
+  if (j == 1 || (p == BLACK && black_prison.size != 0) || (p == WHITE && white_prison.size != 0))
   {
     return 0;
   }
