@@ -27,12 +27,12 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d)
   int i = idx / WIDTH;
   int j = idx % WIDTH;
 
-  if (idx == UINT_MAX || (i == 0 && j == 0 && d == 4 && get_neighbors_seed() == 2) || (i == 0 && j == (WIDTH - 1) && d == 2 && get_neighbors_seed() == 2) || (i == (HEIGHT - 1) && j == 0 && d == -2 && get_neighbors_seed() == 2) || (i == (HEIGHT - 1) && j == (WIDTH - 1) && d == -4 && get_neighbors_seed() == 2))
+  if (idx == UINT_MAX || (i == 0 && j == 0 && d == 4 && get_neighbors_seed() == 2) || (i == 0 && j == (WIDTH - 1) && d == 2 && get_neighbors_seed() == 2) || (i == (HEIGHT - 1) && j == 0 && d == -2 && get_neighbors_seed() == 2) || (i == (HEIGHT - 1) && j == (WIDTH - 1) && d == -4 && get_neighbors_seed() == 2)) // corners with no neighbor in d direction for both seeds
   {
     return UINT_MAX;
   }
 
-  if (i == 0 && (d == 2 || d == 3 || d == 4))
+  if (i == 0 && (d == 2 || d == 3 || d == 4)) // first row (except corners)
   {
     if (get_neighbors_seed() == 2)
     {
@@ -41,12 +41,12 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d)
     return UINT_MAX;
   }
 
-  if ((j == 0 && (d == -1 || d == -2 || d == 4)) || (j == (WIDTH - 1) && (d == 1 || d == 2 || d == -4)))
+  if ((j == 0 && (d == -1 || d == -2 || d == 4)) || (j == (WIDTH - 1) && (d == 1 || d == 2 || d == -4))) // first and last columns (except corners)
   {
     return UINT_MAX;
   }
 
-  if (i == (HEIGHT - 1) && (d == -2 || d == -3 || d == -4))
+  if (i == (HEIGHT - 1) && (d == -2 || d == -3 || d == -4)) // last row (except corners)
   {
     if (get_neighbors_seed() == 2)
     {
@@ -55,7 +55,7 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d)
     return UINT_MAX;
   }
 
-  switch (d)
+  switch (d) // places except the edges
   {
   case -4:
     return idx + WIDTH + 1;
