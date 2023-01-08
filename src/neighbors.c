@@ -41,7 +41,7 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d)
     return UINT_MAX;
   }
 
-  if (j == 0 && (d == -1 || d == -2 || d == 4) || (j == (WIDTH - 1) && (d == 1 || d == 2 || d == -4)))
+  if ((j == 0 && (d == -1 || d == -2 || d == 4)) || (j == (WIDTH - 1) && (d == 1 || d == 2 || d == -4)))
   {
     return UINT_MAX;
   }
