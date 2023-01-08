@@ -60,19 +60,19 @@ int main(int argc, char *argv[])
     }
     if (current_player == BLACK && nb_turns != MAX_TURNS)
     {
-      printf("\n\n░░▒▒░░▒▒▒░  GAME OVER  ░▒▒▒░░▒▒░░\n");
+      printf("\n░░▒▒░░▒▒▒░  GAME OVER  ░▒▒▒░░▒▒░░\n");
       printf("░░ WHITE WON  (SIMPLE VICTORY) ░░\n");
       printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n\n");
     }
     else if (current_player == WHITE && nb_turns != MAX_TURNS)
     {
-      printf("\n\n░░▒▒░░▒▒▒░  GAME OVER  ░▒▒▒░░▒▒░░\n");
+      printf("\n░░▒▒░░▒▒▒░  GAME OVER  ░▒▒▒░░▒▒░░\n");
       printf("░░ BLACK WON  (SIMPLE VICTORY) ░░\n");
       printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n\n");
     }
     else
     {
-      printf("\n\n░░▒▒░░▒▒░   GAME OVER   ░▒▒░░▒▒░░\n");
+      printf("\n░░▒▒░░▒▒░   GAME OVER   ░▒▒░░▒▒░░\n");
       printf("░░▒▒░░▒▒░  NO ONE  WON  ░▒▒░░▒▒░░\n");
       printf("░░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░░\n\n");
     }
