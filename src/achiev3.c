@@ -72,10 +72,10 @@ unsigned int escape(unsigned int player, struct world_t *w)
         black_prison.ptr[2 * i] = black_prison.ptr[black_prison.size - 2];
         black_prison.ptr[2 * i + 1] = black_prison.ptr[black_prison.size - 1];
         pop_set(&black_prison);
-        pop_set(&black_prison);
+        push_set(&black_current_set, pop_set(&black_prison));
         return 0;
     }
-    else if (player == BLACK)
+    else if (player == WHITE)
     {
         if (white_prison.size < 2)
         {
@@ -100,7 +100,7 @@ unsigned int escape(unsigned int player, struct world_t *w)
         white_prison.ptr[2 * i] = white_prison.ptr[white_prison.size - 2];
         white_prison.ptr[2 * i + 1] = white_prison.ptr[white_prison.size - 1];
         pop_set(&white_prison);
-        pop_set(&white_prison);
+        push_set(&white_current_set, pop_set(&white_prison));
         return 0;
     }
     return UINT_MAX;

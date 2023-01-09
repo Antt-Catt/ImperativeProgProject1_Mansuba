@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
       break;
     }
   }
-
+  
   struct world_t *w = world_init();
   init_game(w, 0);
 
