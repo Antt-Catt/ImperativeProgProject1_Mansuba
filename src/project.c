@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[])
 {
-  achiev3 = 1;
+  achiev3 = 0;
   achiev4 = 1;
 
   int opt;

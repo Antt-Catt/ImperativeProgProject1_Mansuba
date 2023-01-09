@@ -3,7 +3,7 @@ HEIGHT ?= 4
 MANSUBA_FLAGS = -DWIDTH=$(WIDTH) -DHEIGHT=$(HEIGHT)
 CFLAGS = -Wall -Wextra -std=c99 -g3 $(MANSUBA_FLAGS)
 TFLAGS = -Wall -Wextra -std=c99 -g3 -DWIDTH=5 -DHEIGHT=4
-OBJS = src/geometry.o src/world.o src/neighbors.o src/set.o src/movements.o src/victory.o src/game.o src/achiev1.o src/achiev3.o src/achiev4.o
+OBJS = src/geometry.o src/world.o src/neighbors.o src/set.o src/movements.o src/victory.o src/game.o src/achiev1.o src/achiev3.o src/achiev4.o src/interface.o
 
 all: clean project test
 
