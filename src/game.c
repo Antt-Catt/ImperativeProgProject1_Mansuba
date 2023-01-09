@@ -122,6 +122,7 @@ void print_world(struct world_t *w)
 {
   if (nb_turns == 0)
   {
+    printf("\n▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
     printf("▒░▒▒░░▒▒▒░ GAME BEGINS ░▒▒▒░░▒▒░▒\n");
     printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
   }
