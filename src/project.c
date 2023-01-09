@@ -44,17 +44,15 @@ int main(int argc, char *argv[])
   unsigned int p = choose_random_piece_belonging_to(current_player % 2 + 1);
   unsigned int m;
 
-  printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
-  printf("▒░▒▒░░▒▒▒░ GAME BEGINS ░▒▒▒░░▒▒░▒\n");
-  printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
-
-    if (victory_type == 0)
+  if (victory_type == 0)
   {
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
     printf("▒░▒▒░ VICTORY TYPE:  SIMPLE ░▒▒░▒\n");
     printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
   }
   else
   {
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
     printf("▒░▒▒░ VICTORY TYPE: COMPLEX ░▒▒░▒\n");
     printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
   }
