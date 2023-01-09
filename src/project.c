@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 
   printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
 
-  if (victory_type = 0)
+  if (victory_type == 0)
   {
     printf("▒░▒▒░ VICTORY TYPE:  SIMPLE ░▒▒░▒\n");
     printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
