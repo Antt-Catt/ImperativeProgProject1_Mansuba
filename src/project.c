@@ -45,6 +45,39 @@ int main(int argc, char *argv[])
   unsigned int m;
 
   printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
+
+  if (victory_type = s)
+  {
+    printf("▒░▒▒░ VICTORY TYPE:  SIMPLE ░▒▒░▒\n");
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
+  }
+  else{
+    printf("▒░▒▒ VICTORY TYPE:  COMPLEXE ▒▒░▒\n");
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
+  }
+
+  if (achiev3 == 1)
+  {
+    printf("▒░▒▒░░ ACHIEV 3: ACTIVATED ░░▒▒░▒\n");
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
+  }
+  else
+  {
+    printf("▒░▒▒ ACHIEV 3:  DISACTIVATED ▒▒░▒\n");
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
+  }
+
+  if (achiev4 == 1)
+  {
+    printf("▒░▒▒░░ ACHIEV 4: ACTIVATED ░░▒▒░▒\n");
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
+  }
+  else
+  {
+    printf("▒░▒▒ ACHIEV 4:  DISACTIVATED ▒▒░▒\n");
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
+  }
+
   print_world(w);
 
   if (victory_type == 0)
