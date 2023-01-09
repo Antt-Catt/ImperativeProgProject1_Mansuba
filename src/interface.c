@@ -10,34 +10,40 @@ void print_world(struct world_t *w)
     {
         printf("\n▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
         printf("▒░▒▒░░▒▒▒░ GAME BEGINS ░▒▒▒░░▒▒░▒\n");
-        printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
     }
     else if (nb_turns < 10)
     {
         printf("▒░▒▒░░▒▒▒░░ TURN:  0%d ░░▒▒▒░░▒▒░▒\n", nb_turns);
-        printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
     }
     else
     {
         printf("▒░▒▒░░▒▒▒░░ TURN:  %d ░░▒▒▒░░▒▒░▒\n", nb_turns);
-        printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
     }
-    if (current_player == BLACK && nb_turns != 0)
+
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
+
+    if (nb_turns == 0)
+    {
+        printf("\n");
+    }
+    else if (current_player == BLACK)
     {
         printf("▒░▒▒░░▒▒▒ PLAYER: BLACK ▒▒▒░░▒▒░▒\n");
-        printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
     }
-    else if (nb_turns != 0)
+    else
     {
         printf("▒░▒▒░░▒▒▒ PLAYER: WHITE ▒▒▒░░▒▒░▒\n");
-        printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
     }
+
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
+
     for (int i = 0; i < HEIGHT; i++)
     {
         if (get_neighbors_seed() == 1 && i % 2 == 1)
         {
             printf("\t");
         }
+
         for (int j = 0; j < WIDTH; j++)
         {
             if (world_get_sort(w, i * WIDTH + j) == NO_SORT && world_get(w, i * WIDTH + j) == NO_COLOR)
@@ -80,7 +86,7 @@ void print_world(struct world_t *w)
             }
             else
             {
-                printf("X\t\t");
+                printf("?\t\t");
             }
         }
         printf("\n\n");
