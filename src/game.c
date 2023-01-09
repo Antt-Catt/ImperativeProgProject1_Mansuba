@@ -120,14 +120,20 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 /** Shows world w*/
 void print_world(struct world_t *w)
 {
-  if (nb_turns<10)
+  if (nb_turns == 0)
   {
-  printf("▒░▒▒░░▒▒▒░  TURN N 0%d  ░▒▒▒░░▒▒░▒\n", nb_turns);
-  printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
+    printf("▒░▒▒░░▒▒▒░ GAME BEGINS ░▒▒▒░░▒▒░▒\n");
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
   }
-  else{
-  printf("▒░▒▒░░▒▒▒░  TURN N %d  ░▒▒▒░░▒▒░▒\n", nb_turns);
-  printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
+  else if (nb_turns < 10)
+  {
+    printf("▒░▒▒░░▒▒▒░  TURN N 0%d  ░▒▒▒░░▒▒░▒\n", nb_turns);
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
+  }
+  else
+  {
+    printf("▒░▒▒░░▒▒▒░  TURN N %d  ░▒▒▒░░▒▒░▒\n", nb_turns);
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
   }
   for (int i = 0; i < HEIGHT; i++)
   {
