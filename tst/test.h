@@ -3,6 +3,7 @@
 
 #include "game.h"
 #include "victory.h"
+#include "interface.h"
 
 void test_geometry();
 

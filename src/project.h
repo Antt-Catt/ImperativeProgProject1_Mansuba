@@ -3,6 +3,7 @@
 
 #include "game.h"
 #include "victory.h"
+#include "interface.h"
 
 /** project.c does not containt any function definition */
 
