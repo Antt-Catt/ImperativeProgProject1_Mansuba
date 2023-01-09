@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
       break;
     }
   }
-  
+
   struct world_t *w = world_init();
   init_game(w, 0);
 
@@ -45,14 +45,17 @@ int main(int argc, char *argv[])
   unsigned int m;
 
   printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
+  printf("▒░▒▒░░▒▒▒░ GAME BEGINS ░▒▒▒░░▒▒░▒\n");
+  printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
 
-  if (victory_type == 0)
+    if (victory_type == 0)
   {
     printf("▒░▒▒░ VICTORY TYPE:  SIMPLE ░▒▒░▒\n");
     printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
   }
-  else{
-    printf("▒░▒▒ VICTORY TYPE:  COMPLEXE ▒▒░▒\n");
+  else
+  {
+    printf("▒░▒▒░ VICTORY TYPE: COMPLEX ░▒▒░▒\n");
     printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
   }
 

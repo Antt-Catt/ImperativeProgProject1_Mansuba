@@ -68,13 +68,13 @@ int check_complex_victory(unsigned int p)
   if (p == BLACK)
   {
     printf("▒░▒▒░░▒▒▒░  GAME OVER  ░▒▒▒░░▒▒░▒\n");
-    printf("▒ BLACK WON  (COMPLEXE VICTORY) ▒\n");
+    printf("▒░ BLACK WON (COMPLEX VICTORY) ░▒\n");
     printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
   }
   else
   {
     printf("▒░▒▒░░▒▒▒░  GAME OVER  ░▒▒▒░░▒▒░▒\n");
-    printf("▒ WHITE WON  (COMPLEXE VICTORY) ▒\n");
+    printf("▒░ WHITE WON (COMPLEX VICTORY) ░▒\n");
     printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
   }
   return 1;
