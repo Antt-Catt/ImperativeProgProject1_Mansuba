@@ -35,7 +35,10 @@ void print_world(struct world_t *w)
         printf("▒░▒▒░░▒▒▒ PLAYER: WHITE ▒▒▒░░▒▒░▒\n");
     }
 
-    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
+    if (nb_turns != 0)
+    {
+        printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
+    }
 
     for (int i = 0; i < HEIGHT; i++)
     {
