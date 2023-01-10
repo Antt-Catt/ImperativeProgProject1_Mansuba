@@ -7,7 +7,6 @@
 #include "game.h"
 
 unsigned int achiev4;
-unsigned int nb_turns;
 unsigned int current_player;
 
 /** Initializes the parameters of the game depends on what achievs are selected */
