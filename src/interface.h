@@ -3,6 +3,8 @@
 
 #include "game.h"
 
+extern unsigned int nb_turns;
+
 /** Shows world w*/
 void print_world(struct world_t *w);
 

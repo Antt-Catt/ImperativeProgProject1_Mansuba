@@ -10,15 +10,14 @@
 
 int main(int argc, char *argv[])
 {
-  achiev3 = 0;
+  achiev3 = 1;
   achiev4 = 1;
-
   int opt;
   srand(time(NULL));
   unsigned int MAX_TURNS = 2 * WIDTH * HEIGHT;
   int victory_type = 0;
 
-  while ((opt = getopt(argc, argv, "s:m:t:")) != -1)
+  while ((opt = getopt(argc, argv, "s:m:t:p:a:")) != -1)
   {
     switch (opt)
     {
@@ -33,9 +32,21 @@ int main(int argc, char *argv[])
       {
         victory_type = 1;
       }
+    case 'p':
+      if (strcmp(optarg, "0") == 0)
+      {
+	achiev3 = 0;
+      }
+    case 'a':
+      if (strcmp(optarg, "0") == 0)
+      {
+	achiev4 = 0;
+      }
       break;
     }
   }
+
+  
 
   struct world_t *w = world_init();
   init_game(w, 0);
@@ -46,7 +57,7 @@ int main(int argc, char *argv[])
 
   if (victory_type == 0)
   {
-    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
+    printf("\n▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
     printf("▒░▒▒░ VICTORY TYPE:  SIMPLE ░▒▒░▒\n");
     printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
   }
