@@ -40,7 +40,6 @@ int main(int argc, char *argv[])
     case 'a':
       if (strcmp(optarg, "0") == 0)
       {
-	printf("oui\n");
 	achiev4 = 0;
       }
       break;
