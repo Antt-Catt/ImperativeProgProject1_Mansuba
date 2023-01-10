@@ -3,6 +3,8 @@
 
 #include "interface.h"
 
+unsigned int nb_turns;
+
 /** Shows world w*/
 void print_world(struct world_t *w)
 {
@@ -10,6 +12,7 @@ void print_world(struct world_t *w)
     {
         printf("\n▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
         printf("▒░▒▒░░▒▒▒░ GAME BEGINS ░▒▒▒░░▒▒░▒\n");
+        printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n\n");
     }
     else if (nb_turns < 10)
     {
@@ -19,18 +22,11 @@ void print_world(struct world_t *w)
     {
         printf("▒░▒▒░░▒▒▒░░ TURN:  %d ░░▒▒▒░░▒▒░▒\n", nb_turns);
     }
-
-    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
-
-    if (nb_turns == 0)
-    {
-        printf("\n");
-    }
-    else if (current_player == BLACK)
+    if (current_player == BLACK && nb_turns!= 0)
     {
         printf("▒░▒▒░░▒▒▒ PLAYER: BLACK ▒▒▒░░▒▒░▒\n");
     }
-    else
+    else if (nb_turns != 0)
     {
         printf("▒░▒▒░░▒▒▒ PLAYER: WHITE ▒▒▒░░▒▒░▒\n");
     }
