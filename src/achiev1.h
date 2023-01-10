@@ -1,10 +1,8 @@
 #ifndef __ACHIEV1_H__
 #define __ACHIEV1_H__
 
-#include "game.h"
-#include "world.h"
-#include "set.h"
 #include "achiev4.h"
+#include "movements.h"
 
 extern unsigned int achiev4;
 
