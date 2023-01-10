@@ -32,11 +32,13 @@ int main(int argc, char *argv[])
       {
         victory_type = 1;
       }
+      break;
     case 'p':
       if (strcmp(optarg, "0") == 0)
       {
 	achiev3 = 0;
       }
+      break;
     case 'a':
       if (strcmp(optarg, "0") == 0)
       {
