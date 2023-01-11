@@ -3,7 +3,8 @@
 #include <limits.h>
 #include <time.h>
 
-#include "test.h"
+#include "victory.h"
+#include "interface.h"
 
 void test_geometry()
 {

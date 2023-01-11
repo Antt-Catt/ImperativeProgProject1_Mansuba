@@ -6,7 +6,8 @@
 #include <unistd.h>
 #include <string.h>
 
-#include "project.h"
+#include "victory.h"
+#include "interface.h"
 
 int main(int argc, char *argv[])
 {
