@@ -35,18 +35,18 @@ void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsign
   int j;
   int k = 0;
   struct neighbors_t neigh_idx = get_neighbors(idx_n);
-  while (neigh_idx.n[k].i != UINT_MAX)
+  while (neigh_idx.n[k].i != UINT_MAX) // check neighbor of the place
   {
     j = neigh_idx.n[k].d;
     idx_n = neigh_idx.n[k].i;
-    if (exist_in_set(drts, j + 4) != UINT_MAX && world_get(w, idx_n) != 0)
+    if (exist_in_set(drts, j + 4) != UINT_MAX && world_get(w, idx_n) != 0) // if valid direction and neighbor not free
     {
-      idx_n = get_neighbor(idx_n, j);
-      if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && idx_n != idx && exist_in_set(set, idx_n) == UINT_MAX)
+      idx_n = get_neighbor(idx_n, j); // check neighbor of initial neighbor
+      if (idx_n != UINT_MAX && world_get(w, idx_n) == 0 && idx_n != idx && exist_in_set(set, idx_n) == UINT_MAX) // if free, recall auxiliary function
       {
         possible_mvts_aux(set, idx_n, w, idx, drts);
       }
-      else if (achiev3 != 0 && idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
+      else if (achiev3 != 0 && idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX) // if opponent and achiev3, push set
       {
         push_set(set, idx_n);
       }
@@ -93,13 +93,13 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
     if (idx_n != UINT_MAX && tmp == 0) // tmp == 0 significates that neighbor is not free
     {
       idx_n = get_neighbor(idx_n, j);
-      if (idx_n != UINT_MAX)
+      if (idx_n != UINT_MAX) // check neighbor of initial neighbor
       {
-        if (world_get(w, idx_n) == 0)
+        if (world_get(w, idx_n) == 0) // if free, call auxiliary function
         {
           possible_mvts_aux(&set, idx_n, w, idx, &drts_aux);
         }
-        else if (achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
+        else if (achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX) // if opponent and achiev3, push set
         {
           push_set(&set, idx_n);
         }
