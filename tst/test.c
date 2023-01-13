@@ -219,8 +219,10 @@ void test_game()
 
   delete_set(&black_init_set);
   delete_set(&black_current_set);
+  delete_set(&black_prison);
   delete_set(&white_init_set);
   delete_set(&white_current_set);
+  delete_set(&white_prison);
 }
 
 void test_achiev1()
@@ -316,11 +318,16 @@ void test_achiev3()
   move_piece(w, 7, 8);
   print_world(w);
 
-printf("\nBLACK tries to make escape a piece:\n");
+  printf("\nBLACK tries to make escape a piece:\n");
   escape(BLACK, w);
   print_world(w);
   printf("\n");
   print_set(&black_prison);
+
+  delete_set(&black_current_set);
+  delete_set(&white_current_set);
+  delete_set(&black_prison);
+  delete_set(&white_prison);
 }
 
 void test_achiev4()
@@ -345,21 +352,26 @@ void test_achiev4()
   set_t tmp_set = possible_mvts(12, w);
   printf("\nPossible movements for 12 with achiev 4 disactivated: ");
   print_set(&tmp_set);
+  delete_set(&tmp_set);
+
   achiev4 = 1;
   tmp_set = possible_mvts(12, w);
   printf("Possible movements for 12 with achiev 4 activated: ");
   print_set(&tmp_set);
+  delete_set(&tmp_set);
 
   achiev4 = 0;
   tmp_set = possible_mvts(11, w);
   printf("Possible movements for 11 with achiev 4 disactivated: ");
   print_set(&tmp_set);
+  delete_set(&tmp_set);
+
   achiev4 = 1;
   printf("Possible movements for 11 with achiev4 activated: ");
   tmp_set = possible_mvts(11, w);
   print_set(&tmp_set);
-
   delete_set(&tmp_set);
+
   delete_set(&black_current_set);
   delete_set(&white_current_set);
 }
