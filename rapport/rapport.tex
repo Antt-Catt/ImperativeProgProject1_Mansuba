@@ -13,11 +13,8 @@
 \usepackage{enumitem}
 \usepackage{verbatim}
 \usepackage[colorlinks=true, allcolors=enseirb]{hyperref}
-%\usepackage[style=alphabetic, citestyle=alphabetic, sorting=nyt]{biblatex}
 \usepackage{csquotes}
 \graphicspath{{./img/}}
-
-%\addbibresource{bibliography.bib}
 
 \begin{document}
 
@@ -37,9 +34,13 @@ Projet Mansuba
 
 \vfill
 \huge
-\textbf{Antton CATTARIN}
+\textbf{CATTARIN Antton}
 
-\textbf{Badr EL HABTI}
+\textbf{EL HABTI Badr}
+
+\vspace{0.5cm}
+\Large
+Encadrés par GUERMOUCHE Amina
        
 \vfill
 
@@ -78,7 +79,7 @@ Pour réaliser ce projet, nous avons utilisé plusieurs outils permettant de fac
 \label{git}
 Bien qu'il n'ait pas été évident de se familiariser avec ses outils durant les premières séances (plus de détails sur ce point dans la partie \ref{pb git}), Git s'est montré extrêmement utile une fois bien maîtrisé. En effet, avoir accès à nos fichiers partout, et avoir une mise à jour automatique des modifications des autres membres du projet, a été particulièrement bénéfique.
 
-L'interface de Thor nous a également aidé, notamment grâce aux tests qui étaient directement présents sur la forge. Ils nous ont permis de faire les premières vérifications sur nos modifications. L'utilitaire Git Inspector, également disponible sur la forge, nous a indiqué les complexités cyclomatiques de nos programmes. % D'après \cite{mobiskill}, plus la complexité cyclomatique d'un programme est faible, plus il est facile à comprendre, et moins il y a de chemins d'exécution possible dans le fichier. C'est pourquoi il nous semblait important de limiter au maximum cette complexité. Elle peut être calculée à la main, mais Git Inspector le fait automatiquement.
+L'interface de Thor nous a également aidé, notamment grâce aux tests qui étaient directement présents sur la forge. Ils nous ont permis de faire les premières vérifications sur nos modifications. L'utilitaire Git Inspector, également disponible sur la forge, nous a indiqué les complexités cyclomatiques de nos programmes. D'après le site internet Mobiskill\footnote{Disponible à https://mobiskill.fr/blog/conseils-emploi-tech/quest-ce-que-la-complexite-cyclomatique/}, plus la complexité cyclomatique d'un programme est faible, plus il est facile à comprendre, et moins il y a de chemins d'exécution possible dans le fichier. C'est pourquoi il nous semblait important de limiter au maximum cette complexité. Elle peut être calculée à la main, mais Git Inspector le fait automatiquement.
 
 \subsubsection{Make}
 \label{makefile}
@@ -165,9 +166,9 @@ Dans la version de base, il nous a été demandé de créer un nouveau type \tex
 
 Afin de définir les ensembles, nous avions le choix entre une structure de taille fixe, avec un curseur repérant le dernier élément, ou une structure de taille variable. Pour faire notre choix, nous avons réfléchi aux situations dans lesquelles nous aurions eu besoin des ensembles.
 
-Premièrement, les ensembles de pièces initiales et courantes pour chaque joueur, qui, par définition, ont une taille qui ne peut pas dépasser \verb|HEIGHT|. Dans ce cas-là, si la taille du monde augmente, on a une augmentation de la taille des ensemble qui est linéaire (car dépend uniquement de \verb|HEIGHT| et non de \verb|WIDTH|).
+Premièrement, nous avons les ensembles de pièces initiales, courantes et emprisonnées pour chaque joueur, qui, par définition, ont une taille qui ne peut pas dépasser \verb|HEIGHT|. Dans ce cas-là, si la taille du monde augmente, on a une augmentation de la taille des ensemble qui est linéaire (car dépend uniquement de \verb|HEIGHT| et non de \verb|WIDTH|).
 
-Deuxièmement, les ensembles des mouvements possibles pour chaque pièce. Leur taille pourrait, dans le pire cas, atteindre \verb|WORLD_SIZE|, si toutes les cases sont accessibles pour une pièce. Leur taille maximum dépend donc de ce paramètre, et, comme vu dans la partie \ref{struct monde}, on aura une augmentation quadratique de la taille de ces ensembles.
+Enfin, les ensembles des mouvements possibles pour chaque pièce. Leur taille pourrait, dans le pire cas, atteindre \verb|WORLD_SIZE|, si toutes les cases sont accessibles pour une pièce. Leur taille maximum dépend donc de ce paramètre, et, comme vu dans la partie \ref{struct monde}, on aura une augmentation quadratique de la taille de ces ensembles.
 
 Ils peuvent atteindre des tailles très grandes (surtout les ensembles des mouvements possibles) si les constantes \verb|WIDTH| et \verb|HEIGHT| augmentent. Par exemple, pour un monde de taille $100 \times 100 = 10000$, un ensemble des mouvements possibles aurait une taille de $40$ ko. Ce cas n'arrivera pas dans le cadre de ce projet (les parties seraient extrêmement longues), mais il est tout à fait envisageable de rencontrer un même type d'objet dans un autre domaine.
 
@@ -217,13 +218,13 @@ Comme dit précédemment, nous avons également des ensembles comme variables gl
 
 \section{Calcul des mouvements possibles}
 \label{mvts}
-L'algorithme sans doute le plus long et difficile que nous ayons à mettre à place pour ce projet est celui du calcul des mouvements possibles d'une pièce. En effet, il y avait plusieurs situations à prendre en compte, telles le type de la pièce considérée et les positions des autres pièces dans le monde.
+L'algorithme, sans doute le plus long et difficile que nous ayons à mettre à place pour ce projet, est celui du calcul des mouvements possibles d'une pièce. En effet, il y avait plusieurs situations à prendre en compte, telles le type de la pièce considérée et les positions des autres pièces dans le monde.
 
 \subsection{Contexte}
 \label{contxt}
 La version actuelle de notre projet contient trois types de pièces, et donc trois fonctionnements différents du point de vue du mouvement.
 
-Premièrement, les pions. Ils peuvent se déplacer d'une seule case dans les quatre directions cardinales (ici \verb|SOUTH|, \verb|NORTH|, \verb|WEST| et \verb|EAST|). Ceci correspond à un \textbf{déplacement simple}. Si la case voisine est occupée, il peut sauter par-dessus cette position et donc se déplacer de deux cases dans une même direction (sous réserve que le deuxième case ne soit pas occupée). Dans ce cas, on dit que le pion a réalisé un \textbf{mouvement simple}. Si une autre position voisine de la case d'arrivée est occupée, il peut de nouveau sauter et ainsi de suite. Ici, c'est un \textbf{saut multiple}. Voici une représentation des mouvements possibles pour un pion :
+Premièrement, les pions. Ils peuvent se déplacer d'une seule case dans les quatre directions cardinales (ici \verb|SOUTH|, \verb|NORTH|, \verb|WEST| et \verb|EAST|). Ceci correspond à un \textbf{déplacement simple}. Si la case voisine est occupée, il peut sauter par-dessus cette position et donc se déplacer de deux cases dans une même direction (sous réserve que le deuxième case ne soit pas occupée). Dans ce cas, on dit que le pion a réalisé un \textbf{mouvement simple}. Si une autre position voisine de la case d'arrivée est occupée, il peut de nouveau sauter et ainsi de suite. Ici, c'est un \textbf{saut multiple}. Voici une représentation des mouvements possibles pour un pion. Dans toute la suite, la position courante est celle en bleu foncé. Les mouvements possibles sont encadrés de cette même couleur. Les cases occupées par le joueur adverse sont de couleur bleu clair.
 
 \begin{figure}[H]
   \centering
@@ -271,7 +272,16 @@ Si elle appartient au joueur qui joue, on regarde la case voisine dans \textbf{d
 
 Voici un exemple de fonctionnement de cette fonction, avec les cases regardées qui sont numérotées par ordre chronologique :
 
-% insérer schéma d'une situation
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{img/poss_mvts.png}
+  \caption{Exemple de fonctionnement de la fonction calculant les mouvements possibles}
+  \label{fig:fct_mvts}
+\end{figure}
+
+\vspace{0.5cm}
+
+La case violette est celle à partir de laquelle la fonction auxiliaire se lance.
 
 \vspace{0.5cm}
 
@@ -281,15 +291,23 @@ Si la case est vide, il ne se passe rien.
 
 Si elle est occupée, on regarde le voisin dans deux fois la direction, comme précédemment. S'il contient une pièce du joueur actuel, la fonction ne fait rien. Si la case est vide, on l'ajoute à l'EMP et on rappelle la fonction auxiliaire \large\textbf{seulement} \normalsize si elle n'appartient pas déjà à l'EMP. Cette condition empêche de faire une boucle infinie si on se retrouve dans une situation où une pièce pourrait faire un tour. Si on trouve une pièce adverse, on l'ajoute à l'EMP, toujours en vérifiant qu'elle n'est pas déjà dedans.
 
-Ci-dessous sont schématisées les opérations faites dans l'ordre, des deux fonctions. En rouge, la première fonction, et en bleu, la fonction auxiliaire.
+Ci-dessous sont schématisées les opérations faites dans l'ordre, des deux fonctions.
 
-% insérer schéma
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{img/poss_mvts_aux.png}
+  \caption{Exemple de fonctionnement de la fonction auxiliaire calculant les mouvements possibles}
+  \label{fig:fct_mvts_aux}
+\end{figure}
 
-Chaque mouvement se terminant sur une pièce adverse supprime cette dernière de l'ensemble des pièces courantes du joueur en question et l'ajoute dans son ensemble prison.
+Nous utilisons ici les mêmes codes couleur que dans la figure \ref{fct_mvts}. Les cases regardées par la fonction auxiliaire sont notées avec une *.
 
 \vspace{0.5cm}
 
+Chaque mouvement se terminant sur une pièce adverse supprime cette dernière de l'ensemble des pièces courantes du joueur en question et l'ajoute dans son ensemble prison.
 Nous avons eu une contrainte qui était que les pièces se déplacent uniquement en s'approchant le plus possible des positions de victoire. Pour cela, nous avons calculé l'EMP grâce aux fonctions décrites ci-dessus. Ensuite, nous avons appliqué à cet ensemble une fonction qui supprime tous les éléments, excepté ceux étant les plus proches des positions de victoire.
+
+\vspace{0.5cm}
 
 Ces algorithmes étant relativement longs et compliqués, il a été important de réaliser des tests solides pour les vérifier.
 
@@ -416,12 +434,9 @@ Premièrement, nos tests pourraient devenir problématiques si le projet venaien
 Deuxièmement, nous aurions pu être plus rigoureux sur la réalisation de nos tests. En effet, à la place de les écrire après chaque implémentation fonction, nous les faisions par bloc afin de tout tester d'un coup. Cette méthode nous a coûté énormément de temps, puisque nous nous sommes plusieurs fois retrouvés à résoudre un gros problème plutôt que plusieurs petits. Ce sera un point sur lequel s'améliorer pour les prochains projets.
 
 \section{Conclusion}
-% on a eu des idées d'amélioration pendant la rédaction du rapport
 
-Ce projet nous a permis d'apprendre à travailler en groupe, bien que ce sera probablement plus difficile pour des projets à 5 personnes. Nous avons appris à nous séparer le travail dans le but de gagner en efficacité. L'outils Git nous a grandement aidé pour cela. Le fichier Makefile nous a également fait gagner énormément de temps grâce à la compilaton séparée.
+Ce projet nous a permis d'apprendre à travailler en groupe, bien que ce soit probablement plus difficile pour des projets à 5 personnes. Nous avons appris à nous répartir le travail dans le but de gagner en efficacité. L'outils Git nous a grandement aidé pour cela. Le fichier Makefile nous a également fait gagner énormément de temps grâce à la compilaton séparée.
 
 Nous avons également amélioré nos compétences de programmation dans le langage \verb|C|. Nous avons acquis des automatismes et avons appris à organiser notre code en plusieurs fichiers.
-
-%\printbibliography
 
 \end{document}
