@@ -10,11 +10,14 @@ all: clean project test
 %.o: %.c
 	gcc -c -I src/ $(CFLAGS) $< -o $@
 
-project: $(OBJS) src/project.o
+project: clean $(OBJS) src/project.o
 	gcc $(CFLAGS) $(OBJS) src/project.o -o src/project
 
-test: $(OBJS) tst/test.o
+test_project: $(OBJS) tst/test.o
 	gcc $(TFLAGS) $(OBJS) tst/test.o -o tst/test_project
+
+test: clean test_project
+	./tst/test_project
 
 clean:
 	rm -f tst/test_project src/project */*.o */*~
