@@ -1,13 +1,15 @@
-# Project Mansuba
+# ReadMe File for Project Mansuba
 
-La page de spécification du projet :
 
-<https://www.labri.fr/perso/renault/working/teaching/projets/2022-23-S5-Mansuba.php>
+You can compile and execute the tests by entering the command **make test** in the terminal.
 
-La page du projet sur la forge :
 
-https://thor.enseirb-matmeca.fr/ruby/projects/projetss5
+To compile the project, you msut first enter **make project** in your terminal, then execute the resulting file "**./src/project**" followed by optional parameters you want to add:
 
-La page des projets en général :
++ -s to initialize the random generator (by default: time(NULL)).
++ -t to set the type of victory (s for a simple victory, and c for a complex one) (by default: s).
++ -m parameter to set the maximum number of rounds (by default: 2 x WIDTH x HEIGHT).
++ -p to activate or disactivate achiev3's rules (1 to activate, 0 to disactivate) (activated by default).
++ -a to activate or disactivate achiev4's rules (1 to activate, 0 to disactivate) (activated by default).
 
-<https://www.labri.fr/perso/renault/working/teaching/projets/projets.php>
+Not mentioning a parameter in your command line means it will be set to its default value.
