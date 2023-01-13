@@ -20,6 +20,17 @@ set_t possible_drts()
       push_set(&set, i + 4);
     }
   }
+  else if (get_neighbors_seed() == 1)
+  {
+    for (int i = -3; i < 4; i++)
+    {
+      if (i != 0)
+      {
+        push_set(&set, i + 4);
+      }
+    }
+  }
+  // get the nearest position to victory
   // relation 1 (triangular) is not implemented
   return set;
 }

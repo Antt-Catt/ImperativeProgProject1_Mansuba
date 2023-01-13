@@ -11,9 +11,9 @@ set_t achiev4_mvts(set_t *set, unsigned int player)
   if (player == BLACK)
   {
     tmp = 0;
-    for (int i = 0; i < (*set).size; i++)
+    for (int i = 0; i < (*set).size; i++) // get the nearest position to victory
     {
-      if ((*set).ptr[i] % WIDTH > tmp)
+      if ((*set).ptr[i] % WIDTH > tmp) // > because white position are 
       {
         tmp = (*set).ptr[i] % WIDTH;
       }
@@ -29,7 +29,7 @@ set_t achiev4_mvts(set_t *set, unsigned int player)
   else if (player == WHITE)
   {
     tmp = WIDTH;
-    for (int i = 0; i < (*set).size; i++)
+    for (int i = 0; i < (*set).size; i++) // get the nearest position to victory
     {
       if ((*set).ptr[i] % WIDTH < tmp)
       {

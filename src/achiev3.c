@@ -54,7 +54,7 @@ unsigned int escape(unsigned int player, struct world_t *w)
             return UINT_MAX;
         }
         tmp_t = (black_prison.size / 2) - 1;
-        i = (rand() % (tmp_t - 1)); // choose random piece in prison
+        i = (rand() % (tmp_t + 1)); // choose random piece in prison
         idx = black_prison.ptr[2 * i];
         sort = black_prison.ptr[2 * i + 1];
         tmp = world_get(w, idx);
@@ -83,7 +83,7 @@ unsigned int escape(unsigned int player, struct world_t *w)
             return UINT_MAX;
         }
         tmp_t = (white_prison.size / 2) - 1;
-        i = (rand() % (tmp_t - 1)); // choose random piece in prison
+        i = (rand() % (tmp_t + 1)); // choose random piece in prison
         idx = white_prison.ptr[2 * i];
         sort = white_prison.ptr[2 * i + 1];
         tmp = world_get(w, idx);
