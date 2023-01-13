@@ -59,6 +59,7 @@ unsigned int choose_random_piece_belonging_to(int player)
 {
   if (player == BLACK)
   {
+    // tmp the total number of pieces owned by the player, this includes improsined pieces
     unsigned int tmp = black_current_set.size + (black_prison.size / 2) - 1;
     int i = (rand() % (tmp - 0 + 1)) + 0;
     if (i < black_current_set.size)
@@ -75,6 +76,8 @@ unsigned int choose_random_piece_belonging_to(int player)
       return white_current_set.ptr[i];
     }
   }
+  // if we choose a number higher than the size of the set of current pieces for a player, we choose to try to escape one of its imprisoned pieces
+  // the UINT_MAX returned will be understood by the choose_random_move_for_piece function
   return UINT_MAX;
 }
 
@@ -86,6 +89,7 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
 
   while (p == UINT_MAX)
   {
+    // we enter here if the choose_random_piece_belonging_to function chose to try to escape an improsined piece
     tmp = escape(current_player, w);
     if (tmp == UINT_MAX)
     {
@@ -99,10 +103,13 @@ unsigned int choose_random_move_for_piece(struct world_t *w, unsigned int p)
     }
     if (tmp != UINT_MAX || count > WORLD_SIZE)
     {
+      // we enter here after trying multiple times to espace multiple pieces without succeeding
       return UINT_MAX;
     }
     count++;
   }
+
+  // we have p != UINT_MAX
   set_t set = possible_mvts(p, w);
   if (set.size > 0)
   {

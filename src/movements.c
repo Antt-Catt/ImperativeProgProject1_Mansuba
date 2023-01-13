@@ -46,9 +46,9 @@ void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsign
       {
         possible_mvts_aux(set, idx_n, w, idx, drts);
       }
-      else if (achiev3 != 0 && idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX) // if opponent and achiev3, push set
+      else if (achiev3 != 0 && idx_n != UINT_MAX && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX) 
       {
-        push_set(set, idx_n);
+        push_set(set, idx_n); // if opponent and achiev3, push set
       }
     }
     k++;
@@ -86,9 +86,9 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
       push_set(&set, idx_n);
       tmp = 1;
     }
-    else if (idx_n != UINT_MAX && achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX) // if neighbor is the opponent and achiev3 activated, push in set
+    else if (idx_n != UINT_MAX && achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX) 
     {
-      push_set(&set, idx_n);
+      push_set(&set, idx_n); // if neighbor is the opponent and achiev3 activated, push in set
     }
     if (idx_n != UINT_MAX && tmp == 0) // tmp == 0 significates that neighbor is not free
     {
@@ -99,9 +99,9 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
         {
           possible_mvts_aux(&set, idx_n, w, idx, &drts_aux);
         }
-        else if (achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX) // if opponent and achiev3, push set
+        else if (achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX) 
         {
-          push_set(&set, idx_n);
+          push_set(&set, idx_n); // if opponent and achiev3, push in set
         }
       }
     }
@@ -111,7 +111,7 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
   unsigned int player = world_get(w, idx);
   if (achiev4 != 0)
   {
-    set = achiev4_mvts(&set, player);
+    set = achiev4_mvts(&set, player); // improve set if achiev4
   }
   return set;
 }

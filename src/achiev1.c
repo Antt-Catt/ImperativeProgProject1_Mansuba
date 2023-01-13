@@ -21,12 +21,12 @@ set_t possible_mvts_tower(unsigned int idx, struct world_t *w)
     {
       if (world_get(w, idx_n) != 0 && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX && achiev3 != 0)
       {
-        push_set(&set, idx_n);
+        push_set(&set, idx_n); // if opponent and achiev3, push in set
         idx_n = UINT_MAX;
       }
       else if (world_get(w, idx_n) == 0)
       {
-        push_set(&set, idx_n);
+        push_set(&set, idx_n); // if neighbor is free, push in set
         idx_n = get_neighbor(idx_n, j);
       }
       else
@@ -39,6 +39,7 @@ set_t possible_mvts_tower(unsigned int idx, struct world_t *w)
   unsigned int player = world_get(w, idx);
   if (achiev4 != 0)
   {
+    // improve set if achiev4
     set = achiev4_mvts(&set, player);
   }
   return set;
@@ -57,7 +58,7 @@ set_t possible_mvts_elephant(unsigned int idx, struct world_t *w)
     {
       if ((world_get(w, idx_n) != 0 && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX && achiev3 != 0) || world_get(w, idx_n) == 0)
       {
-        push_set(&set, idx_n);
+        push_set(&set, idx_n); // if opponent and achiev3 or if neighbor is free, push in set
       }
     }
     j += 2;
@@ -70,7 +71,7 @@ set_t possible_mvts_elephant(unsigned int idx, struct world_t *w)
     {
       if ((world_get(w, idx_n) != 0 && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX && achiev3 != 0) || world_get(w, idx_n) == 0)
       {
-        push_set(&set, idx_n);
+        push_set(&set, idx_n); // if opponent and achiev3 or if neighbor is free, push in set
       }
     }
     j += 2;
@@ -82,6 +83,7 @@ set_t possible_mvts_elephant(unsigned int idx, struct world_t *w)
   unsigned int player = world_get(w, idx);
   if (achiev4 != 0)
   {
+    // improve set if achiev4
     set = achiev4_mvts(&set, player);
   }
   return set;
