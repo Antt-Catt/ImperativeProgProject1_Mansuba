@@ -15,7 +15,7 @@ set_t white_prison;
 unsigned int imprison(unsigned int idx, struct world_t *w)
 {
 
-    if (exist_in_set(&black_init_set, idx) == UINT_MAX && exist_in_set(&white_init_set, idx) == UINT_MAX)
+  if (exist_in_set(&black_init_set, idx) == UINT_MAX && exist_in_set(&white_init_set, idx) == UINT_MAX) // if place not in initial positions
     {
         unsigned int player = world_get(w, idx);
         unsigned int sort = world_get_sort(w, idx);
@@ -54,7 +54,7 @@ unsigned int escape(unsigned int player, struct world_t *w)
             return UINT_MAX;
         }
         tmp_t = (black_prison.size / 2) - 1;
-        i = (rand() % (tmp_t - 0 + 1)) + 0;
+        i = (rand() % (tmp_t - 1)); // choose random piece in prison
         idx = black_prison.ptr[2 * i];
         sort = black_prison.ptr[2 * i + 1];
         tmp = world_get(w, idx);
@@ -62,11 +62,12 @@ unsigned int escape(unsigned int player, struct world_t *w)
         {
             return UINT_MAX;
         }
-        tmp = (rand() % (2 - 1 + 1)) + 1;
+        tmp = (rand() % 2) + 1; // to have 50% of chance of escape
         if (tmp != 2)
         {
             return 1;
         }
+	// here escape is successfull
         world_set(w, idx, player);
         world_set_sort(w, idx, sort);
         black_prison.ptr[2 * i] = black_prison.ptr[black_prison.size - 2];
@@ -82,7 +83,7 @@ unsigned int escape(unsigned int player, struct world_t *w)
             return UINT_MAX;
         }
         tmp_t = (white_prison.size / 2) - 1;
-        i = (rand() % (tmp_t - 0 + 1)) + 0;
+        i = (rand() % (tmp_t - 1)); // choose random piece in prison
         idx = white_prison.ptr[2 * i];
         sort = white_prison.ptr[2 * i + 1];
         tmp = world_get(w, idx);
@@ -90,11 +91,12 @@ unsigned int escape(unsigned int player, struct world_t *w)
         {
             return UINT_MAX;
         }
-        tmp = (rand() % (2 - 1 + 1)) + 1;
+        tmp = (rand() % 2) + 1; // to have 50% of chance of escape
         if (tmp != 2)
         {
             return 1;
         }
+	// here escape is successfull
         world_set(w, idx, player);
         world_set_sort(w, idx, sort);
         white_prison.ptr[2 * i] = white_prison.ptr[white_prison.size - 2];
