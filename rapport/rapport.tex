@@ -89,8 +89,6 @@ Le Makefile était déjà pré-rempli et nous l'avons adapté selon les fichiers
 
 La compréhension et l'optimisation du Makefile n'a pas été évidente au début, mais lorsque nous l'avions correctement assimilé, cet outil s'est révélé très pratique et nous a fait gagner un temps considérable.
 
-% transition ?
-
 \section{Conception globale}
 \label{conception}
 
@@ -214,7 +212,7 @@ Nous avions besoin d'utiliser des variables globales pour avoir accès à l'éta
 
 Comme dit précédemment, nous avons également des ensembles comme variables globales. Il y a les ensembles \verb|black(|ou \verb|white)_init(|ou \verb|current)_set|, qui regroupent les ensembles des pièces initiales ou courantes de chaque joueur. Ils sont énormément utilisés dans les fonctions de mouvements (modification d'un élément, suppression lors de cas de capture...) ou de vérification de victoire (comparaison entre l'ensemble courant d'un joueur et l'ensemble initial de l'autre). On retrouve également \verb|black(|ou \verb|white)_prison| qui sont les ensembles regroupant les pièces emprisonnées pour chaque joueur.
 
-% transition ?
+\newpage
 
 \section{Calcul des mouvements possibles}
 \label{mvts}
@@ -228,7 +226,7 @@ Premièrement, les pions. Ils peuvent se déplacer d'une seule case dans les qua
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.5\textwidth]{img/pawn.png}
+  \includegraphics[width=0.4\textwidth]{img/pawn.png}
   \caption{Exemple de mouvements possibles pour un pion}
   \label{fig:pawn}
 \end{figure}
@@ -237,7 +235,7 @@ Deuxièmement, les tours. Leur fonctionnement est identique aux tours des échec
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.5\textwidth]{img/tower.png}
+  \includegraphics[width=0.4\textwidth]{img/tower.png}
   \caption{Exemple de mouvements possibles pour une tour}
   \label{fig:tower}
 \end{figure}
@@ -246,7 +244,7 @@ Dernièrement, les éléphants. Ils peuvent se déplacer vers une position qui p
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.5\textwidth]{img/elephant.png}
+  \includegraphics[width=0.4\textwidth]{img/elephant.png}
   \caption{Exemple de mouvements possibles pour un éléphant}
   \label{fig:elephant}
 \end{figure}
@@ -274,7 +272,7 @@ Voici un exemple de fonctionnement de cette fonction, avec les cases regardées 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.5\textwidth]{img/poss_mvts.png}
+  \includegraphics[width=0.4\textwidth]{img/poss_mvts.png}
   \caption{Exemple de fonctionnement de la fonction calculant les mouvements possibles}
   \label{fig:fct_mvts}
 \end{figure}
@@ -295,12 +293,12 @@ Ci-dessous sont schématisées les opérations faites dans l'ordre, des deux fon
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.5\textwidth]{img/poss_mvts_aux.png}
+  \includegraphics[width=0.4\textwidth]{img/poss_mvts_aux.png}
   \caption{Exemple de fonctionnement de la fonction auxiliaire calculant les mouvements possibles}
   \label{fig:fct_mvts_aux}
 \end{figure}
 
-Nous utilisons ici les mêmes codes couleur que dans la figure \ref{fct_mvts}. Les cases regardées par la fonction auxiliaire sont notées avec une *.
+Nous utilisons ici les mêmes codes couleur que dans la figure \ref{fig:fct_mvts}. Les cases regardées par la fonction auxiliaire sont notées avec une *.
 
 \vspace{0.5cm}
 
@@ -362,8 +360,6 @@ Malgré nos tests, il y a d'autres erreurs que nous ne pouvions pas identifier. 
 Valgrind nous a été très utile tout au long du projet et nous avons appris à lire ses messages d'erreurs. En effet, nous en avons eu un nombre assez important. La grande majorité du temps, ces problèmes étaient dus à des fuites  de mémoire, résultant en grande partie de la définition des \textbf{ensembles} avec les allocations dynamiques. Ces emplacements mémoires non libérés peuvent ralentir le programme s'ils sont en grand nombre. Et cela n'est pas en adéquation avec nos motivations à allouer dynamiquement la mémoire pour définir les ensemble. Nous verrons dans la partie \ref{fuite mem} comment nous avons résolu ces dysfonctionnements.
 
 Ce genre d'erreur n'est pas visible avec les tests que nous avions écrits. C'est pourquoi cet outil a été indispensable dans l'optimisation de la gestion de la mémoire et la réalisation de notre projet.
-
-% ajouter transition
 
 \section{Problèmes rencontrés}
 \label{pb}
