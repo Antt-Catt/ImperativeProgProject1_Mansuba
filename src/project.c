@@ -12,13 +12,13 @@
 int main(int argc, char *argv[])
 {
   achiev3 = 1;
-  achiev4 = 0;
+  achiev4 = 1;
   int opt;
   srand(time(NULL));
   unsigned int MAX_TURNS = 2 * WIDTH * HEIGHT;
   int victory_type = 0;
 
-  while ((opt = getopt(argc, argv, "s:m:t:p:")) != -1)
+  while ((opt = getopt(argc, argv, "s:m:t:p:a:")) != -1)
   {
     switch (opt)
     {
@@ -38,6 +38,12 @@ int main(int argc, char *argv[])
       if (strcmp(optarg, "0") == 0)
       {
 	achiev3 = 0;
+      }
+      break;
+    case 'a':
+      if (strcmp(optarg, "0") == 0)
+      {
+	achiev4 = 0;
       }
       break;
     }
@@ -73,6 +79,17 @@ int main(int argc, char *argv[])
   else
   {
     printf("▒░▒▒ ACHIEV 3:  DISACTIVATED ▒▒░▒\n");
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
+  }
+
+  if (achiev4 == 1)
+  {
+    printf("▒░▒▒░░ ACHIEV 4: ACTIVATED ░░▒▒░▒\n");
+    printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
+  }
+  else
+  {
+    printf("▒░▒▒ ACHIEV 4:  DISACTIVATED ▒▒░▒\n");
     printf("▒░▒▒░░▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒░░▒▒░▒\n");
   }
 
