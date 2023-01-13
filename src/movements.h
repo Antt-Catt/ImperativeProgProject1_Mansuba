@@ -17,7 +17,7 @@ extern set_t white_current_set;
 set_t possible_drts();
 
 /** Sub function for possible_mvts */ 
-void possible_mvts_aux(set_t *set, unsigned int idx, struct world_t *w, unsigned int init);
+void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsigned int idx, set_t * drts);
 
 /** Returns all possible movements for piece at index idx i */
 set_t possible_mvts(unsigned int idx, struct world_t *w);
