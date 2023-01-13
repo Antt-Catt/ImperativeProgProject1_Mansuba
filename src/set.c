@@ -16,7 +16,7 @@ set_t init_set(unsigned int size)
 /** Resizes the set's size with realloc */
 void resize_set(set_t *set, int new_size)
 {
-  //add 4*(new_size - (*set).size) more bytes
+  // add 4*(new_size - (*set).size) more bytes
   (*set).ptr = realloc((*set).ptr, new_size * sizeof(unsigned int));
   (*set).size = new_size;
 }
