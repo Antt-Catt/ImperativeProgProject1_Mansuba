@@ -9,6 +9,7 @@ set_t black_current_set;
 set_t white_init_set;
 set_t white_current_set;
 
+/** Returns possible directions depending on the seed*/
 set_t possible_drts()
 {
   set_t set = init_set(0);
@@ -19,19 +20,12 @@ set_t possible_drts()
       push_set(&set, i + 4);
     }
   }
-  else if (get_neighbors_seed() == 1)
-  {
-    for (int i = -3; i < 4; i++)
-    {
-      if (i != 0)
-      {
-        push_set(&set, i + 4);
-      }
-    }
-  }
+  // relation 1 (triangular) is not implemented
   return set;
 }
 
+/** Sub function for possible_mvts 
+    Is recursive */ 
 void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsigned int idx, set_t * drts)
 {
   if (idx_n != idx && exist_in_set(set, idx_n) == UINT_MAX)
@@ -61,6 +55,7 @@ void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsign
   }
 }
 
+/** Returns all possible movements for piece at index idx i */
 set_t possible_mvts(unsigned int idx, struct world_t *w)
 {
   if (idx == UINT_MAX)
@@ -86,16 +81,16 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
     j = pop_set(&drts) - 4;
     idx_n = get_neighbor(idx, j);
     tmp = 0;
-    if (idx_n != UINT_MAX && world_get(w, idx_n) == 0)
+    if (idx_n != UINT_MAX && world_get(w, idx_n) == 0) // if neighbor is free, push in set
     {
       push_set(&set, idx_n);
       tmp = 1;
     }
-    else if (idx_n != UINT_MAX && achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX)
+    else if (idx_n != UINT_MAX && achiev3 != 0 && world_get(w, idx_n) != world_get(w, idx) && exist_in_set(&black_init_set, idx_n) == UINT_MAX && exist_in_set(&white_init_set, idx_n) == UINT_MAX) // if neighbor is the opponent and achiev3 activated, push in set
     {
       push_set(&set, idx_n);
     }
-    if (idx_n != UINT_MAX && tmp == 0)
+    if (idx_n != UINT_MAX && tmp == 0) // tmp == 0 significates that neighbor is not free
     {
       idx_n = get_neighbor(idx_n, j);
       if (idx_n != UINT_MAX)
@@ -121,6 +116,7 @@ set_t possible_mvts(unsigned int idx, struct world_t *w)
   return set;
 }
 
+/** Move piece in position p to position m */
 unsigned int move_piece(struct world_t *w, unsigned int p, unsigned int m)
 {
   if (p != m && p != UINT_MAX && m != UINT_MAX)

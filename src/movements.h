@@ -14,9 +14,11 @@ extern set_t black_current_set;
 extern set_t white_init_set;
 extern set_t white_current_set;
 
+/** Returns possible directions depending on the seed*/
 set_t possible_drts();
 
-/** Sub function for possible_mvts */ 
+/** Sub function for possible_mvts 
+    Is recursive */ 
 void possible_mvts_aux(set_t *set, unsigned int idx_n, struct world_t *w, unsigned int idx, set_t * drts);
 
 /** Returns all possible movements for piece at index idx i */
