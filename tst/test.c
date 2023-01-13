@@ -313,8 +313,9 @@ void test_achiev3()
   move_piece(w, 11, 7);
   print_world(w);
 
-  printf("\nMove piece 7 to 8:\n");
+  printf("Black Prison set: ");
   print_set(&black_prison);
+  printf("\nMove piece 7 to 8:\n");
   move_piece(w, 7, 8);
   print_world(w);
 
@@ -322,6 +323,7 @@ void test_achiev3()
   escape(BLACK, w);
   print_world(w);
   printf("\n");
+  printf("Black Prison set: ");
   print_set(&black_prison);
 
   delete_set(&black_current_set);

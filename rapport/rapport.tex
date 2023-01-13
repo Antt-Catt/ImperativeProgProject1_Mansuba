@@ -63,7 +63,7 @@ Dans le contexte du projet de programmation du semestre 5, il nous a été deman
 
 \subsection{Description du sujet}
 \label{description}
-Le sujet portait sur la réalisation d'un jeu de plateau, semblable à un jeu d'échec ou de dames chinoises. Pour ce faire, une version de base était proposée, permettant de générer une partie aléatoire entre deux joueurs. Chaque joueur possède le même nombre de pièces pouvant se déplacer différemment selon leur type. Pour gagner, un joueur doit occuper une seule ou toutes les positions initiales de son adversaire, selon le mode de jeu choisi. Ensuite, des contenus additionnels (ou \emph{achievements}) ont été ajoutés au fur et à mesure des séances.
+Le sujet portait sur la réalisation d'un jeu de plateau, semblable à un jeu d'échecs ou de dames chinoises. Pour ce faire, une version de base était proposée, permettant de générer une partie aléatoire entre deux joueurs. Chaque joueur possède le même nombre de pièces pouvant se déplacer différemment selon leur type. Pour gagner, un joueur doit occuper une seule ou toutes les positions initiales de son adversaire, selon le mode de jeu choisi. Ensuite, des contenus additionnels (ou \emph{achievements}) ont été ajoutés au fur et à mesure des séances.
 
 Nous devions programmer ce jeu en langage \verb|C|, en découpant le projet en plusieurs fichiers \emph{.c} avec leurs fichiers \emph{.h} d'entête.
 
@@ -79,13 +79,13 @@ Pour réaliser ce projet, nous avons utilisé plusieurs outils permettant de fac
 \label{git}
 Bien qu'il n'ait pas été évident de se familiariser avec ses outils durant les premières séances (plus de détails sur ce point dans la partie \ref{pb git}), Git s'est montré extrêmement utile une fois bien maîtrisé. En effet, avoir accès à nos fichiers partout, et avoir une mise à jour automatique des modifications des autres membres du projet, a été particulièrement bénéfique.
 
-L'interface de Thor nous a également aidé, notamment grâce aux tests qui étaient directement présents sur la forge. Ils nous ont permis de faire les premières vérifications sur nos modifications. L'utilitaire Git Inspector, également disponible sur la forge, nous a indiqué les complexités cyclomatiques de nos programmes. D'après le site internet Mobiskill\footnote{Disponible à https://mobiskill.fr/blog/conseils-emploi-tech/quest-ce-que-la-complexite-cyclomatique/}, plus la complexité cyclomatique d'un programme est faible, plus il est facile à comprendre, et moins il y a de chemins d'exécution possible dans le fichier. C'est pourquoi il nous semblait important de limiter au maximum cette complexité. Elle peut être calculée à la main, mais Git Inspector le fait automatiquement.
+L'interface de Thor nous a également aidé, notamment grâce aux tests qui étaient directement présents sur la forge. Ils nous ont permis de faire les premières vérifications sur nos modifications. L'utilitaire Git Inspector, également disponible sur la forge, nous a indiqué les complexités cyclomatiques de nos programmes. D'après le site internet Mobiskill\footnote{Disponible à https://mobiskill.fr/blog/conseils-emploi-tech/quest-ce-que-la-complexite-cyclomatique/}, plus la complexité cyclomatique d'un programme est faible, plus il est facile à comprendre, et moins il y a de chemins d'exécution possibles dans le fichier. C'est pourquoi il nous semblait important de limiter au maximum cette complexité. Elle peut être calculée à la main, mais Git Inspector le fait automatiquement.
 
 \subsubsection{Make}
 \label{makefile}
-La compilation d'un grand nombre de fichiers peut s'avérer fastidieuse, tant la ligne de compilation peut être longue, ou le nombre de commandes important. Pour palier ce problème, nous avions à notre disposition l'outil Make afin d'automatiser cette compilation. C'est un outil permettant de compiler un ou plusieurs fichiers selon un paramètre (ou règle, que l'on retrouve dans le Makefile) passé à la commande \emph{make}.
+La compilation d'un grand nombre de fichiers peut s'avérer fastidieuse, tant la ligne de compilation peut être longue, ou le nombre de commandes important. Pour pallier ce problème, nous avions à notre disposition l'outil Make afin d'automatiser cette compilation. C'est un outil permettant de compiler un ou plusieurs fichiers selon un paramètre (ou règle, que l'on retrouve dans le Makefile) passé à la commande \emph{make}.
 
-Le Makefile était déjà pré-rempli et nous l'avons adapté selon les fichiers que nous avons ajoutés au projet. Pour ce faire, nous avons créé une variable contentant tous les noms de fichiers \emph{.o} à compiler. Ainsi, la compilation peut se faire en une commande (et non une commande pour chaque fichier) et en utilisant le moins de caractères possibles.
+Le Makefile était déjà pré-rempli et nous l'avons adapté selon les fichiers que nous avons ajoutés au projet. Pour ce faire, nous avons créé une variable contentant tous les noms de fichiers \emph{.o} à compiler. Ainsi, la compilation peut se faire en une commande (et non une commande pour chaque fichier) et en utilisant le moins de caractères possible.
 
 La compréhension et l'optimisation du Makefile n'a pas été évidente au début, mais lorsque nous l'avions correctement assimilé, cet outil s'est révélé très pratique et nous a fait gagner un temps considérable.
 
@@ -431,7 +431,7 @@ Deuxièmement, nous aurions pu être plus rigoureux sur la réalisation de nos t
 
 \section{Conclusion}
 
-Ce projet nous a permis d'apprendre à travailler en groupe, bien que ce soit probablement plus difficile pour des projets à 5 personnes. Nous avons appris à nous répartir le travail dans le but de gagner en efficacité. L'outils Git nous a grandement aidé pour cela. Le fichier Makefile nous a également fait gagner énormément de temps grâce à la compilaton séparée.
+Ce projet nous a permis d'apprendre à travailler en groupe, bien que ce soit probablement plus difficile pour des projets à 5 personnes. Nous avons appris à nous répartir le travail dans le but de gagner en efficacité. L'outil Git nous a grandement aidé pour cela. Le fichier Makefile nous a également fait gagner énormément de temps grâce à la compilation séparée.
 
 Nous avons également amélioré nos compétences de programmation dans le langage \verb|C|. Nous avons acquis des automatismes et avons appris à organiser notre code en plusieurs fichiers.
 
